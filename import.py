@@ -99,7 +99,7 @@ def prune_asm(asm_cont: str) -> Tuple[str, str]:
             func_name is None
             and cur_section == ".text"
             and (
-                line.strip().startswith("glabel ") or line.strip().startswith(".globl ")
+                line.strip().startswith("glabel ") or line.strip().startswith(".globl\t")
             )
         ):
             func_name = line.split()[1]
@@ -525,6 +525,14 @@ def import_c_file(
         "-DNON_MATCHING",
         "-DNONMATCHING",
         "-DPERMUTER",
+        "-I",
+        "tools/agbcc/include",
+        "-I",
+        "tools/agbcc",
+        "-iquote",
+        "include",
+        "-nostdinc",
+        "-undef",
     ]
 
     for arg in compiler:
@@ -710,7 +718,7 @@ def write_asm(asm_cont: str, out_file: str) -> None:
     with open(prelude_file, "r") as p:
         asm_prelude = p.read()
     with open(out_file, "w", encoding="utf-8") as f:
-        f.write(asm_prelude)
+        #f.write(asm_prelude)
         f.write(asm_cont)
 
 
