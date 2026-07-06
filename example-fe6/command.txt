@@ -36,3 +36,45 @@ btw 你做的太好了！争取把 asm/banim_efxmagic.s 里的函数全部逆向
 如果某个函数很难匹配，你可以中断工作，仅确保你的函数逻辑与原本的汇编逻辑完全一致后生成 base.c 后我来看看。
 你可以去分析 old_agbcc 的代码逻辑，通过分析 gcc 编译的逻辑来帮助你做匹配。gcc 的源代码在 ~/agbcc/
 对 ~/agbcc/ 的读行为，对 ~/fireemblem8u, ~/fe6/ ~/permuter/ 目录下的读写行为以及 commit 的行为我都同意。不需要再找我要许可了
+
+=== 续做 checkpoint (2026-07-07) ===
+fe6: main 已与 origin 同步。Apocalypse aureola 进度见 asm/banim_efxmagic_aureola.s
+
+已完成进 banim_efxmagic.c 并 commit:
+  EfxApocalypseOBJ_Loop2/3/4, NewEfxApocalypseBGCOL2,
+  EfxApocalypseBGCOL2_Loop, Dummy 全套, BgFlash1/2 全套
+
+下一个待做: NewEfxApocalypseBG2 @ 0x0805327C (aureola.s 文件开头)
+同文件剩余 8 个: EfxApocalypseBG2_Loop, OBJ2×3, OBJ3×3, OBJ3RND×2
+
+permuter example-fe6 已有 Score 0 样例目录(未全部 commit 到 permuter 仓库):
+  EfxApocalypseOBJ_Loop2/3/4, BGCOL2, Dummy, BgFlash1/2 等
+  换机后: cd ~/permuter && git status  # 在 mokha-dev 分支，有未提交 example
+
+工作流程:
+  1. example-fe6/<Fn>/ base.c + target.s, ./compile.sh base.c -o base.o, Score 0
+  2. 写入 ~/fe6/src/banim_efxmagic.c 末尾(Apocalypse 段)
+  3. 删 asm/banim_efxmagic_aureola.s 对应函数
+  4. make && git commit (fe6)
+  OBJ 螺旋动画需 register asm("r1")/("r2") 等，见 EfxApocalypseOBJ_Loop2/base.c
+
+换机恢复:
+  git clone/pull ~/fe6 ~/permuter (及 ~/agbcc, ~/fireemblem8u 若需要)
+  在新 Cursor 里打开 permuter 或 fe6，说「继续 banim_efxmagic_aureola.s，从 NewEfxApocalypseBG2 开始」
+
+
+# 明天的续作话题：
+我在做 FE6 反编译，用 permuter 把 asm 匹配成 C 后集成到 ~/fe6。
+
+请先读 ~/permuter/example-fe6/command.txt（续做 checkpoint 部分），
+以及 ~/fe6/asm/banim_efxmagic_aureola.s 看剩余函数。
+
+进度：Apocalypse aureola 已完成 OBJ_Loop2/3/4、BGCOL2、Dummy、BgFlash1/2 等。
+下一个：NewEfxApocalypseBG2 @ 0x0805327C，然后同文件剩余 8 个函数。
+
+规则：
+- 每个函数 permuter Score 0 → 写入 banim_efxmagic.c → 删 asm → make → commit 后再做下一个
+- 难匹配的先写逻辑正确的 base.c 暂停
+- 对 ~/fe6 ~/permuter ~/agbcc ~/fireemblem8u 的读写和 commit 都同意，不用反复问
+
+请从 NewEfxApocalypseBG2 开始继续。

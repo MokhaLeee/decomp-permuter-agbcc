@@ -1,10 +1,10 @@
 #include "include.h"
 
-void EfxApocalypseOBJ_Loop2(struct ProcEfxOBJ *proc)
+void EfxApocalypseOBJ_Loop3(struct ProcEfxOBJ *proc)
 {
 	struct BaSprite *anim2 = proc->anim2;
 	int zero;
-	i16 interp = Interpolate(0, 0xB4, 0x32, proc->timer, 0x3C);
+	i16 interp = Interpolate(0, 0x32, 0, proc->timer, 0x50);
 	unsigned oldAngle = proc->unk30;
 	register unsigned angle asm("r1") = oldAngle + 0x300;
 	register unsigned index asm("r2");
@@ -28,11 +28,13 @@ void EfxApocalypseOBJ_Loop2(struct ProcEfxOBJ *proc)
 	anim2->yPosition = yPos;
 
 	proc->timer++;
-	if (proc->timer > 0x3C)
-		proc->timer = 0x3C;
+
+	if (proc->timer > 0x50)
+		proc->timer = 0x50;
 
 	proc->terminator++;
-	if (proc->terminator > 0x78) {
+
+	if (proc->terminator > 0x50) {
 		proc->timer = zero;
 		proc->terminator = zero;
 		Proc_Break(proc);

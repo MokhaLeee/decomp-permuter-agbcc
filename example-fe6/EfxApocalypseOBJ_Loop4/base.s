@@ -3,14 +3,14 @@
 .gcc2_compiled.:
 .text
 	.align	2, 0
-	.globl	EfxApocalypseOBJ_Loop2
-	.type	 EfxApocalypseOBJ_Loop2,function
+	.globl	EfxApocalypseOBJ_Loop4
+	.type	 EfxApocalypseOBJ_Loop4,function
 	.thumb_func
-EfxApocalypseOBJ_Loop2:
+EfxApocalypseOBJ_Loop4:
 .LFB1:
 .LM1:
 
-	push	{r4, r5, r6, r7, lr}
+	push	{r4, r5, r6, lr}
 	add	sp, sp, #-0x4
 	add	r5, r0, #0
 .LM2:
@@ -21,38 +21,39 @@ EfxApocalypseOBJ_Loop2:
 
 	mov	r0, #0x2c
 	ldrsh	r3, [r5, r0]
-	mov	r7, #0x3c
-	str	r7, [sp]
-	mov	r0, #0x0
-	mov	r1, #0xb4
-	mov	r2, #0x32
-	bl	Interpolate
 .LM4:
 
-	ldrh	r2, [r5, #0x30]
-	mov	r3, #0xc0
-	lsl	r3, r3, #0x2
-	add	r1, r2, r3
+	mov	r6, #0x32
 .LM5:
 
-	mov	r6, #0x0
+	str	r6, [sp]
+	mov	r0, #0x1
+	mov	r1, #0x0
+	mov	r2, #0xb4
+	bl	Interpolate
 .LM6:
 
-	strh	r1, [r5, #0x30]
+	ldrh	r2, [r5, #0x30]
+	mov	r3, #0x80
+	lsl	r3, r3, #0x4
+	add	r1, r2, r3
 .LM7:
 
-	lsr	r2, r1, #0x8
+	strh	r1, [r5, #0x30]
 .LM8:
+
+	lsr	r2, r1, #0x8
+.LM9:
 
 	ldr	r3, .L10
 	lsl	r1, r2, #0x1
 	add	r1, r1, r3
-.LM9:
+.LM10:
 
 	add	r2, r2, #0x40
 	lsl	r2, r2, #0x1
 	add	r2, r2, r3
-.LM10:
+.LM11:
 
 	mov	r3, #0x0
 	ldrsh	r1, [r1, r3]
@@ -60,79 +61,84 @@ EfxApocalypseOBJ_Loop2:
 	asr	r0, r0, #0x10
 	mul	r1, r1, r0
 	lsl	r1, r1, #0x4
-.LM11:
+.LM12:
 
 	mov	r3, #0x0
 	ldrsh	r2, [r2, r3]
 	mul	r0, r0, r2
 	lsl	r0, r0, #0x4
-.LM12:
+.LM13:
 
 	asr	r1, r1, #0x10
 	ldrh	r2, [r5, #0x32]
 	add	r1, r2, r1
-.LM13:
+.LM14:
 
 	asr	r0, r0, #0x10
 	ldrh	r3, [r5, #0x3a]
 	add	r0, r3, r0
-.LM14:
-
-	strh	r1, [r4, #0x2]
 .LM15:
 
-	strh	r0, [r4, #0x4]
+	strh	r1, [r4, #0x2]
 .LM16:
+
+	strh	r0, [r4, #0x4]
+.LM17:
 
 	ldrh	r0, [r5, #0x2c]
 	add	r0, r0, #0x1
 	strh	r0, [r5, #0x2c]
-.LM17:
+.LM18:
 
 	lsl	r0, r0, #0x10
 	asr	r0, r0, #0x10
-	cmp	r0, #0x3c
+	cmp	r0, #0x32
 	ble	.L8	@cond_branch
-.LM18:
-
-	strh	r7, [r5, #0x2c]
-.L8:
 .LM19:
+
+	strh	r6, [r5, #0x2c]
+.L8:
+.LM20:
 
 	ldrh	r0, [r5, #0x2e]
 	add	r0, r0, #0x1
 	strh	r0, [r5, #0x2e]
-.LM20:
+.LM21:
 
 	lsl	r0, r0, #0x10
 	asr	r0, r0, #0x10
-	cmp	r0, #0x78
+	cmp	r0, #0x32
 	ble	.L9	@cond_branch
-.LM21:
-
-	strh	r6, [r5, #0x2c]
 .LM22:
 
-	strh	r6, [r5, #0x2e]
+	ldr	r0, .L10+0x4
+	ldr	r1, [r0]
+	sub	r1, r1, #0x1
+	str	r1, [r0]
 .LM23:
+
+	ldr	r0, [r5, #0x60]
+	bl	BasRemove
+.LM24:
 
 	add	r0, r5, #0
 	bl	Proc_Break
 .L9:
-.LM24:
+.LM25:
 
 .LBE2:
 	add	sp, sp, #0x4
-	pop	{r4, r5, r6, r7}
+	pop	{r4, r5, r6}
 	pop	{r0}
 	bx	r0
 .L11:
 	.align	2, 0
 .L10:
 	.word	gSinLut
+	.word	gEfxBgSemaphore
 .LFE1:
 .Lfe1:
-	.size	 EfxApocalypseOBJ_Loop2,.Lfe1-EfxApocalypseOBJ_Loop2
+	.size	 EfxApocalypseOBJ_Loop4,.Lfe1-EfxApocalypseOBJ_Loop4
 
 	.section	.text
 .Letext0:
@@ -190,22 +196,22 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3
-	.byte	0x16
+	.byte	0x22
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM4
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM5
-	.byte	0x1d
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM6
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -255,32 +261,32 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM16
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM17
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM18
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM19
 	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM20
+	.4byte	.LM18
+	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM19
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
+	.4byte	.LM20
+	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
 	.4byte	.LM21
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -295,6 +301,11 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM24
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM25
 	.byte	0x16
 	.byte	0x0
 	.byte	0x5
@@ -736,14 +747,14 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0,0
 
 	.section	.debug_info
-	.4byte	0x17d3b
+	.4byte	0x17d63
 	.2byte	0x2
 	.4byte	.debug_abbrev
 	.byte	0x4
 	.byte	0x1
 	.ascii	"base.c\000"
 
-	.ascii	"/home/mokha/permuter/example-fe6/EfxApocalypseOBJ_Loop2\000"
+	.ascii	"/home/mokha/permuter/example-fe6/EfxApocalypseOBJ_Loop4\000"
 
 	.ascii	"GNU C 2.9-arm-000512\000"
 
@@ -933,9 +944,9 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x1
 	.byte	0x7
 	.byte	0x8
-	.4byte	0x2d1
+	.4byte	0x2df
 	.byte	0x1
-	.ascii	"EfxApocalypseOBJ_Loop2\000"
+	.ascii	"EfxApocalypseOBJ_Loop4\000"
 
 	.byte	0x2
 	.byte	0x4
@@ -949,7 +960,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x2
 	.byte	0x3
-	.4byte	0x5ab
+	.4byte	0x5b9
 	.byte	0x1
 	.byte	0x55
 	.byte	0xa
@@ -957,15 +968,15 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x2
 	.byte	0x5
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x1
 	.byte	0x54
 	.byte	0xa
-	.ascii	"zero\000"
+	.ascii	"cap\000"
 
 	.byte	0x2
 	.byte	0x6
-	.4byte	0x788
+	.4byte	0x796
 	.byte	0x1
 	.byte	0x56
 	.byte	0xb
@@ -973,76 +984,84 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x2
 	.byte	0x7
-	.4byte	0x78f
+	.4byte	0x796
+	.byte	0xa
+	.ascii	"timer\000"
+
+	.byte	0x2
+	.byte	0x8
+	.4byte	0x79d
+	.byte	0x1
+	.byte	0x53
 	.byte	0xb
 	.ascii	"oldAngle\000"
 
 	.byte	0x2
-	.byte	0x8
-	.4byte	0x796
+	.byte	0x9
+	.4byte	0x7a4
 	.byte	0xa
 	.ascii	"angle\000"
 
 	.byte	0x2
-	.byte	0x9
-	.4byte	0x796
+	.byte	0xa
+	.4byte	0x7a4
 	.byte	0x1
 	.byte	0x51
 	.byte	0xa
 	.ascii	"index\000"
 
 	.byte	0x2
-	.byte	0xa
-	.4byte	0x796
+	.byte	0xb
+	.4byte	0x7a4
 	.byte	0x1
 	.byte	0x52
 	.byte	0xb
 	.ascii	"xSin\000"
 
 	.byte	0x2
-	.byte	0xb
-	.4byte	0x78f
+	.byte	0xc
+	.4byte	0x796
 	.byte	0xb
 	.ascii	"ySin\000"
 
 	.byte	0x2
-	.byte	0xc
-	.4byte	0x78f
+	.byte	0xd
+	.4byte	0x796
 	.byte	0xa
 	.ascii	"x\000"
 
 	.byte	0x2
-	.byte	0xd
-	.4byte	0x788
+	.byte	0xe
+	.4byte	0x79d
 	.byte	0x1
 	.byte	0x51
 	.byte	0xa
 	.ascii	"y\000"
 
 	.byte	0x2
-	.byte	0xe
-	.4byte	0x788
+	.byte	0xf
+	.4byte	0x79d
 	.byte	0x1
 	.byte	0x50
 	.byte	0xa
 	.ascii	"xPos\000"
 
 	.byte	0x2
-	.byte	0xf
-	.4byte	0x788
+	.byte	0x10
+	.4byte	0x79d
 	.byte	0x1
 	.byte	0x51
 	.byte	0xa
 	.ascii	"yPos\000"
 
 	.byte	0x2
-	.byte	0x10
-	.4byte	0x788
+	.byte	0x11
+	.4byte	0x79d
 	.byte	0x1
 	.byte	0x50
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x5ab
+	.4byte	0x5b9
 	.ascii	"ProcEfxOBJ\000"
 
 	.byte	0x6c
@@ -1053,7 +1072,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c27
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -1062,7 +1081,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c27
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -1071,7 +1090,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c27
-	.4byte	0x832
+	.4byte	0x840
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -1080,7 +1099,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c27
-	.4byte	0x832
+	.4byte	0x840
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -1089,7 +1108,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c27
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -1098,7 +1117,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c27
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -1107,7 +1126,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c27
-	.4byte	0x830
+	.4byte	0x83e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -1116,7 +1135,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c27
-	.4byte	0x830
+	.4byte	0x83e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -1125,7 +1144,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c27
-	.4byte	0x830
+	.4byte	0x83e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -1134,7 +1153,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c27
-	.4byte	0x78f
+	.4byte	0x796
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -1188,7 +1207,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c2b
-	.4byte	0x84b
+	.4byte	0x859
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2b
@@ -1197,7 +1216,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c2c
-	.4byte	0x78f
+	.4byte	0x796
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -1206,7 +1225,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c2d
-	.4byte	0x78f
+	.4byte	0x796
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -1215,7 +1234,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c2e
-	.4byte	0x7a6
+	.4byte	0x7b4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -1224,7 +1243,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c2f
-	.4byte	0x7a6
+	.4byte	0x7b4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -1233,7 +1252,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c30
-	.4byte	0x7a6
+	.4byte	0x7b4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -1242,7 +1261,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c31
-	.4byte	0x7a6
+	.4byte	0x7b4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x36
@@ -1251,7 +1270,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c32
-	.4byte	0x7a6
+	.4byte	0x7b4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -1260,7 +1279,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c33
-	.4byte	0x7a6
+	.4byte	0x7b4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3a
@@ -1269,7 +1288,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c34
-	.4byte	0x7a6
+	.4byte	0x7b4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -1278,7 +1297,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c35
-	.4byte	0x7a6
+	.4byte	0x7b4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3e
@@ -1287,7 +1306,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c36
-	.4byte	0x7a6
+	.4byte	0x7b4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
@@ -1296,7 +1315,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c37
-	.4byte	0x7a6
+	.4byte	0x7b4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x42
@@ -1305,7 +1324,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c38
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -1314,7 +1333,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c39
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -1323,7 +1342,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c3a
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -1332,7 +1351,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c3b
-	.4byte	0x868
+	.4byte	0x876
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -1341,7 +1360,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c3c
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
@@ -1350,7 +1369,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c3d
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
@@ -1359,7 +1378,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c3e
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x64
@@ -1368,16 +1387,16 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c3f
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x68
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x2d1
+	.4byte	0x2df
 	.byte	0x2
-	.4byte	0x782
+	.4byte	0x790
 	.ascii	"BaSprite\000"
 
 	.byte	0x48
@@ -1388,7 +1407,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x145f
-	.4byte	0x7a6
+	.4byte	0x7b4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -1397,7 +1416,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1460
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -1406,7 +1425,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1461
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -1415,7 +1434,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1462
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -1424,7 +1443,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1463
-	.4byte	0x7a6
+	.4byte	0x7b4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -1433,7 +1452,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1464
-	.4byte	0x7a6
+	.4byte	0x7b4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -1442,7 +1461,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1465
-	.4byte	0x7a6
+	.4byte	0x7b4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -1451,7 +1470,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1466
-	.4byte	0x7a6
+	.4byte	0x7b4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -1460,7 +1479,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1467
-	.4byte	0x7a6
+	.4byte	0x7b4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -1496,7 +1515,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x146d
-	.4byte	0x7ba
+	.4byte	0x7c8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
@@ -1514,7 +1533,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1471
-	.4byte	0x7c6
+	.4byte	0x7d4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -1523,7 +1542,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1472
-	.4byte	0x7c6
+	.4byte	0x7d4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -1532,7 +1551,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1474
-	.4byte	0x7d1
+	.4byte	0x7df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -1541,7 +1560,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1475
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -1550,7 +1569,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1476
-	.4byte	0x7d1
+	.4byte	0x7df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -1559,7 +1578,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1478
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -1568,7 +1587,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1479
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -1577,7 +1596,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x147b
-	.4byte	0x7d1
+	.4byte	0x7df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -1586,7 +1605,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x147c
-	.4byte	0x7d1
+	.4byte	0x7df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
@@ -1595,23 +1614,23 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x147d
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x5b1
-	.byte	0x4
-	.ascii	"int\000"
-
-	.byte	0x4
-	.byte	0x5
+	.4byte	0x5bf
 	.byte	0x4
 	.ascii	"i16\000"
 
 	.byte	0x2
+	.byte	0x5
+	.byte	0x4
+	.ascii	"int\000"
+
+	.byte	0x4
 	.byte	0x5
 	.byte	0x4
 	.ascii	"unsigned int\000"
@@ -1629,24 +1648,24 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x2
 	.byte	0x5
 	.byte	0xd
-	.4byte	0x7c6
+	.4byte	0x7d4
 	.4byte	0x1ef
 	.byte	0xe
 	.byte	0x6
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x7cc
+	.4byte	0x7da
 	.byte	0xf
 	.4byte	0x1ba
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x7d7
+	.4byte	0x7e5
 	.byte	0x10
 	.byte	0x11
 	.byte	0x4
 	.byte	0x2
-	.4byte	0x819
+	.4byte	0x827
 	.ascii	"ProcScr\000"
 
 	.byte	0x8
@@ -1657,7 +1676,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x679
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -1666,7 +1685,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x67a
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -1675,40 +1694,40 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x67b
-	.4byte	0x7d1
+	.4byte	0x7df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x81f
+	.4byte	0x82d
 	.byte	0xf
-	.4byte	0x7da
+	.4byte	0x7e8
 	.byte	0x12
-	.4byte	0x830
+	.4byte	0x83e
 	.byte	0x1
 	.byte	0x13
-	.4byte	0x830
+	.4byte	0x83e
 	.byte	0x0
 	.byte	0x11
 	.byte	0x4
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x824
+	.4byte	0x832
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x83e
+	.4byte	0x84c
 	.byte	0xf
-	.4byte	0x843
+	.4byte	0x851
 	.byte	0x4
 	.ascii	"char\000"
 
 	.byte	0x1
 	.byte	0x8
 	.byte	0xd
-	.4byte	0x857
-	.4byte	0x857
+	.4byte	0x865
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x0
 	.byte	0x0
@@ -1718,13 +1737,13 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x1
 	.byte	0x8
 	.byte	0xd
-	.4byte	0x874
-	.4byte	0x857
+	.4byte	0x882
+	.4byte	0x865
 	.byte	0xe
 	.byte	0xb
 	.byte	0x0
 	.byte	0x14
-	.4byte	0xb21
+	.4byte	0xb2f
 	.ascii	"video_banim\000"
 
 	.byte	0x4
@@ -1852,7 +1871,7 @@ EfxApocalypseOBJ_Loop2:
 	.2byte	0x2400
 	.byte	0x0
 	.byte	0x17
-	.4byte	0xe7f
+	.4byte	0xe8d
 	.byte	0x4
 	.byte	0x1
 	.byte	0x28
@@ -2002,7 +2021,7 @@ EfxApocalypseOBJ_Loop2:
 	.2byte	0x3c0
 	.byte	0x0
 	.byte	0x17
-	.4byte	0x11be
+	.4byte	0x11cc
 	.byte	0x4
 	.byte	0x1
 	.byte	0x61
@@ -2160,7 +2179,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x4
 	.byte	0x0
 	.byte	0x17
-	.4byte	0x13af
+	.4byte	0x13bd
 	.byte	0x4
 	.byte	0x1
 	.byte	0x9c
@@ -2254,7 +2273,7 @@ EfxApocalypseOBJ_Loop2:
 	.2byte	0x2e0
 	.byte	0x0
 	.byte	0x17
-	.4byte	0x1621
+	.4byte	0x162f
 	.byte	0x4
 	.byte	0x1
 	.byte	0xc5
@@ -2376,7 +2395,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x8
 	.byte	0x0
 	.byte	0x14
-	.4byte	0x1b7f
+	.4byte	0x1b8d
 	.ascii	"BanimIndex\000"
 
 	.byte	0x4
@@ -2876,7 +2895,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x7a
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x1ba5
+	.4byte	0x1bb3
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x17c
@@ -2898,7 +2917,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x3
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x1e4b
+	.4byte	0x1e59
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x19d
@@ -3088,7 +3107,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x2d
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x1d0
@@ -4506,13 +4525,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x33f
-	.4byte	0x857
+	.4byte	0x865
 	.byte	0x19
 	.ascii	"u16\000"
 
 	.byte	0x1
 	.2byte	0x340
-	.4byte	0x2d4d
+	.4byte	0x2d5b
 	.byte	0x4
 	.ascii	"short unsigned int\000"
 
@@ -4523,13 +4542,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x341
-	.4byte	0x796
+	.4byte	0x7a4
 	.byte	0x19
 	.ascii	"u64\000"
 
 	.byte	0x1
 	.2byte	0x342
-	.4byte	0x2d7b
+	.4byte	0x2d89
 	.byte	0x4
 	.ascii	"long unsigned int\000"
 
@@ -4540,7 +4559,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x343
-	.4byte	0x2d9b
+	.4byte	0x2da9
 	.byte	0x4
 	.ascii	"signed char\000"
 
@@ -4551,19 +4570,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x344
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x19
 	.ascii	"i32\000"
 
 	.byte	0x1
 	.2byte	0x345
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x19
 	.ascii	"i64\000"
 
 	.byte	0x1
 	.2byte	0x346
-	.4byte	0x2dce
+	.4byte	0x2ddc
 	.byte	0x4
 	.ascii	"long int\000"
 
@@ -4574,52 +4593,52 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x348
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x19
 	.ascii	"fi16\000"
 
 	.byte	0x1
 	.2byte	0x349
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x19
 	.ascii	"fu8\000"
 
 	.byte	0x1
 	.2byte	0x34a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x19
 	.ascii	"fu16\000"
 
 	.byte	0x1
 	.2byte	0x34b
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x19
 	.ascii	"bool8\000"
 
 	.byte	0x1
 	.2byte	0x34d
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x19
 	.ascii	"bool\000"
 
 	.byte	0x1
 	.2byte	0x350
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x19
 	.ascii	"s16\000"
 
 	.byte	0x1
 	.2byte	0x355
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x19
 	.ascii	"Func\000"
 
 	.byte	0x1
 	.2byte	0x356
-	.4byte	0x2e40
+	.4byte	0x2e4e
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x2e46
+	.4byte	0x2e54
 	.byte	0x1a
 	.byte	0x1
 	.byte	0x19
@@ -4627,9 +4646,9 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x357
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x18
-	.4byte	0x2e71
+	.4byte	0x2e7f
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x358
@@ -4643,7 +4662,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x1
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x2e9b
+	.4byte	0x2ea9
 	.ascii	"Vec2i\000"
 
 	.byte	0x4
@@ -4654,7 +4673,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x35b
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -4663,13 +4682,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x35b
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x2ec5
+	.4byte	0x2ed3
 	.ascii	"Vec2u\000"
 
 	.byte	0x4
@@ -4680,7 +4699,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x360
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -4689,7 +4708,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x360
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -4699,15 +4718,15 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x3a2
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x19
 	.ascii	"uptr\000"
 
 	.byte	0x1
 	.2byte	0x3a3
-	.4byte	0x796
+	.4byte	0x7a4
 	.byte	0x18
-	.4byte	0x2ef8
+	.4byte	0x2f06
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x3a5
@@ -4721,7 +4740,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x1
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x3d48
+	.4byte	0x3d56
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x3bc
@@ -5639,7 +5658,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0xe3
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x3dc6
+	.4byte	0x3dd4
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x537
@@ -5669,7 +5688,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x5
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x3df2
+	.4byte	0x3e00
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x541
@@ -5683,7 +5702,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x1
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x3fee
+	.4byte	0x3ffc
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x547
@@ -5769,7 +5788,7 @@ EfxApocalypseOBJ_Loop2:
 	.2byte	0x8000
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x4085
+	.4byte	0x4093
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x565
@@ -5799,7 +5818,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x20
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x40b9
+	.4byte	0x40c7
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x573
@@ -5813,7 +5832,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x1
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x410b
+	.4byte	0x4119
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x579
@@ -5835,7 +5854,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x3
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x417b
+	.4byte	0x4189
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x581
@@ -5857,7 +5876,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x3
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x429e
+	.4byte	0x42ac
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x589
@@ -5911,7 +5930,7 @@ EfxApocalypseOBJ_Loop2:
 	.2byte	0xc000
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x42ff
+	.4byte	0x430d
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x5a2
@@ -5933,7 +5952,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x3
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x4463
+	.4byte	0x4471
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x5aa
@@ -6003,7 +6022,7 @@ EfxApocalypseOBJ_Loop2:
 	.2byte	0x2000
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x45e4
+	.4byte	0x45f2
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x5c8
@@ -6081,7 +6100,7 @@ EfxApocalypseOBJ_Loop2:
 	.2byte	0x8000
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x4638
+	.4byte	0x4646
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x5e0
@@ -6107,7 +6126,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x80
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x621
@@ -6169,18 +6188,18 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x674
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x19
 	.ascii	"ProcFunc\000"
 
 	.byte	0x1
 	.2byte	0x675
-	.4byte	0x4733
+	.4byte	0x4741
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x824
+	.4byte	0x832
 	.byte	0x18
-	.4byte	0x492d
+	.4byte	0x493b
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x67f
@@ -6290,7 +6309,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x19
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x4bc0
+	.4byte	0x4bce
 	.ascii	"GenericProc\000"
 
 	.byte	0x6c
@@ -6301,7 +6320,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6cd
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -6310,7 +6329,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6cd
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -6319,7 +6338,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6cd
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -6328,7 +6347,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6cd
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -6337,7 +6356,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6cd
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -6346,7 +6365,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6cd
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -6355,7 +6374,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6cd
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -6364,7 +6383,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6cd
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -6373,7 +6392,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6cd
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -6382,7 +6401,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6cd
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -6391,7 +6410,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6cd
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -6400,7 +6419,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6cd
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -6409,7 +6428,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6cd
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -6418,7 +6437,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6cf
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -6427,7 +6446,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6cf
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -6436,7 +6455,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6d0
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -6445,7 +6464,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6d1
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -6454,7 +6473,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6d2
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -6463,7 +6482,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6d3
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
@@ -6472,7 +6491,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6d5
-	.4byte	0x4bc0
+	.4byte	0x4bce
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -6481,7 +6500,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6d7
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4a
@@ -6490,7 +6509,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6da
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -6499,7 +6518,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6db
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4e
@@ -6508,7 +6527,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6dc
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -6517,7 +6536,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6de
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x52
@@ -6526,7 +6545,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6e0
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -6535,7 +6554,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6e1
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x58
@@ -6544,7 +6563,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6e2
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
@@ -6553,7 +6572,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6e3
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
@@ -6562,7 +6581,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6e4
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x64
@@ -6571,7 +6590,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6e5
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x66
@@ -6580,7 +6599,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6e6
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x68
@@ -6589,19 +6608,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x6e7
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6a
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x4bcc
-	.4byte	0x2d36
+	.4byte	0x4bda
+	.4byte	0x2d44
 	.byte	0xe
 	.byte	0x5
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x4c5d
+	.4byte	0x4c6b
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x6f4
@@ -6643,7 +6662,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0xb
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x4cb7
+	.4byte	0x4cc5
 	.ascii	"Glyph\000"
 
 	.byte	0x48
@@ -6654,7 +6673,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x721
-	.4byte	0x4cb7
+	.4byte	0x4cc5
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -6663,7 +6682,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x723
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -6672,7 +6691,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x724
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -6681,24 +6700,24 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x725
-	.4byte	0x4cc2
+	.4byte	0x4cd0
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x4cbd
+	.4byte	0x4ccb
 	.byte	0xf
-	.4byte	0x4c5d
+	.4byte	0x4c6b
 	.byte	0xd
-	.4byte	0x4cce
-	.4byte	0x2d63
+	.4byte	0x4cdc
+	.4byte	0x2d71
 	.byte	0xe
 	.byte	0xf
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x4d67
+	.4byte	0x4d75
 	.ascii	"Text\000"
 
 	.byte	0x8
@@ -6709,7 +6728,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x72a
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -6718,7 +6737,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x72b
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -6727,7 +6746,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x72c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -6736,7 +6755,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x72d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -6745,7 +6764,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x72e
-	.4byte	0x2e0c
+	.4byte	0x2e1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -6754,7 +6773,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x72f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -6763,13 +6782,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x730
-	.4byte	0x2e0c
+	.4byte	0x2e1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x4e17
+	.4byte	0x4e25
 	.ascii	"Font\000"
 
 	.byte	0x18
@@ -6780,7 +6799,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x735
-	.4byte	0x4e17
+	.4byte	0x4e25
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -6789,7 +6808,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x736
-	.4byte	0x4e1d
+	.4byte	0x4e2b
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -6798,7 +6817,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x737
-	.4byte	0x4e3f
+	.4byte	0x4e4d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -6807,7 +6826,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x738
-	.4byte	0x4e55
+	.4byte	0x4e63
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -6816,7 +6835,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x739
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -6825,7 +6844,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x73a
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -6834,7 +6853,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x73b
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -6843,45 +6862,45 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x73c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x4e23
+	.4byte	0x4e31
 	.byte	0xf
-	.4byte	0x4cb7
+	.4byte	0x4cc5
 	.byte	0x12
-	.4byte	0x4e39
+	.4byte	0x4e47
 	.byte	0x1
 	.byte	0x13
-	.4byte	0x4e39
+	.4byte	0x4e47
 	.byte	0x13
-	.4byte	0x4cb7
+	.4byte	0x4cc5
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x4cce
+	.4byte	0x4cdc
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x4e28
+	.4byte	0x4e36
 	.byte	0x1b
-	.4byte	0x4e55
+	.4byte	0x4e63
 	.byte	0x1
-	.4byte	0x4e17
+	.4byte	0x4e25
 	.byte	0x13
-	.4byte	0x4e39
+	.4byte	0x4e47
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x4e45
+	.4byte	0x4e53
 	.byte	0x2
-	.4byte	0x4e93
+	.4byte	0x4ea1
 	.ascii	"TextInitInfo\000"
 
 	.byte	0x8
@@ -6892,7 +6911,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x741
-	.4byte	0x4e39
+	.4byte	0x4e47
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -6901,13 +6920,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x742
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x4ebc
+	.4byte	0x4eca
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x746
@@ -6921,7 +6940,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x1
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x4eee
+	.4byte	0x4efc
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x74c
@@ -6935,7 +6954,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x1
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x503e
+	.4byte	0x504c
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x752
@@ -7005,7 +7024,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x4
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x5410
+	.4byte	0x541e
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x76a
@@ -7187,7 +7206,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0xff
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x5496
+	.4byte	0x54a4
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x7d8
@@ -7217,7 +7236,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x5
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x551d
+	.4byte	0x552b
 	.ascii	"PalFadeSt\000"
 
 	.byte	0x30
@@ -7228,7 +7247,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x7e3
-	.4byte	0x551d
+	.4byte	0x552b
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -7237,7 +7256,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x7e4
-	.4byte	0x5529
+	.4byte	0x5537
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -7246,7 +7265,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x7e5
-	.4byte	0x5534
+	.4byte	0x5542
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -7255,7 +7274,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x7e6
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -7264,7 +7283,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x7e7
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -7273,27 +7292,27 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x7e8
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x5529
-	.4byte	0x2d41
+	.4byte	0x5537
+	.4byte	0x2d4f
 	.byte	0xe
 	.byte	0xf
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x552f
+	.4byte	0x553d
 	.byte	0xf
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x18
-	.4byte	0x555c
+	.4byte	0x556a
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x87b
@@ -7303,7 +7322,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0xc
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x5682
+	.4byte	0x5690
 	.ascii	"GlobalSaveInfo\000"
 
 	.byte	0x20
@@ -7314,7 +7333,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x87f
-	.4byte	0x5682
+	.4byte	0x5690
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -7323,7 +7342,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x880
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -7332,7 +7351,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x881
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -7341,7 +7360,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x883
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -7353,7 +7372,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x884
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -7365,7 +7384,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x885
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -7377,7 +7396,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x886
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -7389,7 +7408,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x887
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x4
 	.byte	0x0
@@ -7401,7 +7420,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x889
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -7410,7 +7429,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x88b
-	.4byte	0x568e
+	.4byte	0x569c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -7419,7 +7438,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x88c
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -7428,7 +7447,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x88d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
@@ -7437,25 +7456,25 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x88e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1f
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x568e
-	.4byte	0x843
+	.4byte	0x569c
+	.4byte	0x851
 	.byte	0xe
 	.byte	0x7
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x569a
-	.4byte	0x2d36
+	.4byte	0x56a8
+	.4byte	0x2d44
 	.byte	0xe
 	.byte	0xb
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x5720
+	.4byte	0x572e
 	.ascii	"SaveBlockInfo\000"
 
 	.byte	0x10
@@ -7466,7 +7485,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x892
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -7475,7 +7494,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x893
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -7484,7 +7503,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x894
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -7493,7 +7512,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x895
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -7502,7 +7521,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x896
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -7511,13 +7530,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x897
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x57a6
+	.4byte	0x57b4
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x89c
@@ -7555,7 +7574,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x7
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x57dd
+	.4byte	0x57eb
 	.ascii	"SramHeader\000"
 
 	.byte	0x90
@@ -7566,7 +7585,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x8a8
-	.4byte	0x555c
+	.4byte	0x556a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -7575,19 +7594,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x8a9
-	.4byte	0x57dd
+	.4byte	0x57eb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x57e9
-	.4byte	0x569a
+	.4byte	0x57f7
+	.4byte	0x56a8
 	.byte	0xe
 	.byte	0x6
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x586d
+	.4byte	0x587b
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x8b5
@@ -7621,7 +7640,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x40
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x58c8
+	.4byte	0x58d6
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x8cd
@@ -7639,7 +7658,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x4
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x59b3
+	.4byte	0x59c1
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x8d4
@@ -7685,7 +7704,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x3
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x5a44
+	.4byte	0x5a52
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x8e3
@@ -7723,7 +7742,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x7
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x5abf
+	.4byte	0x5acd
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x8f0
@@ -7749,7 +7768,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x4
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x5b5e
+	.4byte	0x5b6c
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x8f9
@@ -7791,7 +7810,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x8
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x5e3b
+	.4byte	0x5e49
 	.ascii	"BmSt\000"
 
 	.byte	0x40
@@ -7802,7 +7821,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x907
-	.4byte	0x2e0c
+	.4byte	0x2e1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -7811,7 +7830,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x908
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -7820,7 +7839,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x909
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -7829,7 +7848,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x90a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -7838,7 +7857,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x90b
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -7847,7 +7866,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x90d
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -7856,7 +7875,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x90e
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -7865,7 +7884,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x90f
-	.4byte	0x2e71
+	.4byte	0x2e7f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -7874,7 +7893,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x910
-	.4byte	0x2e71
+	.4byte	0x2e7f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -7883,7 +7902,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x911
-	.4byte	0x2e71
+	.4byte	0x2e7f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -7892,7 +7911,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x912
-	.4byte	0x2e71
+	.4byte	0x2e7f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -7901,7 +7920,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x913
-	.4byte	0x2e71
+	.4byte	0x2e7f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -7910,7 +7929,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x914
-	.4byte	0x2e71
+	.4byte	0x2e7f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -7919,7 +7938,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x915
-	.4byte	0x2e71
+	.4byte	0x2e7f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -7928,7 +7947,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x916
-	.4byte	0x2e71
+	.4byte	0x2e7f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -7937,7 +7956,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x917
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -7946,7 +7965,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x918
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -7955,7 +7974,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x919
-	.4byte	0x2e0c
+	.4byte	0x2e1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -7964,7 +7983,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x91a
-	.4byte	0x2e0c
+	.4byte	0x2e1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x31
@@ -7973,7 +7992,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x91b
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -7982,7 +8001,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x91c
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -7991,7 +8010,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x91d
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x36
@@ -8000,7 +8019,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x91e
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x37
@@ -8009,7 +8028,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x91f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -8018,7 +8037,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x920
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x39
@@ -8027,7 +8046,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x921
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3a
@@ -8036,7 +8055,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x922
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3b
@@ -8045,7 +8064,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x923
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -8054,7 +8073,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x924
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3d
@@ -8063,7 +8082,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x925
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3e
@@ -8072,13 +8091,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x926
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3f
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x5e6e
+	.4byte	0x5e7c
 	.ascii	"glb_pos\000"
 
 	.byte	0x4
@@ -8098,7 +8117,7 @@ EfxApocalypseOBJ_Loop2:
 	.4byte	0xffffffff
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x6245
+	.4byte	0x6253
 	.ascii	"PlaySt\000"
 
 	.byte	0x20
@@ -8109,7 +8128,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x930
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -8118,7 +8137,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x931
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -8127,7 +8146,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x933
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -8136,7 +8155,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x934
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -8145,7 +8164,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x935
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -8154,7 +8173,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x936
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -8163,7 +8182,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x937
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -8172,7 +8191,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x938
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -8181,7 +8200,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x939
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -8190,7 +8209,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x939
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -8199,7 +8218,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x93a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -8208,7 +8227,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x93b
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
@@ -8217,7 +8236,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x93c
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -8226,7 +8245,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x93d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -8235,7 +8254,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x93e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -8247,7 +8266,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x93f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
@@ -8256,7 +8275,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x940
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1b
@@ -8265,7 +8284,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x943
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1f
@@ -8277,7 +8296,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x944
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1e
@@ -8289,7 +8308,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x945
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x2
 	.byte	0x1c
@@ -8301,7 +8320,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x946
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1b
@@ -8313,7 +8332,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x947
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x2
 	.byte	0x19
@@ -8325,7 +8344,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x948
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x1
 	.byte	0x18
@@ -8337,7 +8356,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x949
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x1
 	.byte	0x17
@@ -8349,7 +8368,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x94a
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x1
 	.byte	0x16
@@ -8361,7 +8380,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x94b
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x2
 	.byte	0x14
@@ -8373,7 +8392,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x94c
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x1
 	.byte	0x13
@@ -8385,7 +8404,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x94d
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x1
 	.byte	0x12
@@ -8397,7 +8416,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x94e
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x1
 	.byte	0x11
@@ -8409,7 +8428,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x94f
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x1
 	.byte	0x10
@@ -8421,7 +8440,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x950
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x2
 	.byte	0xe
@@ -8433,7 +8452,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x951
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x2
 	.byte	0xc
@@ -8445,7 +8464,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x952
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x1
 	.byte	0xb
@@ -8457,7 +8476,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x953
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x1
 	.byte	0xa
@@ -8469,7 +8488,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x954
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x2
 	.byte	0x8
@@ -8481,7 +8500,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x955
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x2
 	.byte	0x6
@@ -8493,7 +8512,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x956
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x6
 	.byte	0x0
@@ -8502,7 +8521,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x1c
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x62ba
+	.4byte	0x62c8
 	.ascii	"AnimConfType\000"
 
 	.byte	0x4
@@ -8526,7 +8545,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x3
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x62dc
+	.4byte	0x62ea
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x97f
@@ -8536,7 +8555,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x8
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x62fb
+	.4byte	0x6309
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x980
@@ -8546,7 +8565,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0xa
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x6316
+	.4byte	0x6324
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x981
@@ -8556,7 +8575,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x14
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x636e
+	.4byte	0x637c
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x984
@@ -8578,7 +8597,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x5
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x65df
+	.4byte	0x65ed
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x98c
@@ -8688,7 +8707,7 @@ EfxApocalypseOBJ_Loop2:
 	.4byte	0x600000
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x671f
+	.4byte	0x672d
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x9ac
@@ -8750,7 +8769,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0xc
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x6792
+	.4byte	0x67a0
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x9c2
@@ -8776,7 +8795,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x4
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x67c5
+	.4byte	0x67d3
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x9cc
@@ -8790,7 +8809,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x688e
+	.4byte	0x689c
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x9d2
@@ -8836,7 +8855,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x8
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x6aef
+	.4byte	0x6afd
 	.ascii	"PInfo\000"
 
 	.byte	0x30
@@ -8847,7 +8866,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9e3
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -8856,7 +8875,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9e4
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -8865,7 +8884,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9e5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -8874,7 +8893,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9e6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -8883,7 +8902,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9e7
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -8892,7 +8911,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9e8
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -8901,7 +8920,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9e9
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -8910,7 +8929,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9ea
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -8919,7 +8938,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9ec
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -8928,7 +8947,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9ed
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -8937,7 +8956,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9ee
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -8946,7 +8965,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9ef
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -8955,7 +8974,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9f0
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -8964,7 +8983,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9f1
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -8973,7 +8992,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9f2
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -8982,7 +9001,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9f3
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -8991,7 +9010,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9f4
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -9000,7 +9019,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9f6
-	.4byte	0x6aef
+	.4byte	0x6afd
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -9009,7 +9028,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9f8
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -9018,7 +9037,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9f9
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1d
@@ -9027,7 +9046,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9fa
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
@@ -9036,7 +9055,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9fb
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1f
@@ -9045,7 +9064,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9fc
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -9054,7 +9073,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9fd
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x21
@@ -9063,7 +9082,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x9fe
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x22
@@ -9072,7 +9091,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa00
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x23
@@ -9081,7 +9100,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa01
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -9090,7 +9109,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa04
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -9099,14 +9118,14 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa06
-	.4byte	0x6b09
+	.4byte	0x6b17
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x6afb
-	.4byte	0x2d36
+	.4byte	0x6b09
+	.4byte	0x2d44
 	.byte	0xe
 	.byte	0x7
 	.byte	0x0
@@ -9116,11 +9135,11 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x1
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x6b0f
+	.4byte	0x6b1d
 	.byte	0xf
-	.4byte	0x6afb
+	.4byte	0x6b09
 	.byte	0x2
-	.4byte	0x6e4b
+	.4byte	0x6e59
 	.ascii	"JInfo\000"
 
 	.byte	0x48
@@ -9131,7 +9150,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa0b
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -9140,7 +9159,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa0c
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -9149,7 +9168,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa0d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -9158,7 +9177,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa0e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -9167,7 +9186,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa0f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -9176,7 +9195,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa10
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -9185,7 +9204,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa11
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -9194,7 +9213,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa12
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -9203,7 +9222,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa14
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -9212,7 +9231,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa15
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -9221,7 +9240,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa16
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -9230,7 +9249,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa17
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -9239,7 +9258,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa18
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -9248,7 +9267,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa19
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -9257,7 +9276,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa1a
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -9266,7 +9285,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa1b
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -9275,7 +9294,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa1d
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -9284,7 +9303,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa1e
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -9293,7 +9312,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa1f
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
@@ -9302,7 +9321,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa20
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -9311,7 +9330,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa21
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x17
@@ -9320,7 +9339,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa22
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -9329,7 +9348,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa23
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x19
@@ -9338,7 +9357,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa25
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
@@ -9347,7 +9366,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa27
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1b
@@ -9356,7 +9375,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa28
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -9365,7 +9384,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa29
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1d
@@ -9374,7 +9393,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa2a
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
@@ -9383,7 +9402,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa2b
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1f
@@ -9392,7 +9411,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa2c
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -9401,7 +9420,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa2d
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x21
@@ -9410,7 +9429,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa30
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -9419,7 +9438,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa32
-	.4byte	0x6aef
+	.4byte	0x6afd
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -9428,7 +9447,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa34
-	.4byte	0x7d1
+	.4byte	0x7df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -9437,7 +9456,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa36
-	.4byte	0x6e4b
+	.4byte	0x6e59
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -9446,7 +9465,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa37
-	.4byte	0x6e4b
+	.4byte	0x6e59
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -9455,7 +9474,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa38
-	.4byte	0x6e4b
+	.4byte	0x6e59
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -9464,7 +9483,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa39
-	.4byte	0x6e4b
+	.4byte	0x6e59
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
@@ -9473,18 +9492,18 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa3b
-	.4byte	0x7d1
+	.4byte	0x7df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x6e51
+	.4byte	0x6e5f
 	.byte	0xf
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
-	.4byte	0x70bf
+	.4byte	0x70cd
 	.ascii	"Unit\000"
 
 	.byte	0x48
@@ -9495,7 +9514,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa40
-	.4byte	0x70bf
+	.4byte	0x70cd
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -9504,7 +9523,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa41
-	.4byte	0x70ca
+	.4byte	0x70d8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -9513,7 +9532,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa42
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -9522,7 +9541,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa43
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -9531,7 +9550,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa44
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -9540,7 +9559,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa45
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -9549,7 +9568,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa46
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -9558,7 +9577,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa47
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -9567,7 +9586,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa48
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -9576,7 +9595,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa49
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -9585,7 +9604,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa4a
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -9594,7 +9613,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa4b
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -9603,7 +9622,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa4c
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -9612,7 +9631,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa4d
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -9621,7 +9640,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa4e
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
@@ -9630,7 +9649,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa4f
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -9639,7 +9658,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa50
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x17
@@ -9648,7 +9667,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa51
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -9657,7 +9676,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa52
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x19
@@ -9666,7 +9685,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa53
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
@@ -9675,7 +9694,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa55
-	.4byte	0x70d5
+	.4byte	0x70e3
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -9684,7 +9703,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa56
-	.4byte	0x6aef
+	.4byte	0x6afd
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -9693,7 +9712,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa57
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -9705,7 +9724,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa58
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x4
 	.byte	0x0
@@ -9717,7 +9736,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa59
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -9729,7 +9748,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa5a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x4
 	.byte	0x0
@@ -9741,7 +9760,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa5b
-	.4byte	0x70e1
+	.4byte	0x70ef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -9750,7 +9769,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa5d
-	.4byte	0x7163
+	.4byte	0x7171
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -9759,7 +9778,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa5e
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
@@ -9768,7 +9787,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa5f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x42
@@ -9777,7 +9796,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa60
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x43
@@ -9786,7 +9805,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa61
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -9795,7 +9814,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa62
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x45
@@ -9804,35 +9823,35 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa63
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x46
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x70c5
+	.4byte	0x70d3
 	.byte	0xf
-	.4byte	0x688e
+	.4byte	0x689c
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x70d0
+	.4byte	0x70de
 	.byte	0xf
-	.4byte	0x6b14
+	.4byte	0x6b22
 	.byte	0xd
-	.4byte	0x70e1
-	.4byte	0x2d41
+	.4byte	0x70ef
+	.4byte	0x2d4f
 	.byte	0xe
 	.byte	0x4
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x70ed
-	.4byte	0x2d36
+	.4byte	0x70fb
+	.4byte	0x2d44
 	.byte	0xe
 	.byte	0x9
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x7163
+	.4byte	0x7171
 	.ascii	"UnitSprite\000"
 
 	.byte	0xc
@@ -9843,7 +9862,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x167e
-	.4byte	0x7163
+	.4byte	0x7171
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -9852,7 +9871,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x167f
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -9861,7 +9880,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x167f
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -9870,7 +9889,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1680
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -9879,7 +9898,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1681
-	.4byte	0x84b
+	.4byte	0x859
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -9888,16 +9907,16 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1682
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x70ed
+	.4byte	0x70fb
 	.byte	0x2
-	.4byte	0x725a
+	.4byte	0x7268
 	.ascii	"UnitInfo\000"
 
 	.byte	0x10
@@ -9908,7 +9927,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa6a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -9917,7 +9936,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa6b
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -9926,7 +9945,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa6c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -9935,7 +9954,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa6d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -9947,7 +9966,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa6e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x2
 	.byte	0x5
@@ -9959,7 +9978,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa6f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x5
 	.byte	0x0
@@ -9971,7 +9990,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa70
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -9980,7 +9999,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa70
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -9989,7 +10008,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa71
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -9998,7 +10017,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa71
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -10007,7 +10026,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa72
-	.4byte	0x725a
+	.4byte	0x7268
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -10016,14 +10035,14 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xa73
-	.4byte	0x725a
+	.4byte	0x7268
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x7266
-	.4byte	0x2d36
+	.4byte	0x7274
+	.4byte	0x2d44
 	.byte	0xe
 	.byte	0x3
 	.byte	0x0
@@ -10032,67 +10051,67 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xae7
-	.4byte	0x7272
+	.4byte	0x7280
 	.byte	0x1f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x19
 	.ascii	"vu16\000"
 
 	.byte	0x1
 	.2byte	0xae8
-	.4byte	0x7284
+	.4byte	0x7292
 	.byte	0x1f
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x19
 	.ascii	"vu32\000"
 
 	.byte	0x1
 	.2byte	0xae9
-	.4byte	0x7296
+	.4byte	0x72a4
 	.byte	0x1f
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x19
 	.ascii	"vu64\000"
 
 	.byte	0x1
 	.2byte	0xaea
-	.4byte	0x72a8
+	.4byte	0x72b6
 	.byte	0x1f
-	.4byte	0x2d6f
+	.4byte	0x2d7d
 	.byte	0x19
 	.ascii	"vi8\000"
 
 	.byte	0x1
 	.2byte	0xaeb
-	.4byte	0x72b9
+	.4byte	0x72c7
 	.byte	0x1f
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x19
 	.ascii	"vi16\000"
 
 	.byte	0x1
 	.2byte	0xaec
-	.4byte	0x72cb
+	.4byte	0x72d9
 	.byte	0x1f
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x19
 	.ascii	"vi32\000"
 
 	.byte	0x1
 	.2byte	0xaed
-	.4byte	0x72dd
+	.4byte	0x72eb
 	.byte	0x1f
-	.4byte	0x2db6
+	.4byte	0x2dc4
 	.byte	0x19
 	.ascii	"vi64\000"
 
 	.byte	0x1
 	.2byte	0xaee
-	.4byte	0x72ef
+	.4byte	0x72fd
 	.byte	0x1f
-	.4byte	0x2dc2
+	.4byte	0x2dd0
 	.byte	0x2
-	.4byte	0x737e
+	.4byte	0x738c
 	.ascii	"BgAffineSetSrc\000"
 
 	.byte	0x14
@@ -10103,7 +10122,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xaf2
-	.4byte	0x2db6
+	.4byte	0x2dc4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -10112,7 +10131,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xaf3
-	.4byte	0x2db6
+	.4byte	0x2dc4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -10121,7 +10140,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xaf4
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -10130,7 +10149,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xaf5
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -10139,7 +10158,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xaf6
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -10148,7 +10167,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xaf7
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -10157,13 +10176,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xaf8
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x73eb
+	.4byte	0x73f9
 	.ascii	"BgAffineSetDst\000"
 
 	.byte	0x10
@@ -10174,7 +10193,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xafd
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -10183,7 +10202,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xafe
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -10192,7 +10211,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xaff
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -10201,7 +10220,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xb00
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -10210,7 +10229,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xb01
-	.4byte	0x2db6
+	.4byte	0x2dc4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -10219,13 +10238,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xb02
-	.4byte	0x2db6
+	.4byte	0x2dc4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x743f
+	.4byte	0x744d
 	.ascii	"ObjAffineSetSrc\000"
 
 	.byte	0x8
@@ -10236,7 +10255,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xb07
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -10245,7 +10264,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xb08
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -10254,13 +10273,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xb09
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x7465
+	.4byte	0x7473
 	.byte	0x4
 	.byte	0x1
 	.2byte	0xb0d
@@ -10270,7 +10289,7 @@ EfxApocalypseOBJ_Loop2:
 	.4byte	0x80000000
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x74d9
+	.4byte	0x74e7
 	.ascii	"BitUnpackInfo\000"
 
 	.byte	0x8
@@ -10281,7 +10300,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xb13
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -10290,7 +10309,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xb14
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -10299,7 +10318,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xb15
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -10308,13 +10327,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xb16
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x7583
+	.4byte	0x7591
 	.byte	0x4
 	.byte	0x1
 	.2byte	0xb1a
@@ -10356,7 +10375,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0xff
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x75c7
+	.4byte	0x75d5
 	.byte	0x4
 	.byte	0x1
 	.2byte	0xb55
@@ -10374,7 +10393,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x0
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x772c
+	.4byte	0x773a
 	.ascii	"DispCnt\000"
 
 	.byte	0x4
@@ -10385,7 +10404,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc5c
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x3
 	.byte	0xd
@@ -10397,7 +10416,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc5e
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0xb
@@ -10409,7 +10428,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc5f
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0xa
@@ -10421,7 +10440,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc60
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0x9
@@ -10433,7 +10452,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc61
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0x8
@@ -10445,7 +10464,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc62
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0x7
@@ -10457,7 +10476,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc63
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0x6
@@ -10469,7 +10488,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc64
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0x5
@@ -10481,7 +10500,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc65
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0x4
@@ -10493,7 +10512,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc66
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0x3
@@ -10505,7 +10524,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc67
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0x2
@@ -10517,7 +10536,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc68
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0x1
@@ -10529,7 +10548,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc69
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0x0
@@ -10538,7 +10557,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x0
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x77fb
+	.4byte	0x7809
 	.ascii	"DispStat\000"
 
 	.byte	0x4
@@ -10549,7 +10568,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc6e
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0xf
@@ -10561,7 +10580,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc6f
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0xe
@@ -10573,7 +10592,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc70
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0xd
@@ -10585,7 +10604,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc71
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0xc
@@ -10597,7 +10616,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc72
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0xb
@@ -10609,7 +10628,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc73
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0xa
@@ -10621,7 +10640,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc75
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x8
 	.byte	0x0
@@ -10630,7 +10649,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x0
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x78a6
+	.4byte	0x78b4
 	.ascii	"BgCnt\000"
 
 	.byte	0x4
@@ -10641,7 +10660,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc7a
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x2
 	.byte	0xe
@@ -10653,7 +10672,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc7b
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x2
 	.byte	0xc
@@ -10665,7 +10684,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc7d
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0x9
@@ -10677,7 +10696,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc7e
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0x8
@@ -10689,7 +10708,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc7f
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x5
 	.byte	0x3
@@ -10701,7 +10720,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc80
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0x2
@@ -10713,7 +10732,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc81
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x2
 	.byte	0x0
@@ -10722,7 +10741,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x0
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x7b8f
+	.4byte	0x7b9d
 	.ascii	"WinCnt\000"
 
 	.byte	0x4
@@ -10733,7 +10752,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc86
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -10745,7 +10764,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc87
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -10757,7 +10776,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc88
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -10769,7 +10788,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc89
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -10781,7 +10800,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc8a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -10793,7 +10812,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc8b
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -10805,7 +10824,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc8e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -10817,7 +10836,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc8f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -10829,7 +10848,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc90
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -10841,7 +10860,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc91
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -10853,7 +10872,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc92
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -10865,7 +10884,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc93
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -10877,7 +10896,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc96
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -10889,7 +10908,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc97
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -10901,7 +10920,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc98
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -10913,7 +10932,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc99
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -10925,7 +10944,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc9a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -10937,7 +10956,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc9b
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -10949,7 +10968,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc9e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -10961,7 +10980,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xc9f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -10973,7 +10992,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xca0
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -10985,7 +11004,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xca1
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -10997,7 +11016,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xca2
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -11009,7 +11028,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xca3
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -11018,7 +11037,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x3
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x7d41
+	.4byte	0x7d4f
 	.ascii	"BlendCnt\000"
 
 	.byte	0x4
@@ -11029,7 +11048,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xca9
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0xf
@@ -11041,7 +11060,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcaa
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0xe
@@ -11053,7 +11072,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcab
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0xd
@@ -11065,7 +11084,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcac
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0xc
@@ -11077,7 +11096,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcad
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0xb
@@ -11089,7 +11108,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcae
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0xa
@@ -11101,7 +11120,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcaf
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x2
 	.byte	0x8
@@ -11113,7 +11132,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcb0
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0x7
@@ -11125,7 +11144,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcb1
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0x6
@@ -11137,7 +11156,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcb2
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0x5
@@ -11149,7 +11168,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcb3
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0x4
@@ -11161,7 +11180,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcb4
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0x3
@@ -11173,7 +11192,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcb5
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x1
 	.byte	0x2
@@ -11182,7 +11201,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x0
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x8013
+	.4byte	0x8021
 	.ascii	"DispIo\000"
 
 	.byte	0x6c
@@ -11193,7 +11212,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcba
-	.4byte	0x75c7
+	.4byte	0x75d5
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -11202,7 +11221,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcbb
-	.4byte	0x772c
+	.4byte	0x773a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -11211,7 +11230,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcbc
-	.4byte	0x725a
+	.4byte	0x7268
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -11220,7 +11239,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcbd
-	.4byte	0x77fb
+	.4byte	0x7809
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -11229,7 +11248,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcbe
-	.4byte	0x77fb
+	.4byte	0x7809
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -11238,7 +11257,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcbf
-	.4byte	0x77fb
+	.4byte	0x7809
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -11247,7 +11266,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcc0
-	.4byte	0x77fb
+	.4byte	0x7809
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -11256,7 +11275,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcc1
-	.4byte	0x8013
+	.4byte	0x8021
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -11265,7 +11284,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcc2
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -11274,7 +11293,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcc2
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2d
@@ -11283,7 +11302,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcc2
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -11292,7 +11311,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcc2
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2f
@@ -11301,7 +11320,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcc3
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -11310,7 +11329,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcc3
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x31
@@ -11319,7 +11338,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcc3
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -11328,7 +11347,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcc3
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x33
@@ -11337,7 +11356,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcc4
-	.4byte	0x78a6
+	.4byte	0x78b4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -11346,7 +11365,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcc5
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -11355,7 +11374,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcc6
-	.4byte	0x801f
+	.4byte	0x802d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3a
@@ -11364,7 +11383,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcc7
-	.4byte	0x7b8f
+	.4byte	0x7b9d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -11373,7 +11392,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcc8
-	.4byte	0x725a
+	.4byte	0x7268
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
@@ -11382,7 +11401,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcc9
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -11391,7 +11410,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcca
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x45
@@ -11400,7 +11419,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xccb
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x46
@@ -11409,7 +11428,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xccc
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -11418,7 +11437,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xccd
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4a
@@ -11427,7 +11446,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcce
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -11436,7 +11455,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xccf
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4e
@@ -11445,7 +11464,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcd0
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -11454,7 +11473,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcd1
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -11463,7 +11482,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcd2
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x58
@@ -11472,7 +11491,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcd3
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5a
@@ -11481,7 +11500,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcd4
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
@@ -11490,7 +11509,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcd5
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5e
@@ -11499,7 +11518,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcd6
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
@@ -11508,7 +11527,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcd7
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x64
@@ -11517,25 +11536,25 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcd8
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x68
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x801f
-	.4byte	0x2e9b
+	.4byte	0x802d
+	.4byte	0x2ea9
 	.byte	0xe
 	.byte	0x3
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x802b
-	.4byte	0x2d36
+	.4byte	0x8039
+	.4byte	0x2d44
 	.byte	0xe
 	.byte	0x1
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x8130
+	.4byte	0x813e
 	.ascii	"KeySt\000"
 
 	.byte	0x14
@@ -11546,7 +11565,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcdd
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -11555,7 +11574,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcde
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -11564,7 +11583,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xcdf
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -11573,7 +11592,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xce0
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -11582,7 +11601,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xce1
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -11591,7 +11610,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xce2
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -11600,7 +11619,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xce3
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -11609,7 +11628,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xce4
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -11618,7 +11637,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xce5
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -11627,7 +11646,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xce6
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -11636,13 +11655,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xce7
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x8176
+	.4byte	0x8184
 	.byte	0x4
 	.byte	0x1
 	.2byte	0xceb
@@ -11664,8 +11683,8 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x8
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x8182
-	.4byte	0x7ad
+	.4byte	0x8190
+	.4byte	0x7bb
 	.byte	0xe
 	.byte	0x0
 	.byte	0x0
@@ -11674,11 +11693,11 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xd33
-	.4byte	0x8176
+	.4byte	0x8184
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
-	.4byte	0x81fa
+	.4byte	0x8208
 	.ascii	"ChWinData\000"
 
 	.byte	0x4
@@ -11689,7 +11708,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xdb0
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x6
 	.byte	0xa
@@ -11701,7 +11720,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xdb1
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0xa
 	.byte	0x0
@@ -11713,7 +11732,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xdb2
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x10
 	.byte	0x0
@@ -11722,8 +11741,8 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x2
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x8206
-	.4byte	0x8194
+	.4byte	0x8214
+	.4byte	0x81a2
 	.byte	0xe
 	.byte	0x1f
 	.byte	0x0
@@ -11732,11 +11751,11 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xdb5
-	.4byte	0x81fa
+	.4byte	0x8208
 	.byte	0x1
 	.byte	0x1
 	.byte	0x18
-	.4byte	0x82cd
+	.4byte	0x82db
 	.byte	0x4
 	.byte	0x1
 	.2byte	0xdbb
@@ -11774,7 +11793,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x80
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x83f2
+	.4byte	0x8400
 	.byte	0x4
 	.byte	0x1
 	.2byte	0xdc9
@@ -11824,7 +11843,7 @@ EfxApocalypseOBJ_Loop2:
 	.2byte	0x400
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x847d
+	.4byte	0x848b
 	.byte	0x4
 	.byte	0x1
 	.2byte	0xdd8
@@ -11850,7 +11869,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x80
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x8538
+	.4byte	0x8546
 	.ascii	"BattleSt\000"
 
 	.byte	0x14
@@ -11861,7 +11880,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xde4
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -11870,7 +11889,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xde5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -11879,7 +11898,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xde6
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -11888,7 +11907,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xde7
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -11897,7 +11916,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xde8
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -11906,7 +11925,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xde9
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -11915,7 +11934,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xdea
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -11924,7 +11943,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xdeb
-	.4byte	0x8538
+	.4byte	0x8546
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -11933,16 +11952,16 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xdec
-	.4byte	0x8538
+	.4byte	0x8546
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x6e56
+	.4byte	0x6e64
 	.byte	0x2
-	.4byte	0x891e
+	.4byte	0x892c
 	.ascii	"BattleUnit\000"
 
 	.byte	0x7c
@@ -11953,7 +11972,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xdf1
-	.4byte	0x6e56
+	.4byte	0x6e64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -11962,7 +11981,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xdf3
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -11971,7 +11990,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xdf4
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4a
@@ -11980,7 +11999,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xdf5
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -11989,7 +12008,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xdf6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4e
@@ -11998,7 +12017,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xdf7
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4f
@@ -12007,7 +12026,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xdf8
-	.4byte	0x2e0c
+	.4byte	0x2e1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -12016,7 +12035,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xdfa
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x51
@@ -12025,7 +12044,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xdfb
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x52
@@ -12034,7 +12053,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xdfd
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x53
@@ -12043,7 +12062,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xdfe
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -12052,7 +12071,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xdff
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x55
@@ -12061,7 +12080,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe00
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x56
@@ -12070,7 +12089,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe03
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x58
@@ -12079,7 +12098,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe04
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5a
@@ -12088,7 +12107,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe05
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
@@ -12097,7 +12116,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe06
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5e
@@ -12106,7 +12125,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe07
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
@@ -12115,7 +12134,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe08
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x62
@@ -12124,7 +12143,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe09
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x64
@@ -12133,7 +12152,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe0a
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x66
@@ -12142,7 +12161,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe0b
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x68
@@ -12151,7 +12170,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe0d
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6a
@@ -12160,7 +12179,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe0e
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6b
@@ -12169,7 +12188,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe0f
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6c
@@ -12178,7 +12197,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe10
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6d
@@ -12187,7 +12206,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe11
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6e
@@ -12196,7 +12215,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe13
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6f
@@ -12205,7 +12224,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe14
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x70
@@ -12214,7 +12233,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe15
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x71
@@ -12223,7 +12242,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe16
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x72
@@ -12232,7 +12251,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe17
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x73
@@ -12241,7 +12260,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe18
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x74
@@ -12250,7 +12269,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe19
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x75
@@ -12259,7 +12278,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe1a
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x76
@@ -12268,7 +12287,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe1c
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x77
@@ -12277,7 +12296,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe1d
-	.4byte	0x2e0c
+	.4byte	0x2e1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x78
@@ -12286,7 +12305,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe1e
-	.4byte	0x2e0c
+	.4byte	0x2e1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x79
@@ -12295,13 +12314,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe20
-	.4byte	0x2e0c
+	.4byte	0x2e1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7a
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x896a
+	.4byte	0x8978
 	.ascii	"BattleHit\000"
 
 	.byte	0x4
@@ -12312,7 +12331,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe26
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -12321,7 +12340,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe27
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -12330,13 +12349,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xe28
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x89b2
+	.4byte	0x89c0
 	.byte	0x4
 	.byte	0x1
 	.2byte	0xe92
@@ -12358,7 +12377,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0xc0
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x8a06
+	.4byte	0x8a14
 	.byte	0x4
 	.byte	0x1
 	.2byte	0xe9a
@@ -12380,7 +12399,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x3
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x8a24
+	.4byte	0x8a32
 	.byte	0x4
 	.byte	0x1
 	.2byte	0xec0
@@ -12390,7 +12409,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x64
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x8a44
+	.4byte	0x8a52
 	.byte	0x4
 	.byte	0x1
 	.2byte	0xecb
@@ -12400,7 +12419,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x64
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x8a5f
+	.4byte	0x8a6d
 	.byte	0x4
 	.byte	0x1
 	.2byte	0xecd
@@ -12410,7 +12429,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x1
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x8a7d
+	.4byte	0x8a8b
 	.byte	0x4
 	.byte	0x1
 	.2byte	0xecf
@@ -12420,7 +12439,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x20
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x8a9d
+	.4byte	0x8aab
 	.byte	0x4
 	.byte	0x1
 	.2byte	0xed0
@@ -12430,7 +12449,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x28
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x8bd8
+	.4byte	0x8be6
 	.byte	0x4
 	.byte	0x1
 	.2byte	0xed3
@@ -12492,7 +12511,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0xd
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x8ccb
+	.4byte	0x8cd9
 	.byte	0x4
 	.byte	0x1
 	.2byte	0xee5
@@ -12546,9 +12565,9 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xef5
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
-	.4byte	0x8dbf
+	.4byte	0x8dcd
 	.ascii	"EventInfo\000"
 
 	.byte	0x1c
@@ -12559,7 +12578,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xef9
-	.4byte	0x8dbf
+	.4byte	0x8dcd
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -12568,7 +12587,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xefa
-	.4byte	0x7d1
+	.4byte	0x7df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -12577,7 +12596,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xefb
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -12586,7 +12605,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xefc
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -12595,7 +12614,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xefd
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -12604,7 +12623,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xefe
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -12613,7 +12632,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xeff
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -12622,7 +12641,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf00
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x19
@@ -12631,7 +12650,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf01
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
@@ -12640,18 +12659,18 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf02
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1b
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x8dc5
+	.4byte	0x8dd3
 	.byte	0xf
-	.4byte	0x8ccb
+	.4byte	0x8cd9
 	.byte	0x2
-	.4byte	0x8e47
+	.4byte	0x8e55
 	.ascii	"SupportTalkEnt\000"
 
 	.byte	0x10
@@ -12662,7 +12681,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf07
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -12671,7 +12690,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf07
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -12680,7 +12699,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf09
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -12689,7 +12708,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf0a
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -12698,13 +12717,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf0b
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x8eb6
+	.4byte	0x8ec4
 	.ascii	"BattleTalkExtEnt\000"
 
 	.byte	0xc
@@ -12715,7 +12734,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf10
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -12724,7 +12743,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf11
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -12733,7 +12752,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf12
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -12742,7 +12761,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf14
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -12751,13 +12770,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf15
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x8f21
+	.4byte	0x8f2f
 	.ascii	"BattleTalkEnt\000"
 
 	.byte	0x10
@@ -12768,7 +12787,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf1a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -12777,7 +12796,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf1b
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -12786,7 +12805,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf1d
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -12795,7 +12814,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf1e
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -12804,13 +12823,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf1f
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x91e4
+	.4byte	0x91f2
 	.ascii	"SuspendPackedUnit\000"
 
 	.byte	0x34
@@ -12821,7 +12840,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf94
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -12830,7 +12849,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf95
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -12839,7 +12858,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf96
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -12848,7 +12867,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf97
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -12857,7 +12876,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf98
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -12866,7 +12885,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf99
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -12875,7 +12894,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf9a
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -12884,7 +12903,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf9b
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -12893,7 +12912,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf9c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -12902,7 +12921,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf9d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -12911,7 +12930,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf9e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -12920,7 +12939,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xf9f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -12929,7 +12948,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfa0
-	.4byte	0x6aef
+	.4byte	0x6afd
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -12938,7 +12957,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfa1
-	.4byte	0x70e1
+	.4byte	0x70ef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -12947,7 +12966,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfa2
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x22
@@ -12956,7 +12975,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfa3
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x23
@@ -12965,7 +12984,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfa4
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -12974,7 +12993,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfa5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -12983,7 +13002,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfa6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -12992,7 +13011,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfa7
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0x1b
@@ -13004,7 +13023,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfa8
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x6
 	.byte	0x15
@@ -13016,7 +13035,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfa9
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x6
 	.byte	0xf
@@ -13028,7 +13047,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfaa
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0xa
@@ -13040,7 +13059,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfab
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0x5
@@ -13052,7 +13071,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfac
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0x0
@@ -13064,7 +13083,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfad
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0x1b
@@ -13076,7 +13095,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfae
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0x16
@@ -13088,7 +13107,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfaf
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0x11
@@ -13100,7 +13119,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfb0
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0xc
@@ -13112,7 +13131,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfb1
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x3
 	.byte	0x9
@@ -13124,7 +13143,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfb2
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x3
 	.byte	0x6
@@ -13136,7 +13155,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfb3
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x3
 	.byte	0x3
@@ -13148,7 +13167,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfb4
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x3
 	.byte	0x0
@@ -13160,7 +13179,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfb5
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x4
 	.byte	0x1c
@@ -13172,7 +13191,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfb6
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0xe
 	.byte	0xe
@@ -13184,7 +13203,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfb7
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0xe
 	.byte	0x0
@@ -13193,7 +13212,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x32
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x91f0
+	.4byte	0x91fe
 	.4byte	0x6d
 	.byte	0xe
 	.byte	0x45
@@ -13203,11 +13222,11 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfca
-	.4byte	0x91e4
+	.4byte	0x91f2
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1c
-	.4byte	0x928c
+	.4byte	0x929a
 	.ascii	"SaveSaDataSizes\000"
 
 	.byte	0x4
@@ -13235,7 +13254,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x80
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x9338
+	.4byte	0x9346
 	.ascii	"SaveSaDataOffsets\000"
 
 	.byte	0x4
@@ -13271,7 +13290,7 @@ EfxApocalypseOBJ_Loop2:
 	.2byte	0xde8
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x950b
+	.4byte	0x9519
 	.ascii	"UnitSavePack\000"
 
 	.byte	0x28
@@ -13282,7 +13301,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xff1
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x7
 	.byte	0x19
@@ -13294,7 +13313,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xff2
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x7
 	.byte	0x12
@@ -13306,7 +13325,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xff3
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0xd
@@ -13318,7 +13337,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xff4
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x6
 	.byte	0x7
@@ -13330,7 +13349,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xff5
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x7
 	.byte	0x0
@@ -13342,7 +13361,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xff7
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x6
 	.byte	0x1a
@@ -13354,7 +13373,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xff8
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x6
 	.byte	0x14
@@ -13366,7 +13385,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xff9
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x6
 	.byte	0xe
@@ -13378,7 +13397,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xffa
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0x9
@@ -13390,7 +13409,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xffb
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0x4
@@ -13402,7 +13421,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xffc
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0x1f
@@ -13414,7 +13433,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xffe
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0x1a
@@ -13426,7 +13445,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0xfff
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0x15
@@ -13438,7 +13457,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1000
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0x10
@@ -13450,7 +13469,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1001
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0xb
@@ -13462,7 +13481,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1002
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0x6
@@ -13474,7 +13493,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1004
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0xe
 	.byte	0x18
@@ -13486,7 +13505,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1005
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0xe
 	.byte	0xa
@@ -13498,7 +13517,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1006
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0xe
 	.byte	0x1c
@@ -13510,7 +13529,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1007
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0xe
 	.byte	0xe
@@ -13522,7 +13541,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1008
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0xe
 	.byte	0x0
@@ -13534,7 +13553,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x100a
-	.4byte	0x801f
+	.4byte	0x802d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -13543,7 +13562,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x100b
-	.4byte	0x6aef
+	.4byte	0x6afd
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -13552,13 +13571,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x100c
-	.4byte	0x70e1
+	.4byte	0x70ef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x95ce
+	.4byte	0x95dc
 	.ascii	"packed_unit_state_bits\000"
 
 	.byte	0x4
@@ -13598,7 +13617,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x80
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x9753
+	.4byte	0x9761
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x1021
@@ -13700,7 +13719,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x1c
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x9851
+	.4byte	0x985f
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x1041
@@ -13746,7 +13765,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x9
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x9971
+	.4byte	0x997f
 	.ascii	"Action\000"
 
 	.byte	0x18
@@ -13757,7 +13776,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1050
-	.4byte	0x9971
+	.4byte	0x997f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -13766,7 +13785,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1051
-	.4byte	0x9971
+	.4byte	0x997f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -13775,7 +13794,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1052
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -13784,7 +13803,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1053
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -13793,7 +13812,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1054
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -13802,7 +13821,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1054
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -13811,7 +13830,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1055
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -13820,7 +13839,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1056
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -13829,7 +13848,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1057
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -13838,7 +13857,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1058
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -13847,7 +13866,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1058
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -13856,7 +13875,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1059
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
@@ -13865,19 +13884,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x105a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x997d
-	.4byte	0x2d41
+	.4byte	0x998b
+	.4byte	0x2d4f
 	.byte	0xe
 	.byte	0x2
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x9a41
+	.4byte	0x9a4f
 	.ascii	"SaveSuDataSizes\000"
 
 	.byte	0x4
@@ -13917,7 +13936,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x5
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x9b2b
+	.4byte	0x9b39
 	.ascii	"SaveSuDataOffsets\000"
 
 	.byte	0x4
@@ -13965,7 +13984,7 @@ EfxApocalypseOBJ_Loop2:
 	.2byte	0x1da5
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x9b95
+	.4byte	0x9ba3
 	.ascii	"unit_amount_in_savedata\000"
 
 	.byte	0x4
@@ -13985,7 +14004,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0xa
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x9d6c
+	.4byte	0x9d7a
 	.ascii	"SavePackedUnit\000"
 
 	.byte	0x28
@@ -13996,7 +14015,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1089
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x7
 	.byte	0x19
@@ -14008,7 +14027,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x108a
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x7
 	.byte	0x12
@@ -14020,7 +14039,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x108b
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0xd
@@ -14032,7 +14051,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x108c
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x6
 	.byte	0x7
@@ -14044,7 +14063,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x108d
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x7
 	.byte	0x0
@@ -14056,7 +14075,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x108e
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x6
 	.byte	0x1a
@@ -14068,7 +14087,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x108f
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x6
 	.byte	0x14
@@ -14080,7 +14099,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1090
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x6
 	.byte	0xe
@@ -14092,7 +14111,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1092
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0x9
@@ -14104,7 +14123,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1093
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0x4
@@ -14116,7 +14135,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1094
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0x1f
@@ -14128,7 +14147,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1095
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0x1a
@@ -14140,7 +14159,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1096
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0x15
@@ -14152,7 +14171,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1097
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0x10
@@ -14164,7 +14183,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1098
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0xb
@@ -14176,7 +14195,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1099
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0x5
 	.byte	0x6
@@ -14188,7 +14207,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x109b
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0xe
 	.byte	0x18
@@ -14200,7 +14219,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x109c
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0xe
 	.byte	0xa
@@ -14212,7 +14231,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x109d
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0xe
 	.byte	0x1c
@@ -14224,7 +14243,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x109e
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0xe
 	.byte	0xe
@@ -14236,7 +14255,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x109f
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x4
 	.byte	0xe
 	.byte	0x0
@@ -14248,7 +14267,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x10a1
-	.4byte	0x801f
+	.4byte	0x802d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -14257,7 +14276,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x10a3
-	.4byte	0x6aef
+	.4byte	0x6afd
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -14266,13 +14285,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x10a4
-	.4byte	0x70e1
+	.4byte	0x70ef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x9ddf
+	.4byte	0x9ded
 	.ascii	"SaveDataSizes\000"
 
 	.byte	0x4
@@ -14300,7 +14319,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x80
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x9eb4
+	.4byte	0x9ec2
 	.ascii	"SuspandDataSizes\000"
 
 	.byte	0x4
@@ -14348,7 +14367,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x5
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x9f5e
+	.4byte	0x9f6c
 	.ascii	"SaveDataOffsets\000"
 
 	.byte	0x4
@@ -14384,7 +14403,7 @@ EfxApocalypseOBJ_Loop2:
 	.2byte	0xde8
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0xa075
+	.4byte	0xa083
 	.ascii	"SuspandDataOffsets\000"
 
 	.byte	0x4
@@ -14440,7 +14459,7 @@ EfxApocalypseOBJ_Loop2:
 	.2byte	0x1da5
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xa090
+	.4byte	0xa09e
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x10dc
@@ -14450,7 +14469,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x20
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xa16a
+	.4byte	0xa178
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x10e1
@@ -14508,7 +14527,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0xc
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xa1d4
+	.4byte	0xa1e2
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x10f3
@@ -14530,7 +14549,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x3
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xa22e
+	.4byte	0xa23c
 	.ascii	"Trap\000"
 
 	.byte	0x8
@@ -14541,7 +14560,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x10fc
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -14550,7 +14569,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x10fc
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -14559,7 +14578,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x10fd
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -14568,7 +14587,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x10fe
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -14577,14 +14596,14 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x10ff
-	.4byte	0xa22e
+	.4byte	0xa23c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0xd
-	.4byte	0xa23a
-	.4byte	0x2d90
+	.4byte	0xa248
+	.4byte	0x2d9e
 	.byte	0xe
 	.byte	0x3
 	.byte	0x0
@@ -14593,7 +14612,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.byte	0x2
-	.4byte	0xa311
+	.4byte	0xa31f
 	.ascii	"ChapterEventInfo\000"
 
 	.byte	0x1c
@@ -14604,7 +14623,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1126
-	.4byte	0x7d1
+	.4byte	0x7df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -14613,7 +14632,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1127
-	.4byte	0x7d1
+	.4byte	0x7df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -14622,7 +14641,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1128
-	.4byte	0x7d1
+	.4byte	0x7df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -14631,7 +14650,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1129
-	.4byte	0x7d1
+	.4byte	0x7df
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -14640,7 +14659,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x112a
-	.4byte	0x7d1
+	.4byte	0x7df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -14649,7 +14668,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x112b
-	.4byte	0x7d1
+	.4byte	0x7df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -14658,13 +14677,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x112c
-	.4byte	0x7d1
+	.4byte	0x7df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xa35a
+	.4byte	0xa368
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x114b
@@ -14682,7 +14701,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xa615
+	.4byte	0xa623
 	.ascii	"HelpBoxProc\000"
 
 	.byte	0x54
@@ -14693,7 +14712,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1153
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -14702,7 +14721,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1153
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -14711,7 +14730,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1153
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -14720,7 +14739,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1153
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -14729,7 +14748,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1153
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -14738,7 +14757,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1153
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -14747,7 +14766,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1153
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -14756,7 +14775,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1153
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -14765,7 +14784,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1153
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -14774,7 +14793,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1153
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -14783,7 +14802,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1153
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -14792,7 +14811,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1153
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -14801,7 +14820,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1153
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -14810,7 +14829,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1155
-	.4byte	0xa6df
+	.4byte	0xa6ed
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -14819,7 +14838,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1157
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -14828,7 +14847,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1158
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -14837,7 +14856,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1159
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -14846,7 +14865,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x115a
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x36
@@ -14855,7 +14874,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x115b
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -14864,7 +14883,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x115c
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3a
@@ -14873,7 +14892,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x115d
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -14882,7 +14901,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x115e
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3e
@@ -14891,7 +14910,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x115f
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
@@ -14900,7 +14919,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1160
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x42
@@ -14909,7 +14928,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1161
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -14918,7 +14937,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1162
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x46
@@ -14927,7 +14946,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1163
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -14936,7 +14955,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1164
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4a
@@ -14945,7 +14964,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1166
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -14954,7 +14973,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1167
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4e
@@ -14963,7 +14982,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1169
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -14972,13 +14991,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x116b
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x52
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xa6df
+	.4byte	0xa6ed
 	.ascii	"HelpBoxInfo\000"
 
 	.byte	0x1c
@@ -14989,7 +15008,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1172
-	.4byte	0xa6df
+	.4byte	0xa6ed
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -14998,7 +15017,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1173
-	.4byte	0xa6df
+	.4byte	0xa6ed
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -15007,7 +15026,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1174
-	.4byte	0xa6df
+	.4byte	0xa6ed
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -15016,7 +15035,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1175
-	.4byte	0xa6df
+	.4byte	0xa6ed
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -15025,7 +15044,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1176
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -15034,7 +15053,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1176
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -15043,7 +15062,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1177
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -15052,7 +15071,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1178
-	.4byte	0xa6fc
+	.4byte	0xa70a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -15061,30 +15080,30 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1179
-	.4byte	0xa6fc
+	.4byte	0xa70a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xa6e5
+	.4byte	0xa6f3
 	.byte	0xf
-	.4byte	0xa615
+	.4byte	0xa623
 	.byte	0x12
-	.4byte	0xa6f6
+	.4byte	0xa704
 	.byte	0x1
 	.byte	0x13
-	.4byte	0xa6f6
+	.4byte	0xa704
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xa35a
+	.4byte	0xa368
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xa6ea
+	.4byte	0xa6f8
 	.byte	0x2
-	.4byte	0xa77d
+	.4byte	0xa78b
 	.ascii	"WaveData\000"
 
 	.byte	0x14
@@ -15095,7 +15114,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x125d
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -15104,7 +15123,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x125e
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -15113,7 +15132,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x125f
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -15122,7 +15141,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1260
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -15131,7 +15150,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1261
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -15140,19 +15159,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1262
-	.4byte	0xa77d
+	.4byte	0xa78b
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
 	.byte	0x0
 	.byte	0xd
-	.4byte	0xa789
-	.4byte	0x2d90
+	.4byte	0xa797
+	.4byte	0x2d9e
 	.byte	0xe
 	.byte	0x0
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xa83a
+	.4byte	0xa848
 	.ascii	"ToneData\000"
 
 	.byte	0xc
@@ -15163,7 +15182,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1272
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -15172,7 +15191,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1273
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -15181,7 +15200,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1274
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -15190,7 +15209,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1275
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -15199,7 +15218,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1276
-	.4byte	0xa83a
+	.4byte	0xa848
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -15208,7 +15227,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1277
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -15217,7 +15236,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1278
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -15226,7 +15245,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1279
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -15235,16 +15254,16 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x127a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xa702
+	.4byte	0xa710
 	.byte	0x2
-	.4byte	0xab4c
+	.4byte	0xab5a
 	.ascii	"CgbChannel\000"
 
 	.byte	0x40
@@ -15255,7 +15274,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1299
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -15264,7 +15283,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x129a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -15273,7 +15292,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x129b
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -15282,7 +15301,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x129c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -15291,7 +15310,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x129d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -15300,7 +15319,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x129e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -15309,7 +15328,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x129f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -15318,7 +15337,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12a0
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -15327,7 +15346,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12a1
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -15336,7 +15355,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12a2
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -15345,7 +15364,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12a3
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -15354,7 +15373,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12a4
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -15363,7 +15382,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12a5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -15372,7 +15391,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12a6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -15381,7 +15400,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12a7
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -15390,7 +15409,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12a8
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -15399,7 +15418,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12a9
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -15408,7 +15427,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12aa
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -15417,7 +15436,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12ab
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -15426,7 +15445,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12ac
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -15435,7 +15454,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12ad
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -15444,7 +15463,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12ae
-	.4byte	0xab4c
+	.4byte	0xab5a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
@@ -15453,7 +15472,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12af
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -15462,7 +15481,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12b0
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x19
@@ -15471,7 +15490,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12b1
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
@@ -15480,7 +15499,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12b2
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1b
@@ -15489,7 +15508,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12b3
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -15498,7 +15517,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12b4
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1d
@@ -15507,7 +15526,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12b5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
@@ -15516,7 +15535,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12b6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1f
@@ -15525,7 +15544,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12b7
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -15534,7 +15553,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12b8
-	.4byte	0xab58
+	.4byte	0xab66
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -15543,7 +15562,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12b9
-	.4byte	0xab58
+	.4byte	0xab66
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -15552,7 +15571,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12ba
-	.4byte	0xae64
+	.4byte	0xae72
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -15561,7 +15580,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12bb
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -15570,7 +15589,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12bc
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -15579,22 +15598,22 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12bd
-	.4byte	0x6aef
+	.4byte	0x6afd
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
 	.byte	0x0
 	.byte	0xd
-	.4byte	0xab58
-	.4byte	0x2d36
+	.4byte	0xab66
+	.4byte	0x2d44
 	.byte	0xe
 	.byte	0x2
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
-	.4byte	0xae64
+	.4byte	0xae72
 	.ascii	"MusicPlayerTrack\000"
 
 	.byte	0x50
@@ -15605,7 +15624,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1325
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -15614,7 +15633,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1326
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -15623,7 +15642,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1327
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -15632,7 +15651,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1328
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -15641,7 +15660,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1329
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -15650,7 +15669,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x132a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -15659,7 +15678,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x132b
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -15668,7 +15687,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x132c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -15677,7 +15696,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x132d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -15686,7 +15705,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x132e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -15695,7 +15714,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x132f
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -15704,7 +15723,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1330
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -15713,7 +15732,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1331
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -15722,7 +15741,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1332
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -15731,7 +15750,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1333
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -15740,7 +15759,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1334
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -15749,7 +15768,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1335
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -15758,7 +15777,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1336
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -15767,7 +15786,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1337
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -15776,7 +15795,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1338
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -15785,7 +15804,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1339
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -15794,7 +15813,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x133a
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
@@ -15803,7 +15822,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x133b
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -15812,7 +15831,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x133c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x17
@@ -15821,7 +15840,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x133d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -15830,7 +15849,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x133e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x19
@@ -15839,7 +15858,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x133f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
@@ -15848,7 +15867,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1340
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1b
@@ -15857,7 +15876,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1341
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -15866,7 +15885,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1342
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1d
@@ -15875,7 +15894,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1343
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
@@ -15884,7 +15903,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1344
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1f
@@ -15893,7 +15912,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1345
-	.4byte	0xb131
+	.4byte	0xb13f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -15902,7 +15921,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1346
-	.4byte	0xa789
+	.4byte	0xa797
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -15911,7 +15930,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1347
-	.4byte	0x70e1
+	.4byte	0x70ef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -15920,7 +15939,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1348
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3a
@@ -15929,7 +15948,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1349
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -15938,7 +15957,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x134a
-	.4byte	0x4e17
+	.4byte	0x4e25
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
@@ -15947,16 +15966,16 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x134b
-	.4byte	0xb137
+	.4byte	0xb145
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xab5e
+	.4byte	0xab6c
 	.byte	0x2
-	.4byte	0xb131
+	.4byte	0xb13f
 	.ascii	"SoundChannel\000"
 
 	.byte	0x40
@@ -15967,7 +15986,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12c2
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -15976,7 +15995,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12c3
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -15985,7 +16004,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12c4
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -15994,7 +16013,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12c5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -16003,7 +16022,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12c6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -16012,7 +16031,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12c7
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -16021,7 +16040,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12c8
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -16030,7 +16049,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12c9
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -16039,7 +16058,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12ca
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -16048,7 +16067,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12cb
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -16057,7 +16076,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12cc
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -16066,7 +16085,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12cd
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -16075,7 +16094,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12ce
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -16084,7 +16103,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12cf
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -16093,7 +16112,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12d0
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -16102,7 +16121,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12d1
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -16111,7 +16130,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12d2
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -16120,7 +16139,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12d3
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -16129,7 +16148,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12d4
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -16138,7 +16157,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12d5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -16147,7 +16166,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12d6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -16156,7 +16175,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12d7
-	.4byte	0xab4c
+	.4byte	0xab5a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
@@ -16165,7 +16184,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12d8
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -16174,7 +16193,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12d9
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -16183,7 +16202,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12da
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -16192,7 +16211,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12db
-	.4byte	0xa83a
+	.4byte	0xa848
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -16201,7 +16220,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12dc
-	.4byte	0xb143
+	.4byte	0xb151
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -16210,7 +16229,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12dd
-	.4byte	0xae64
+	.4byte	0xae72
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -16219,7 +16238,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12de
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -16228,7 +16247,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12df
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -16237,7 +16256,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12e0
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -16246,7 +16265,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12e1
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -16255,25 +16274,25 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12e2
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3e
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xae6a
+	.4byte	0xae78
 	.byte	0xd
-	.4byte	0xb143
-	.4byte	0x4e17
+	.4byte	0xb151
+	.4byte	0x4e25
 	.byte	0xe
 	.byte	0x2
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x21
-	.4byte	0xb3a2
+	.4byte	0xb3b0
 	.ascii	"SoundInfo\000"
 
 	.2byte	0xfb0
@@ -16284,7 +16303,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12ef
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -16293,7 +16312,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12f1
-	.4byte	0x7272
+	.4byte	0x7280
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -16302,7 +16321,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12f4
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -16311,7 +16330,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12f5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -16320,7 +16339,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12f6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -16329,7 +16348,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12f7
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -16338,7 +16357,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12f9
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -16347,7 +16366,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12fa
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -16356,7 +16375,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12fb
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -16365,7 +16384,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12fc
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -16374,7 +16393,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12fd
-	.4byte	0xab4c
+	.4byte	0xab5a
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -16383,7 +16402,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12fe
-	.4byte	0x2db6
+	.4byte	0x2dc4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -16392,7 +16411,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x12ff
-	.4byte	0x2db6
+	.4byte	0x2dc4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -16401,7 +16420,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1300
-	.4byte	0x2db6
+	.4byte	0x2dc4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -16410,7 +16429,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1301
-	.4byte	0xb3a2
+	.4byte	0xb3b0
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -16419,7 +16438,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1302
-	.4byte	0xb552
+	.4byte	0xb560
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -16428,7 +16447,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1303
-	.4byte	0xb3b4
+	.4byte	0xb3c2
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -16437,7 +16456,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1304
-	.4byte	0xb558
+	.4byte	0xb566
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -16446,7 +16465,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1305
-	.4byte	0xb56a
+	.4byte	0xb578
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -16455,7 +16474,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1306
-	.4byte	0xb58a
+	.4byte	0xb598
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -16464,7 +16483,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1307
-	.4byte	0xb597
+	.4byte	0xb5a5
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -16473,7 +16492,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1308
-	.4byte	0xb5b9
+	.4byte	0xb5c7
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -16482,7 +16501,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1309
-	.4byte	0xb5bf
+	.4byte	0xb5cd
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -16491,7 +16510,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x130a
-	.4byte	0xb5c5
+	.4byte	0xb5d3
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
@@ -16500,7 +16519,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x130b
-	.4byte	0xb5d1
+	.4byte	0xb5df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -16509,25 +16528,25 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x130c
-	.4byte	0xb5dd
+	.4byte	0xb5eb
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd0,0x6
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xa840
+	.4byte	0xa84e
 	.byte	0x12
-	.4byte	0xb3b4
+	.4byte	0xb3c2
 	.byte	0x1
 	.byte	0x13
-	.4byte	0xb3b4
+	.4byte	0xb3c2
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xb3ba
+	.4byte	0xb3c8
 	.byte	0x2
-	.4byte	0xb552
+	.4byte	0xb560
 	.ascii	"MusicPlayer\000"
 
 	.byte	0x40
@@ -16538,7 +16557,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1362
-	.4byte	0xb66d
+	.4byte	0xb67b
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -16547,7 +16566,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1363
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -16556,7 +16575,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1364
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -16565,7 +16584,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1365
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -16574,7 +16593,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1366
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -16583,7 +16602,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1367
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -16592,7 +16611,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1368
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -16601,7 +16620,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1369
-	.4byte	0x6aef
+	.4byte	0x6afd
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -16610,7 +16629,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x136a
-	.4byte	0x4e17
+	.4byte	0x4e25
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -16619,7 +16638,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x136b
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -16628,7 +16647,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x136c
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
@@ -16637,7 +16656,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x136d
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -16646,7 +16665,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x136e
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x22
@@ -16655,7 +16674,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x136f
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -16664,7 +16683,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1370
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -16673,7 +16692,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1371
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -16682,7 +16701,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1372
-	.4byte	0xae64
+	.4byte	0xae72
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -16691,7 +16710,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1373
-	.4byte	0xb678
+	.4byte	0xb686
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -16700,7 +16719,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1374
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -16709,7 +16728,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1375
-	.4byte	0xb552
+	.4byte	0xb560
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -16718,86 +16737,86 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1376
-	.4byte	0xb3b4
+	.4byte	0xb3c2
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xb3a8
+	.4byte	0xb3b6
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x2e46
+	.4byte	0x2e54
 	.byte	0x12
-	.4byte	0xb56a
+	.4byte	0xb578
 	.byte	0x1
 	.byte	0x13
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xb55e
+	.4byte	0xb56c
 	.byte	0x1b
-	.4byte	0xb58a
+	.4byte	0xb598
 	.byte	0x1
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x13
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x13
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x13
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xb570
+	.4byte	0xb57e
 	.byte	0x22
-	.4byte	0xb597
+	.4byte	0xb5a5
 	.byte	0x23
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xb59d
+	.4byte	0xb5ab
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xb590
+	.4byte	0xb59e
 	.byte	0x12
-	.4byte	0xb5b9
+	.4byte	0xb5c7
 	.byte	0x1
 	.byte	0x13
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x13
-	.4byte	0xb3b4
+	.4byte	0xb3c2
 	.byte	0x13
-	.4byte	0xae64
+	.4byte	0xae72
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xb5a3
+	.4byte	0xb5b1
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x2e46
+	.4byte	0x2e54
 	.byte	0xd
-	.4byte	0xb5d1
-	.4byte	0x2d36
+	.4byte	0xb5df
+	.4byte	0x2d44
 	.byte	0xe
 	.byte	0xf
 	.byte	0x0
 	.byte	0xd
-	.4byte	0xb5dd
-	.4byte	0xae6a
+	.4byte	0xb5eb
+	.4byte	0xae78
 	.byte	0xe
 	.byte	0xb
 	.byte	0x0
 	.byte	0xd
-	.4byte	0xb5ea
-	.4byte	0x2d90
+	.4byte	0xb5f8
+	.4byte	0x2d9e
 	.byte	0x24
 	.2byte	0xc5f
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xb66d
+	.4byte	0xb67b
 	.ascii	"Song\000"
 
 	.byte	0xc
@@ -16808,7 +16827,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1311
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -16817,7 +16836,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1312
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -16826,7 +16845,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1313
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -16835,7 +16854,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1314
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -16844,7 +16863,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1315
-	.4byte	0xb678
+	.4byte	0xb686
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -16853,27 +16872,27 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1316
-	.4byte	0xb67e
+	.4byte	0xb68c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xb673
+	.4byte	0xb681
 	.byte	0xf
-	.4byte	0xb5ea
+	.4byte	0xb5f8
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xa789
+	.4byte	0xa797
 	.byte	0xd
-	.4byte	0xb68a
-	.4byte	0x4e17
+	.4byte	0xb698
+	.4byte	0x4e25
 	.byte	0xe
 	.byte	0x0
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xb6f3
+	.4byte	0xb701
 	.ascii	"MusicPlayerEnt\000"
 
 	.byte	0xc
@@ -16884,7 +16903,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x137b
-	.4byte	0xb3b4
+	.4byte	0xb3c2
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -16893,7 +16912,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x137c
-	.4byte	0xae64
+	.4byte	0xae72
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -16902,7 +16921,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x137d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -16911,13 +16930,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x137e
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xb731
+	.4byte	0xb73f
 	.ascii	"SongEnt\000"
 
 	.byte	0x8
@@ -16928,7 +16947,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1383
-	.4byte	0xb731
+	.4byte	0xb73f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -16937,7 +16956,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1384
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -16946,73 +16965,73 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1385
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xb5ea
+	.4byte	0xb5f8
 	.byte	0x19
 	.ascii	"MPlayFunc\000"
 
 	.byte	0x1
 	.2byte	0x122f
-	.4byte	0xb749
+	.4byte	0xb757
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xb590
+	.4byte	0xb59e
 	.byte	0x19
 	.ascii	"PlyNoteFunc\000"
 
 	.byte	0x1
 	.2byte	0x1230
-	.4byte	0xb763
+	.4byte	0xb771
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xb5a3
+	.4byte	0xb5b1
 	.byte	0x19
 	.ascii	"CgbSoundFunc\000"
 
 	.byte	0x1
 	.2byte	0x1231
-	.4byte	0x2e40
+	.4byte	0x2e4e
 	.byte	0x19
 	.ascii	"CgbOscOffFunc\000"
 
 	.byte	0x1
 	.2byte	0x1232
-	.4byte	0xb794
+	.4byte	0xb7a2
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xb55e
+	.4byte	0xb56c
 	.byte	0x19
 	.ascii	"MidiKeyToCgbFreqFunc\000"
 
 	.byte	0x1
 	.2byte	0x1233
-	.4byte	0xb7b7
+	.4byte	0xb7c5
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xb570
+	.4byte	0xb57e
 	.byte	0x19
 	.ascii	"ExtVolPitFunc\000"
 
 	.byte	0x1
 	.2byte	0x1234
-	.4byte	0x2e40
+	.4byte	0x2e4e
 	.byte	0x19
 	.ascii	"MPlayMainFunc\000"
 
 	.byte	0x1
 	.2byte	0x1235
-	.4byte	0xb7e9
+	.4byte	0xb7f7
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xb3a8
+	.4byte	0xb3b6
 	.byte	0x18
-	.4byte	0xb808
+	.4byte	0xb816
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x1239
@@ -17022,7 +17041,7 @@ EfxApocalypseOBJ_Loop2:
 	.4byte	0x68736d53
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xb818
+	.4byte	0xb826
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x123b
@@ -17032,7 +17051,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x40
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xbab6
+	.4byte	0xbac4
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x123e
@@ -17142,7 +17161,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x14
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xbb36
+	.4byte	0xbb44
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x1266
@@ -17172,7 +17191,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0xc0
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xbc46
+	.4byte	0xbc54
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x127e
@@ -17218,7 +17237,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0xc7
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xbc7a
+	.4byte	0xbc88
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x128c
@@ -17232,7 +17251,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x1
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xbcb2
+	.4byte	0xbcc0
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x1292
@@ -17246,7 +17265,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x8
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xbcd7
+	.4byte	0xbce5
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x12e5
@@ -17256,7 +17275,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0xc
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xbcf5
+	.4byte	0xbd03
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x12e7
@@ -17266,7 +17285,7 @@ EfxApocalypseOBJ_Loop2:
 	.2byte	0x630
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xbd63
+	.4byte	0xbd71
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x131a
@@ -17296,7 +17315,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x80
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xbda7
+	.4byte	0xbdb5
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x134f
@@ -17310,7 +17329,7 @@ EfxApocalypseOBJ_Loop2:
 	.4byte	0x80000000
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xbdca
+	.4byte	0xbdd8
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x1354
@@ -17320,7 +17339,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x10
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xbde2
+	.4byte	0xbdf0
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x1356
@@ -17330,7 +17349,7 @@ EfxApocalypseOBJ_Loop2:
 	.2byte	0xffff
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xbe27
+	.4byte	0xbe35
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x1359
@@ -17352,7 +17371,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xbe41
+	.4byte	0xbe4f
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x13a7
@@ -17362,7 +17381,7 @@ EfxApocalypseOBJ_Loop2:
 	.4byte	0x94d700
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xbee9
+	.4byte	0xbef7
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x1481
@@ -17404,7 +17423,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x39
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0xc052
+	.4byte	0xc060
 	.ascii	"anim_flag2\000"
 
 	.byte	0x4
@@ -17484,7 +17503,7 @@ EfxApocalypseOBJ_Loop2:
 	.2byte	0x8000
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0xc1fd
+	.4byte	0xc20b
 	.ascii	"anim_flag3\000"
 
 	.byte	0x4
@@ -17556,7 +17575,7 @@ EfxApocalypseOBJ_Loop2:
 	.2byte	0x8000
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xc40e
+	.4byte	0xc41c
 	.ascii	"ProcEkrBattle\000"
 
 	.byte	0x60
@@ -17567,7 +17586,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14c5
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -17576,7 +17595,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14c5
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -17585,7 +17604,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14c5
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -17594,7 +17613,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14c5
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -17603,7 +17622,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14c5
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -17612,7 +17631,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14c5
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -17621,7 +17640,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14c5
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -17630,7 +17649,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14c5
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -17639,7 +17658,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14c5
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -17648,7 +17667,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14c5
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -17657,7 +17676,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14c5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -17666,7 +17685,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14c5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -17675,7 +17694,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14c5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -17684,7 +17703,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14c7
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -17693,7 +17712,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14c8
-	.4byte	0xc40e
+	.4byte	0xc41c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -17702,7 +17721,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14c9
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -17711,7 +17730,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14ca
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -17720,7 +17739,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14cb
-	.4byte	0xc41a
+	.4byte	0xc428
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -17729,7 +17748,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14cc
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -17738,7 +17757,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14cd
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -17747,7 +17766,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14ce
-	.4byte	0xc426
+	.4byte	0xc434
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -17756,7 +17775,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14cf
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -17765,7 +17784,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14d0
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x58
@@ -17774,31 +17793,31 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14d1
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
 	.byte	0x0
 	.byte	0xd
-	.4byte	0xc41a
-	.4byte	0x857
+	.4byte	0xc428
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x1
 	.byte	0x0
 	.byte	0xd
-	.4byte	0xc426
-	.4byte	0x857
+	.4byte	0xc434
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x13
 	.byte	0x0
 	.byte	0xd
-	.4byte	0xc432
-	.4byte	0x857
+	.4byte	0xc440
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x7
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xc602
+	.4byte	0xc610
 	.ascii	"ProcEfxMagicOBJ\000"
 
 	.byte	0x68
@@ -17809,7 +17828,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14d5
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -17818,7 +17837,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14d5
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -17827,7 +17846,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14d5
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -17836,7 +17855,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14d5
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -17845,7 +17864,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14d5
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -17854,7 +17873,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14d5
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -17863,7 +17882,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14d5
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -17872,7 +17891,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14d5
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -17881,7 +17900,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14d5
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -17890,7 +17909,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14d5
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -17899,7 +17918,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14d5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -17908,7 +17927,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14d5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -17917,7 +17936,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14d5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -17926,7 +17945,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14d7
-	.4byte	0xc602
+	.4byte	0xc610
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -17935,7 +17954,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14d9
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -17944,7 +17963,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14d9
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -17953,7 +17972,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14db
-	.4byte	0xc60e
+	.4byte	0xc61c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -17962,7 +17981,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14dd
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
@@ -17971,7 +17990,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14de
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
@@ -17980,25 +17999,25 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x14e0
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x64
 	.byte	0x0
 	.byte	0xd
-	.4byte	0xc60e
-	.4byte	0x857
+	.4byte	0xc61c
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x2
 	.byte	0x0
 	.byte	0xd
-	.4byte	0xc61a
-	.4byte	0x857
+	.4byte	0xc628
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x2b
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0xc6bc
+	.4byte	0xc6ca
 	.ascii	"EkrDistanceType_idx\000"
 
 	.byte	0x4
@@ -18030,7 +18049,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x5
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0xc785
+	.4byte	0xc793
 	.ascii	"anim_round_type\000"
 
 	.byte	0x4
@@ -18070,7 +18089,7 @@ EfxApocalypseOBJ_Loop2:
 	.2byte	0x8000
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xc9a3
+	.4byte	0xc9b1
 	.ascii	"ProcEkrDragonFlashing\000"
 
 	.byte	0x60
@@ -18081,7 +18100,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x155c
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -18090,7 +18109,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x155c
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -18099,7 +18118,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x155c
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -18108,7 +18127,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x155c
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -18117,7 +18136,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x155c
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -18126,7 +18145,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x155c
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -18135,7 +18154,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x155c
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -18144,7 +18163,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x155c
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -18153,7 +18172,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x155c
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -18162,7 +18181,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x155c
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -18171,7 +18190,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x155c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -18180,7 +18199,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x155c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -18189,7 +18208,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x155c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -18198,7 +18217,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x155e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -18207,7 +18226,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1560
-	.4byte	0xc40e
+	.4byte	0xc41c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -18216,7 +18235,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1562
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -18225,7 +18244,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1564
-	.4byte	0xc9a3
+	.4byte	0xc9b1
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -18234,7 +18253,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1566
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -18243,7 +18262,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1567
-	.4byte	0xc9af
+	.4byte	0xc9bd
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -18252,7 +18271,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1568
-	.4byte	0x5529
+	.4byte	0x5537
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -18261,7 +18280,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x156a
-	.4byte	0xc9ba
+	.4byte	0xc9c8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -18270,7 +18289,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x156c
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -18279,7 +18298,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x156e
-	.4byte	0xc9ba
+	.4byte	0xc9c8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x58
@@ -18288,30 +18307,30 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1570
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
 	.byte	0x0
 	.byte	0xd
-	.4byte	0xc9af
-	.4byte	0x857
+	.4byte	0xc9bd
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x15
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xc9b5
+	.4byte	0xc9c3
 	.byte	0xf
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0xd
-	.4byte	0xc9c6
-	.4byte	0x857
+	.4byte	0xc9d4
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x3
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xcafb
+	.4byte	0xcb09
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x158d
@@ -18365,7 +18384,7 @@ EfxApocalypseOBJ_Loop2:
 	.4byte	0xffffffff
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xcd3f
+	.4byte	0xcd4d
 	.ascii	"ProcEfxHpBar\000"
 
 	.byte	0x68
@@ -18376,7 +18395,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15a7
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -18385,7 +18404,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15a7
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -18394,7 +18413,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15a7
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -18403,7 +18422,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15a7
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -18412,7 +18431,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15a7
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -18421,7 +18440,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15a7
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -18430,7 +18449,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15a7
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -18439,7 +18458,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15a7
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -18448,7 +18467,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15a7
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -18457,7 +18476,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15a7
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -18466,7 +18485,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15a7
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -18475,7 +18494,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15a7
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -18484,7 +18503,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15a7
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -18493,7 +18512,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15a9
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -18502,7 +18521,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15aa
-	.4byte	0xc40e
+	.4byte	0xc41c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -18511,7 +18530,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15ab
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -18520,7 +18539,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15ac
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -18529,7 +18548,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15ad
-	.4byte	0xcd3f
+	.4byte	0xcd4d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -18538,7 +18557,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15ae
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -18547,7 +18566,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15af
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -18556,7 +18575,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15b0
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -18565,7 +18584,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15b1
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -18574,7 +18593,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15b2
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x58
@@ -18583,7 +18602,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15b3
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
@@ -18592,7 +18611,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15b4
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
@@ -18601,19 +18620,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15b5
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x64
 	.byte	0x0
 	.byte	0xd
-	.4byte	0xcd4b
-	.4byte	0x857
+	.4byte	0xcd59
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x17
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xcfbd
+	.4byte	0xcfcb
 	.ascii	"ProcEfxQuake\000"
 
 	.byte	0x68
@@ -18624,7 +18643,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15c0
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -18633,7 +18652,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15c0
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -18642,7 +18661,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15c0
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -18651,7 +18670,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15c0
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -18660,7 +18679,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15c0
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -18669,7 +18688,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15c0
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -18678,7 +18697,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15c0
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -18687,7 +18706,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15c0
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -18696,7 +18715,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15c0
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -18705,7 +18724,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15c0
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -18714,7 +18733,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15c0
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -18723,7 +18742,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15c0
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -18732,7 +18751,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15c0
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -18741,7 +18760,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15c2
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -18750,7 +18769,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15c3
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -18759,7 +18778,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15c4
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -18768,7 +18787,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15c5
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -18777,7 +18796,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15c6
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -18786,7 +18805,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15c7
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x36
@@ -18795,7 +18814,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15c8
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -18804,7 +18823,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15c9
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3a
@@ -18813,7 +18832,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15ca
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -18822,7 +18841,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15cb
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3e
@@ -18831,7 +18850,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15cc
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
@@ -18840,7 +18859,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15cd
-	.4byte	0xc9af
+	.4byte	0xc9bd
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -18849,7 +18868,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15ce
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -18858,7 +18877,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15cf
-	.4byte	0xcfbd
+	.4byte	0xcfcb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -18867,7 +18886,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15d0
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
@@ -18876,7 +18895,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15d1
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
@@ -18885,19 +18904,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x15d2
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x64
 	.byte	0x0
 	.byte	0xd
-	.4byte	0xcfc9
-	.4byte	0x857
+	.4byte	0xcfd7
+	.4byte	0x865
 	.byte	0xe
 	.byte	0xf
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xcfee
+	.4byte	0xcffc
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x15e3
@@ -18907,7 +18926,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x1
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xd025
+	.4byte	0xd033
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x15e8
@@ -18925,7 +18944,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0xb
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0xd05d
+	.4byte	0xd06b
 	.ascii	"prepscreen_text_idx\000"
 
 	.byte	0x4
@@ -18937,7 +18956,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x0
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xd208
+	.4byte	0xd216
 	.ascii	"UnkProc_08678E18\000"
 
 	.byte	0x38
@@ -18948,7 +18967,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1635
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -18957,7 +18976,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1635
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -18966,7 +18985,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1635
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -18975,7 +18994,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1635
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -18984,7 +19003,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1635
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -18993,7 +19012,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1635
-	.4byte	0xd5f7
+	.4byte	0xd605
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -19002,7 +19021,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1635
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -19011,7 +19030,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1635
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -19020,7 +19039,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1635
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -19029,7 +19048,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1635
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -19038,7 +19057,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1635
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -19047,7 +19066,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1635
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -19056,7 +19075,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1635
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -19065,7 +19084,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1636
-	.4byte	0xc602
+	.4byte	0xc610
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -19074,7 +19093,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1637
-	.4byte	0x8538
+	.4byte	0x8546
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -19083,7 +19102,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1638
-	.4byte	0xd5f7
+	.4byte	0xd605
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -19092,7 +19111,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1639
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -19101,13 +19120,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x163a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x35
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xd5f7
+	.4byte	0xd605
 	.ascii	"PrepMenuProc\000"
 
 	.byte	0x64
@@ -19118,7 +19137,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1602
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -19127,7 +19146,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1602
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -19136,7 +19155,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1602
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -19145,7 +19164,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1602
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -19154,7 +19173,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1602
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -19163,7 +19182,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1602
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -19172,7 +19191,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1602
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -19181,7 +19200,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1602
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -19190,7 +19209,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1602
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -19199,7 +19218,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1602
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -19208,7 +19227,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1602
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -19217,7 +19236,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1602
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -19226,7 +19245,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1602
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -19235,7 +19254,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1603
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -19244,7 +19263,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1604
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -19253,7 +19272,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1605
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2b
@@ -19262,7 +19281,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1606
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -19271,7 +19290,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1607
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2d
@@ -19280,7 +19299,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1608
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -19289,7 +19308,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1609
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2f
@@ -19298,7 +19317,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x160a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -19307,7 +19326,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x160b
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x31
@@ -19316,7 +19335,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x160c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -19325,7 +19344,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x160d
-	.4byte	0x801f
+	.4byte	0x802d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x33
@@ -19334,7 +19353,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x160e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x35
@@ -19343,7 +19362,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x160f
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x36
@@ -19352,7 +19371,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1610
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x37
@@ -19361,7 +19380,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1611
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -19370,7 +19389,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1612
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x39
@@ -19379,7 +19398,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1613
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3a
@@ -19388,7 +19407,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1614
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3b
@@ -19397,7 +19416,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1615
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -19406,7 +19425,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1616
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3d
@@ -19415,7 +19434,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1617
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3e
@@ -19424,7 +19443,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1618
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3f
@@ -19433,7 +19452,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1619
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
@@ -19442,7 +19461,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x161a
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x42
@@ -19451,7 +19470,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x161b
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -19460,7 +19479,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x161c
-	.4byte	0xc40e
+	.4byte	0xc41c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x46
@@ -19469,7 +19488,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x161d
-	.4byte	0x8538
+	.4byte	0x8546
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -19478,7 +19497,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x161d
-	.4byte	0x8538
+	.4byte	0x8546
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -19487,7 +19506,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x161e
-	.4byte	0xd612
+	.4byte	0xd620
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -19496,7 +19515,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x161f
-	.4byte	0xc9ba
+	.4byte	0xc9c8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -19505,7 +19524,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1620
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x58
@@ -19514,7 +19533,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1621
-	.4byte	0xd618
+	.4byte	0xd626
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
@@ -19523,26 +19542,26 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1622
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xd208
+	.4byte	0xd216
 	.byte	0x1e
 	.ascii	"PrepScreenDispProc\000"
 
 	.byte	0x1
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xd5fd
+	.4byte	0xd60b
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xd05d
+	.4byte	0xd06b
 	.byte	0x2
-	.4byte	0xd795
+	.4byte	0xd7a3
 	.ascii	"UnkProc_PrepMenu_50\000"
 
 	.byte	0x2c
@@ -19553,7 +19572,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x163f
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -19562,7 +19581,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x163f
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -19571,7 +19590,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x163f
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -19580,7 +19599,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x163f
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -19589,7 +19608,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x163f
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -19598,7 +19617,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x163f
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -19607,7 +19626,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x163f
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -19616,7 +19635,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x163f
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -19625,7 +19644,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x163f
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -19634,7 +19653,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x163f
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -19643,7 +19662,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x163f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -19652,7 +19671,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x163f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -19661,7 +19680,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x163f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -19670,7 +19689,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1640
-	.4byte	0x84b
+	.4byte	0x859
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -19679,13 +19698,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1641
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0xd850
+	.4byte	0xd85e
 	.ascii	"PREP_SUB2_ACTION_IDX\000"
 
 	.byte	0x4
@@ -19717,7 +19736,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x7
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xd9c4
+	.4byte	0xd9d2
 	.ascii	"UnkProc_08678DE0\000"
 
 	.byte	0x34
@@ -19728,7 +19747,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1627
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -19737,7 +19756,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1627
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -19746,7 +19765,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1627
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -19755,7 +19774,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1627
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -19764,7 +19783,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1627
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -19773,7 +19792,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1627
-	.4byte	0xd5f7
+	.4byte	0xd605
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -19782,7 +19801,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1627
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -19791,7 +19810,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1627
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -19800,7 +19819,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1627
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -19809,7 +19828,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1627
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -19818,7 +19837,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1627
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -19827,7 +19846,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1627
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -19836,7 +19855,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1627
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -19845,7 +19864,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1628
-	.4byte	0xd9c4
+	.4byte	0xd9d2
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -19854,19 +19873,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1629
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
 	.byte	0x0
 	.byte	0xd
-	.4byte	0xd9d0
-	.4byte	0x857
+	.4byte	0xd9de
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x6
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xdb42
+	.4byte	0xdb50
 	.ascii	"UnkProc_08678E00\000"
 
 	.byte	0x4c
@@ -19877,7 +19896,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x162e
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -19886,7 +19905,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x162e
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -19895,7 +19914,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x162e
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -19904,7 +19923,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x162e
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -19913,7 +19932,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x162e
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -19922,7 +19941,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x162e
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -19931,7 +19950,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x162e
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -19940,7 +19959,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x162e
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -19949,7 +19968,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x162e
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -19958,7 +19977,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x162e
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -19967,7 +19986,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x162e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -19976,7 +19995,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x162e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -19985,7 +20004,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x162e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -19994,7 +20013,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x162f
-	.4byte	0xdb42
+	.4byte	0xdb50
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -20003,19 +20022,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1630
-	.4byte	0x8538
+	.4byte	0x8546
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
 	.byte	0x0
 	.byte	0xd
-	.4byte	0xdb4e
-	.4byte	0x857
+	.4byte	0xdb5c
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x1e
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xdbb4
+	.4byte	0xdbc2
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x1644
@@ -20037,7 +20056,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x3
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xdbf5
+	.4byte	0xdc03
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x164e
@@ -20055,7 +20074,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xdc38
+	.4byte	0xdc46
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x1676
@@ -20073,7 +20092,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xdc82
+	.4byte	0xdc90
 	.ascii	"UnitSpriteInfo\000"
 
 	.byte	0x8
@@ -20084,7 +20103,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1687
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -20093,7 +20112,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1688
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -20102,18 +20121,18 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1689
-	.4byte	0xdc82
+	.4byte	0xdc90
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xdc88
+	.4byte	0xdc96
 	.byte	0xf
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x18
-	.4byte	0xdcab
+	.4byte	0xdcb9
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x16ba
@@ -20123,7 +20142,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x5
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xdfcd
+	.4byte	0xdfdb
 	.ascii	"PrepMenuCursorProc\000"
 
 	.byte	0x4c
@@ -20134,7 +20153,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1743
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -20143,7 +20162,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1743
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -20152,7 +20171,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1743
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -20161,7 +20180,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1743
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -20170,7 +20189,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1743
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -20179,7 +20198,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1743
-	.4byte	0xd5f7
+	.4byte	0xd605
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -20188,7 +20207,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1743
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -20197,7 +20216,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1743
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -20206,7 +20225,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1743
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -20215,7 +20234,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1743
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -20224,7 +20243,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1743
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -20233,7 +20252,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1743
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -20242,7 +20261,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1743
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -20251,7 +20270,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1744
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -20260,7 +20279,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1745
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -20269,7 +20288,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1746
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2b
@@ -20278,7 +20297,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1747
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -20287,7 +20306,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1748
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2d
@@ -20296,7 +20315,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1749
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -20305,7 +20324,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x174a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2f
@@ -20314,7 +20333,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x174b
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -20323,7 +20342,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x174c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x31
@@ -20332,7 +20351,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x174d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -20341,7 +20360,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x174e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x33
@@ -20350,7 +20369,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x174f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -20359,7 +20378,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x174f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x35
@@ -20368,7 +20387,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1750
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x36
@@ -20377,7 +20396,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1750
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x37
@@ -20386,7 +20405,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1751
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -20395,7 +20414,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1751
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x39
@@ -20404,7 +20423,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1752
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3a
@@ -20413,7 +20432,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1753
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -20422,7 +20441,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1754
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3e
@@ -20431,7 +20450,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1755
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
@@ -20440,7 +20459,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1756
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x42
@@ -20449,7 +20468,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1757
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x43
@@ -20458,7 +20477,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1758
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -20467,7 +20486,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1759
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x46
@@ -20476,13 +20495,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x175a
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xe176
+	.4byte	0xe184
 	.ascii	"SpriteProc\000"
 
 	.byte	0x58
@@ -20493,7 +20512,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x177a
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -20502,7 +20521,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x177a
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -20511,7 +20530,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x177a
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -20520,7 +20539,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x177a
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -20529,7 +20548,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x177a
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -20538,7 +20557,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x177a
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -20547,7 +20566,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x177a
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -20556,7 +20575,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x177a
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -20565,7 +20584,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x177a
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -20574,7 +20593,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x177a
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -20583,7 +20602,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x177a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -20592,7 +20611,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x177a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -20601,7 +20620,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x177a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -20610,7 +20629,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x177c
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -20619,7 +20638,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x177d
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -20628,7 +20647,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x177f
-	.4byte	0xe176
+	.4byte	0xe184
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -20637,7 +20656,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1781
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -20646,7 +20665,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1782
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x52
@@ -20655,19 +20674,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1783
-	.4byte	0x5529
+	.4byte	0x5537
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
 	.byte	0x0
 	.byte	0xd
-	.4byte	0xe182
-	.4byte	0x2d36
+	.4byte	0xe190
+	.4byte	0x2d44
 	.byte	0xe
 	.byte	0x1b
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xe201
+	.4byte	0xe20f
 	.ascii	"PrepMenuItem\000"
 
 	.byte	0x14
@@ -20678,7 +20697,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17b3
-	.4byte	0xe20d
+	.4byte	0xe21b
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -20687,7 +20706,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17b4
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -20696,7 +20715,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17b5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -20705,7 +20724,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17b6
-	.4byte	0x2df3
+	.4byte	0x2e01
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -20714,7 +20733,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17b7
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -20723,22 +20742,22 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17b8
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
 	.byte	0x0
 	.byte	0x12
-	.4byte	0xe20d
+	.4byte	0xe21b
 	.byte	0x1
 	.byte	0x13
-	.4byte	0xd5f7
+	.4byte	0xd605
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xe201
+	.4byte	0xe20f
 	.byte	0x2
-	.4byte	0xe497
+	.4byte	0xe4a5
 	.ascii	"ProcShop\000"
 
 	.byte	0x6c
@@ -20749,7 +20768,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17c0
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -20758,7 +20777,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17c0
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -20767,7 +20786,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17c0
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -20776,7 +20795,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17c0
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -20785,7 +20804,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17c0
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -20794,7 +20813,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17c0
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -20803,7 +20822,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17c0
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -20812,7 +20831,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17c0
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -20821,7 +20840,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17c0
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -20830,7 +20849,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17c0
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -20839,7 +20858,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17c0
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -20848,7 +20867,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17c0
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -20857,7 +20876,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17c0
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -20866,7 +20885,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17c2
-	.4byte	0x8538
+	.4byte	0x8546
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -20875,7 +20894,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17c3
-	.4byte	0xe497
+	.4byte	0xe4a5
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -20884,7 +20903,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17c5
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x58
@@ -20893,7 +20912,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17c7
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5a
@@ -20902,7 +20921,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17c8
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5b
@@ -20911,7 +20930,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17c9
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
@@ -20920,7 +20939,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17ca
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5d
@@ -20929,7 +20948,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17cb
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5e
@@ -20938,7 +20957,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17cc
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5f
@@ -20947,7 +20966,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17cd
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
@@ -20956,7 +20975,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17ce
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x61
@@ -20965,7 +20984,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17cf
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x62
@@ -20974,7 +20993,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17d1
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x64
@@ -20983,7 +21002,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17d1
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x66
@@ -20992,19 +21011,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17d1
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x68
 	.byte	0x0
 	.byte	0xd
-	.4byte	0xe4a3
-	.4byte	0x2d41
+	.4byte	0xe4b1
+	.4byte	0x2d4f
 	.byte	0xe
 	.byte	0x13
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0xe5cc
+	.4byte	0xe5da
 	.ascii	"ShopProcLabel\000"
 
 	.byte	0x4
@@ -21064,7 +21083,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0xc
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0xe62d
+	.4byte	0xe63b
 	.ascii	"ShopType\000"
 
 	.byte	0x4
@@ -21088,7 +21107,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x3
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0xe65f
+	.4byte	0xe66d
 	.ascii	"ShopStatus\000"
 
 	.byte	0x4
@@ -21104,7 +21123,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x1
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xe7d1
+	.4byte	0xe7df
 	.ascii	"ProcShopInit\000"
 
 	.byte	0x58
@@ -21115,7 +21134,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17f6
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -21124,7 +21143,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17f6
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -21133,7 +21152,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17f6
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -21142,7 +21161,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17f6
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -21151,7 +21170,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17f6
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -21160,7 +21179,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17f6
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -21169,7 +21188,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17f6
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -21178,7 +21197,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17f6
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -21187,7 +21206,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17f6
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -21196,7 +21215,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17f6
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -21205,7 +21224,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17f6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -21214,7 +21233,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17f6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -21223,7 +21242,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17f6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -21232,7 +21251,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17f8
-	.4byte	0xe7d1
+	.4byte	0xe7df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -21241,22 +21260,22 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x17fa
-	.4byte	0xe7dd
+	.4byte	0xe7eb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
 	.byte	0x0
 	.byte	0xd
-	.4byte	0xe7dd
-	.4byte	0x857
+	.4byte	0xe7eb
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x2a
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0xe213
+	.4byte	0xe221
 	.byte	0x2
-	.4byte	0xe9e9
+	.4byte	0xe9f7
 	.ascii	"ProcEfxHpBarColorChange\000"
 
 	.byte	0x60
@@ -21267,7 +21286,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1827
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -21276,7 +21295,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1827
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -21285,7 +21304,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1827
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -21294,7 +21313,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1827
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -21303,7 +21322,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1827
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -21312,7 +21331,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1827
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -21321,7 +21340,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1827
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -21330,7 +21349,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1827
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -21339,7 +21358,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1827
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -21348,7 +21367,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1827
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -21357,7 +21376,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1827
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -21366,7 +21385,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1827
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -21375,7 +21394,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1827
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -21384,7 +21403,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1829
-	.4byte	0xc40e
+	.4byte	0xc41c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -21393,7 +21412,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x182b
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -21402,7 +21421,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x182d
-	.4byte	0xc9a3
+	.4byte	0xc9b1
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -21411,7 +21430,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x182f
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -21420,7 +21439,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1830
-	.4byte	0x5529
+	.4byte	0x5537
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -21429,7 +21448,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1831
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -21438,7 +21457,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1832
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -21447,7 +21466,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1834
-	.4byte	0xc426
+	.4byte	0xc434
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -21456,13 +21475,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1836
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0xea4f
+	.4byte	0xea5d
 	.ascii	"banim_faction_palette_idx\000"
 
 	.byte	0x4
@@ -21486,7 +21505,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x3
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xea6f
+	.4byte	0xea7d
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x1851
@@ -21496,7 +21515,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x10
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xec03
+	.4byte	0xec11
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x1864
@@ -21570,7 +21589,7 @@ EfxApocalypseOBJ_Loop2:
 	.2byte	0x3c00
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0xec60
+	.4byte	0xec6e
 	.ascii	"ChapterInfo_RefRanks\000"
 
 	.byte	0x4
@@ -21598,7 +21617,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x4
 	.byte	0x0
 	.byte	0x2
-	.4byte	0xf030
+	.4byte	0xf03e
 	.ascii	"ChapterInfo\000"
 
 	.byte	0x44
@@ -21609,7 +21628,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x188c
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -21618,7 +21637,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x188e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -21627,7 +21646,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x188f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -21636,7 +21655,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1890
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -21645,7 +21664,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1891
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -21654,7 +21673,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1892
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -21663,7 +21682,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1893
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -21672,7 +21691,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1894
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -21681,7 +21700,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1895
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -21690,7 +21709,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1897
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -21699,7 +21718,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1898
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -21708,7 +21727,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1899
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -21717,7 +21736,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x189a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -21726,7 +21745,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x189b
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -21735,7 +21754,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x189c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -21744,7 +21763,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x189d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -21753,7 +21772,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x189e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -21762,7 +21781,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18a0
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -21771,7 +21790,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18a1
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
@@ -21780,7 +21799,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18a2
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -21789,7 +21808,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18a3
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x17
@@ -21798,7 +21817,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18a4
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -21807,7 +21826,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18a6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x19
@@ -21816,7 +21835,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18a7
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
@@ -21825,7 +21844,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18aa
-	.4byte	0x725a
+	.4byte	0x7268
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1b
@@ -21834,7 +21853,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18ab
-	.4byte	0xf030
+	.4byte	0xf03e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -21843,7 +21862,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18ac
-	.4byte	0xf030
+	.4byte	0xf03e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -21852,7 +21871,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18ae
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -21861,7 +21880,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18af
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -21870,7 +21889,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18b0
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -21879,7 +21898,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18b1
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x36
@@ -21888,7 +21907,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18b2
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -21897,7 +21916,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18b3
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3a
@@ -21906,7 +21925,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18b4
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3b
@@ -21915,7 +21934,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18b6
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -21924,7 +21943,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18b7
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3e
@@ -21933,7 +21952,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18b8
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3f
@@ -21942,7 +21961,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18b9
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
@@ -21951,7 +21970,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18ba
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x41
@@ -21960,7 +21979,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18bb
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x42
@@ -21969,19 +21988,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x18bc
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x43
 	.byte	0x0
 	.byte	0xd
-	.4byte	0xf03c
-	.4byte	0x2d41
+	.4byte	0xf04a
+	.4byte	0x2d4f
 	.byte	0xe
 	.byte	0x3
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xf4fb
+	.4byte	0xf509
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x18bf
@@ -22299,7 +22318,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x1
 	.byte	0x0
 	.byte	0x18
-	.4byte	0xf8aa
+	.4byte	0xf8b8
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x1913
@@ -22513,7 +22532,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x33
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x100b7
+	.4byte	0x100c5
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x195f
@@ -23035,7 +23054,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x80
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x100f0
+	.4byte	0x100fe
 	.ascii	"BanimInfoEnt\000"
 
 	.byte	0x4
@@ -23046,7 +23065,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x19f2
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -23055,13 +23074,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x19f2
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x101e7
+	.4byte	0x101f5
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x19f5
@@ -23119,7 +23138,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0xff
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x10457
+	.4byte	0x10465
 	.ascii	"ProcEfx\000"
 
 	.byte	0x68
@@ -23130,7 +23149,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a09
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -23139,7 +23158,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a09
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -23148,7 +23167,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a09
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -23157,7 +23176,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a09
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -23166,7 +23185,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a09
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -23175,7 +23194,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a09
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -23184,7 +23203,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a09
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -23193,7 +23212,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a09
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -23202,7 +23221,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a09
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -23211,7 +23230,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a09
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -23220,7 +23239,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a09
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -23229,7 +23248,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a09
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -23238,7 +23257,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a09
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -23247,7 +23266,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a0b
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -23256,7 +23275,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a0c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -23265,7 +23284,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a0d
-	.4byte	0x84b
+	.4byte	0x859
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2b
@@ -23274,7 +23293,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a0e
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -23283,7 +23302,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a0f
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -23292,7 +23311,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a10
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -23301,7 +23320,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a11
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -23310,7 +23329,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a12
-	.4byte	0xcfbd
+	.4byte	0xcfcb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -23319,7 +23338,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a13
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -23328,7 +23347,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a14
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -23337,7 +23356,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a15
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -23346,7 +23365,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a16
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -23355,7 +23374,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a17
-	.4byte	0x10457
+	.4byte	0x10465
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -23364,7 +23383,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a18
-	.4byte	0x1045d
+	.4byte	0x1046b
 	.byte	0x2
 	.byte	0x23
 	.byte	0x58
@@ -23373,7 +23392,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a19
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
@@ -23382,7 +23401,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a1a
-	.4byte	0xc9ba
+	.4byte	0xc9c8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
@@ -23391,19 +23410,27 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a1b
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x64
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x10457
+	.4byte	0x10465
+	.byte	0x20
+	.ascii	"gEfxBgSemaphore\000"
+
+	.byte	0x1
+	.2byte	0x1a2b
+	.4byte	0x2d71
+	.byte	0x1
+	.byte	0x1
 	.byte	0x1c
-	.4byte	0x104b1
+	.4byte	0x104d9
 	.ascii	"talk_choice\000"
 
 	.byte	0x4
@@ -23423,7 +23450,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x106ff
+	.4byte	0x10727
 	.ascii	"ProcWorldMap\000"
 
 	.byte	0x58
@@ -23434,7 +23461,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a44
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -23443,7 +23470,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a44
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -23452,7 +23479,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a44
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -23461,7 +23488,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a44
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -23470,7 +23497,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a44
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -23479,7 +23506,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a44
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -23488,7 +23515,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a44
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -23497,7 +23524,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a44
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -23506,7 +23533,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a44
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -23515,7 +23542,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a44
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -23524,7 +23551,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a44
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -23533,7 +23560,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a44
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -23542,7 +23569,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a44
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -23551,7 +23578,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a46
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -23560,7 +23587,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a47
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -23569,7 +23596,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a48
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -23578,7 +23605,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a49
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -23587,7 +23614,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a4b
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -23596,7 +23623,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a4b
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
@@ -23605,7 +23632,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a4d
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -23614,7 +23641,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a4e
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -23623,7 +23650,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a4e
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4a
@@ -23632,7 +23659,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a4f
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -23641,7 +23668,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a4f
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4e
@@ -23650,7 +23677,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a4f
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -23659,7 +23686,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a50
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x52
@@ -23668,7 +23695,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a50
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x53
@@ -23677,13 +23704,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a50
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x108d2
+	.4byte	0x108fa
 	.ascii	"WmArrowSt\000"
 
 	.2byte	0x334
@@ -23694,7 +23721,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a56
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -23703,7 +23730,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a56
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -23712,7 +23739,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a56
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -23721,7 +23748,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a56
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -23730,7 +23757,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a57
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -23739,7 +23766,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a58
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -23748,7 +23775,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a5a
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -23757,7 +23784,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a5b
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -23766,7 +23793,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a5c
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -23775,7 +23802,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a5d
-	.4byte	0x108d2
+	.4byte	0x108fa
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -23784,7 +23811,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a5e
-	.4byte	0x108d2
+	.4byte	0x108fa
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -23793,7 +23820,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a5f
-	.4byte	0x108d2
+	.4byte	0x108fa
 	.byte	0x2
 	.byte	0x23
 	.byte	0x74
@@ -23802,7 +23829,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a60
-	.4byte	0x108d2
+	.4byte	0x108fa
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa4,0x1
@@ -23811,7 +23838,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a61
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd4,0x1
@@ -23820,7 +23847,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a62
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd8,0x1
@@ -23829,7 +23856,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a64
-	.4byte	0x108de
+	.4byte	0x10906
 	.byte	0x3
 	.byte	0x23
 	.byte	0xdc,0x1
@@ -23838,7 +23865,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a65
-	.4byte	0x108de
+	.4byte	0x10906
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf0,0x1
@@ -23847,7 +23874,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a67
-	.4byte	0x108ea
+	.4byte	0x10912
 	.byte	0x3
 	.byte	0x23
 	.byte	0x84,0x2
@@ -23856,7 +23883,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a68
-	.4byte	0x108ea
+	.4byte	0x10912
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd4,0x2
@@ -23865,7 +23892,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a69
-	.4byte	0x108ea
+	.4byte	0x10912
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa4,0x3
@@ -23874,7 +23901,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a6a
-	.4byte	0x108ea
+	.4byte	0x10912
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf4,0x3
@@ -23883,7 +23910,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a6b
-	.4byte	0x108ea
+	.4byte	0x10912
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc4,0x4
@@ -23892,7 +23919,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a6c
-	.4byte	0x108ea
+	.4byte	0x10912
 	.byte	0x3
 	.byte	0x23
 	.byte	0x94,0x5
@@ -23901,31 +23928,31 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a6d
-	.4byte	0x108ea
+	.4byte	0x10912
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe4,0x5
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x108de
-	.4byte	0x788
+	.4byte	0x10906
+	.4byte	0x79d
 	.byte	0xe
 	.byte	0xb
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x108ea
-	.4byte	0x2d36
+	.4byte	0x10912
+	.4byte	0x2d44
 	.byte	0xe
 	.byte	0x13
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x108f6
-	.4byte	0x788
+	.4byte	0x1091e
+	.4byte	0x79d
 	.byte	0xe
 	.byte	0x13
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x10a64
+	.4byte	0x10a8c
 	.ascii	"ProcWmArrow\000"
 
 	.byte	0x5c
@@ -23936,7 +23963,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a71
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -23945,7 +23972,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a71
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -23954,7 +23981,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a71
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -23963,7 +23990,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a71
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -23972,7 +23999,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a71
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -23981,7 +24008,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a71
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -23990,7 +24017,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a71
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -23999,7 +24026,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a71
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -24008,7 +24035,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a71
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -24017,7 +24044,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a71
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -24026,7 +24053,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a71
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -24035,7 +24062,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a71
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -24044,7 +24071,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a71
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -24053,7 +24080,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a73
-	.4byte	0x10a64
+	.4byte	0x10a8c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -24062,22 +24089,22 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a75
-	.4byte	0x10a70
+	.4byte	0x10a98
 	.byte	0x2
 	.byte	0x23
 	.byte	0x58
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x10a70
-	.4byte	0x857
+	.4byte	0x10a98
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x2e
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x106ff
+	.4byte	0x10727
 	.byte	0x2
-	.4byte	0x10c3c
+	.4byte	0x10c64
 	.ascii	"Proc_0868C3C4\000"
 
 	.byte	0x6c
@@ -24088,7 +24115,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a83
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -24097,7 +24124,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a83
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -24106,7 +24133,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a83
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -24115,7 +24142,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a83
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -24124,7 +24151,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a83
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -24133,7 +24160,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a83
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -24142,7 +24169,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a83
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -24151,7 +24178,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a83
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -24160,7 +24187,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a83
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -24169,7 +24196,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a83
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -24178,7 +24205,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a83
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -24187,7 +24214,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a83
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -24196,7 +24223,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a83
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -24205,7 +24232,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a85
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -24214,7 +24241,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a85
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -24223,7 +24250,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a87
-	.4byte	0xcd3f
+	.4byte	0xcd4d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -24232,7 +24259,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a89
-	.4byte	0x10c3c
+	.4byte	0x10c64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -24241,7 +24268,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a8b
-	.4byte	0xc9a3
+	.4byte	0xc9b1
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -24250,7 +24277,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a8d
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x66
@@ -24259,16 +24286,16 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a8d
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x68
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x104b1
+	.4byte	0x104d9
 	.byte	0x2
-	.4byte	0x10dc5
+	.4byte	0x10ded
 	.ascii	"ProcTitleDisp\000"
 
 	.byte	0x68
@@ -24279,7 +24306,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a93
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -24288,7 +24315,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a93
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -24297,7 +24324,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a93
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -24306,7 +24333,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a93
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -24315,7 +24342,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a93
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -24324,7 +24351,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a93
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -24333,7 +24360,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a93
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -24342,7 +24369,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a93
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -24351,7 +24378,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a93
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -24360,7 +24387,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a93
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -24369,7 +24396,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a93
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -24378,7 +24405,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a93
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -24387,7 +24414,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a93
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -24396,7 +24423,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a95
-	.4byte	0x10dc5
+	.4byte	0x10ded
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -24405,7 +24432,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a97
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x64
@@ -24414,19 +24441,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1a97
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x66
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x10dd1
-	.4byte	0x857
+	.4byte	0x10df9
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x3a
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x10fe1
+	.4byte	0x11009
 	.ascii	"ProcEkrGauge\000"
 
 	.byte	0x54
@@ -24437,7 +24464,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1aa8
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -24446,7 +24473,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1aa8
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -24455,7 +24482,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1aa8
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -24464,7 +24491,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1aa8
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -24473,7 +24500,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1aa8
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -24482,7 +24509,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1aa8
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -24491,7 +24518,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1aa8
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -24500,7 +24527,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1aa8
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -24509,7 +24536,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1aa8
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -24518,7 +24545,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1aa8
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -24527,7 +24554,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1aa8
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -24536,7 +24563,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1aa8
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -24545,7 +24572,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1aa8
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -24554,7 +24581,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1aaa
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -24563,7 +24590,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1aab
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -24572,7 +24599,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1aac
-	.4byte	0x7ba
+	.4byte	0x7c8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2b
@@ -24581,7 +24608,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1aad
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -24590,7 +24617,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1aae
-	.4byte	0x4bc0
+	.4byte	0x4bce
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -24599,7 +24626,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1aaf
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3a
@@ -24608,7 +24635,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ab0
-	.4byte	0x6aef
+	.4byte	0x6afd
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -24617,7 +24644,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ab1
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -24626,7 +24653,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ab2
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -24635,7 +24662,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ab3
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -24644,13 +24671,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ab4
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x1102f
+	.4byte	0x11057
 	.ascii	"AUGURY_CHOICE\000"
 
 	.byte	0x4
@@ -24670,7 +24697,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x110ad
+	.4byte	0x110d5
 	.ascii	"AUGURY_PROC_LABLE\000"
 
 	.byte	0x4
@@ -24706,7 +24733,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x6
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x110f3
+	.4byte	0x1111b
 	.ascii	"AuguryDispConfig\000"
 
 	.byte	0x4
@@ -24717,7 +24744,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1aee
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -24726,7 +24753,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1aee
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -24735,13 +24762,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1af0
-	.4byte	0x801f
+	.4byte	0x802d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x1114c
+	.4byte	0x11174
 	.ascii	"AuguryConfig\000"
 
 	.byte	0x10
@@ -24752,7 +24779,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1af4
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -24761,7 +24788,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1af5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -24770,7 +24797,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1af7
-	.4byte	0x1114c
+	.4byte	0x11174
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -24779,22 +24806,22 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1af9
-	.4byte	0x11158
+	.4byte	0x11180
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x11158
-	.4byte	0x857
+	.4byte	0x11180
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x9
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
-	.4byte	0x112ea
+	.4byte	0x11312
 	.ascii	"Proc_0868AFF0_Augury\000"
 
 	.byte	0x34
@@ -24805,7 +24832,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b05
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -24814,7 +24841,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b05
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -24823,7 +24850,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b05
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -24832,7 +24859,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b05
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -24841,7 +24868,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b05
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -24850,7 +24877,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b05
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -24859,7 +24886,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b05
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -24868,7 +24895,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b05
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -24877,7 +24904,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b05
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -24886,7 +24913,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b05
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -24895,7 +24922,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b05
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -24904,7 +24931,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b05
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -24913,7 +24940,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b05
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -24922,7 +24949,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b07
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -24931,7 +24958,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b08
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -24940,13 +24967,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b09
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x1143c
+	.4byte	0x11464
 	.ascii	"ekr_lvup_status_index\000"
 
 	.byte	0x4
@@ -25014,7 +25041,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0xa
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x1163f
+	.4byte	0x11667
 	.ascii	"ProcEkrlvup\000"
 
 	.byte	0x64
@@ -25025,7 +25052,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b26
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -25034,7 +25061,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b26
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -25043,7 +25070,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b26
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -25052,7 +25079,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b26
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -25061,7 +25088,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b26
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -25070,7 +25097,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b26
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -25079,7 +25106,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b26
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -25088,7 +25115,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b26
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -25097,7 +25124,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b26
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -25106,7 +25133,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b26
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -25115,7 +25142,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b26
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -25124,7 +25151,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b26
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -25133,7 +25160,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b26
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -25142,7 +25169,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b28
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -25151,7 +25178,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b29
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -25160,7 +25187,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b2a
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -25169,7 +25196,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b2b
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -25178,7 +25205,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b2d
-	.4byte	0xc41a
+	.4byte	0xc428
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -25187,7 +25214,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b2f
-	.4byte	0x1163f
+	.4byte	0x11667
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -25196,7 +25223,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b31
-	.4byte	0xc426
+	.4byte	0xc434
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -25205,7 +25232,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b33
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
@@ -25214,19 +25241,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b33
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x1164b
-	.4byte	0x788
+	.4byte	0x11673
+	.4byte	0x79d
 	.byte	0xe
 	.byte	0x3
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x11720
+	.4byte	0x11748
 	.ascii	"PlayRankSt_texts_idx\000"
 
 	.byte	0x4
@@ -25274,7 +25301,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x9
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x117cc
+	.4byte	0x117f4
 	.ascii	"PlayRankSt_ranks\000"
 
 	.byte	0x4
@@ -25314,7 +25341,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x7
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x1185e
+	.4byte	0x11886
 	.ascii	"PlayRankSt_Xmap_ranks\000"
 
 	.byte	0x4
@@ -25342,7 +25369,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x4
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x11913
+	.4byte	0x1193b
 	.ascii	"PlayRankSt_trail_texts_idx\000"
 
 	.byte	0x4
@@ -25370,7 +25397,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x4
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x11a53
+	.4byte	0x11a7b
 	.ascii	"PlayRankSt\000"
 
 	.2byte	0x130
@@ -25381,7 +25408,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b78
-	.4byte	0x11a53
+	.4byte	0x11a7b
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -25390,7 +25417,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b7a
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -25399,7 +25426,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b7b
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -25408,7 +25435,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b7c
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -25417,7 +25444,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b7c
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -25426,7 +25453,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b7d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
@@ -25435,7 +25462,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b7d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x41
@@ -25444,7 +25471,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b7e
-	.4byte	0x11a5f
+	.4byte	0x11a87
 	.byte	0x2
 	.byte	0x23
 	.byte	0x42
@@ -25453,7 +25480,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b7f
-	.4byte	0x11a5f
+	.4byte	0x11a87
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -25462,7 +25489,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b80
-	.4byte	0x11a6b
+	.4byte	0x11a93
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5e
@@ -25471,7 +25498,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b81
-	.4byte	0x11a6b
+	.4byte	0x11a93
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6c
@@ -25480,7 +25507,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b82
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7a
@@ -25489,7 +25516,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b83
-	.4byte	0x11a77
+	.4byte	0x11a9f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7c
@@ -25498,7 +25525,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b84
-	.4byte	0x7ba
+	.4byte	0x7c8
 	.byte	0x3
 	.byte	0x23
 	.byte	0x98,0x1
@@ -25507,7 +25534,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b85
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9f,0x1
@@ -25516,7 +25543,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b86
-	.4byte	0x11a83
+	.4byte	0x11aab
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa0,0x1
@@ -25525,43 +25552,43 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b87
-	.4byte	0x11a83
+	.4byte	0x11aab
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe8,0x1
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x11a5f
-	.4byte	0x857
+	.4byte	0x11a87
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x31
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x11a6b
-	.4byte	0x2daa
+	.4byte	0x11a93
+	.4byte	0x2db8
 	.byte	0xe
 	.byte	0x6
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x11a77
-	.4byte	0x2d41
+	.4byte	0x11a9f
+	.4byte	0x2d4f
 	.byte	0xe
 	.byte	0x6
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x11a83
-	.4byte	0x5534
+	.4byte	0x11aab
+	.4byte	0x5542
 	.byte	0xe
 	.byte	0x6
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x11a8f
-	.4byte	0x4cce
+	.4byte	0x11ab7
+	.4byte	0x4cdc
 	.byte	0xe
 	.byte	0x8
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x11acd
+	.4byte	0x11af5
 	.ascii	"UnkStruct_0868B4D0\000"
 
 	.byte	0x8
@@ -25572,7 +25599,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b8b
-	.4byte	0x5534
+	.4byte	0x5542
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -25581,13 +25608,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b8c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x11c98
+	.4byte	0x11cc0
 	.ascii	"Proc_0868B5E8\000"
 
 	.byte	0x38
@@ -25598,7 +25625,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b90
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -25607,7 +25634,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b90
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -25616,7 +25643,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b90
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -25625,7 +25652,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b90
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -25634,7 +25661,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b90
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -25643,7 +25670,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b90
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -25652,7 +25679,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b90
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -25661,7 +25688,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b90
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -25670,7 +25697,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b90
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -25679,7 +25706,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b90
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -25688,7 +25715,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b90
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -25697,7 +25724,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b90
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -25706,7 +25733,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b90
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -25715,7 +25742,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b92
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -25724,7 +25751,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b93
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -25733,7 +25760,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b94
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -25742,7 +25769,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b95
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -25751,7 +25778,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b96
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -25760,7 +25787,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b96
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -25769,13 +25796,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1b97
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x36
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x11e05
+	.4byte	0x11e2d
 	.ascii	"Proc_0868B700\000"
 
 	.byte	0x30
@@ -25786,7 +25813,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba2
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -25795,7 +25822,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba2
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -25804,7 +25831,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba2
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -25813,7 +25840,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba2
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -25822,7 +25849,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba2
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -25831,7 +25858,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba2
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -25840,7 +25867,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba2
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -25849,7 +25876,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba2
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -25858,7 +25885,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba2
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -25867,7 +25894,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba2
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -25876,7 +25903,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba2
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -25885,7 +25912,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba2
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -25894,7 +25921,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba2
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -25903,7 +25930,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba4
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -25912,13 +25939,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba5
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x11f8b
+	.4byte	0x11fb3
 	.ascii	"Proc_0868B730\000"
 
 	.byte	0x30
@@ -25929,7 +25956,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba8
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -25938,7 +25965,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba8
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -25947,7 +25974,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba8
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -25956,7 +25983,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba8
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -25965,7 +25992,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba8
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -25974,7 +26001,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba8
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -25983,7 +26010,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba8
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -25992,7 +26019,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba8
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -26001,7 +26028,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba8
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -26010,7 +26037,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba8
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -26019,7 +26046,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba8
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -26028,7 +26055,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba8
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -26037,7 +26064,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ba8
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -26046,7 +26073,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1baa
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -26055,7 +26082,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bab
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -26064,13 +26091,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bac
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x11fe7
+	.4byte	0x1200f
 	.ascii	"UnkStruct_0868b508\000"
 
 	.byte	0x4
@@ -26081,7 +26108,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bb4
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -26090,7 +26117,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bb5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -26099,7 +26126,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bb5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -26108,13 +26135,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bb6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x12041
+	.4byte	0x12069
 	.ascii	"UnkStruct_0868B5B0\000"
 
 	.byte	0x8
@@ -26125,7 +26152,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bbb
-	.4byte	0x12041
+	.4byte	0x12069
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -26134,7 +26161,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bbc
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -26143,7 +26170,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bbc
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -26152,16 +26179,16 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bbc
-	.4byte	0x801f
+	.4byte	0x802d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x11f8b
+	.4byte	0x11fb3
 	.byte	0x2
-	.4byte	0x120ad
+	.4byte	0x120d5
 	.ascii	"ChapterStats\000"
 
 	.byte	0x4
@@ -26172,7 +26199,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bc5
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x6
 	.byte	0xa
@@ -26184,7 +26211,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bc6
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0xa
 	.byte	0x0
@@ -26196,7 +26223,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bc7
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x10
 	.byte	0x0
@@ -26205,7 +26232,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x12125
+	.4byte	0x1214d
 	.ascii	"TotalPlayRankConf\000"
 
 	.byte	0x10
@@ -26216,7 +26243,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1be7
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -26225,7 +26252,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1be8
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -26234,7 +26261,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1be9
-	.4byte	0x1212b
+	.4byte	0x12153
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -26243,7 +26270,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bea
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -26252,7 +26279,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1beb
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -26261,19 +26288,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bec
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
 	.byte	0x0
 	.byte	0x25
 	.byte	0x1
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x12125
+	.4byte	0x1214d
 	.byte	0x2
-	.4byte	0x122b3
+	.4byte	0x122db
 	.ascii	"ProcPlayRank\000"
 
 	.byte	0x34
@@ -26284,7 +26311,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bf3
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -26293,7 +26320,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bf3
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -26302,7 +26329,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bf3
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -26311,7 +26338,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bf3
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -26320,7 +26347,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bf3
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -26329,7 +26356,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bf3
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -26338,7 +26365,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bf3
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -26347,7 +26374,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bf3
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -26356,7 +26383,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bf3
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -26365,7 +26392,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bf3
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -26374,7 +26401,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bf3
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -26383,7 +26410,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bf3
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -26392,7 +26419,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bf3
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -26401,7 +26428,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bf5
-	.4byte	0x122b3
+	.4byte	0x122db
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -26410,7 +26437,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bf7
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -26419,19 +26446,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1bf8
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x122bf
-	.4byte	0x857
+	.4byte	0x122e7
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x4
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x12537
+	.4byte	0x1255f
 	.ascii	"ProcEfxBG\000"
 
 	.byte	0x60
@@ -26442,7 +26469,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c43
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -26451,7 +26478,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c43
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -26460,7 +26487,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c43
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -26469,7 +26496,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c43
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -26478,7 +26505,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c43
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -26487,7 +26514,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c43
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -26496,7 +26523,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c43
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -26505,7 +26532,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c43
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -26514,7 +26541,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c43
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -26523,7 +26550,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c43
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -26532,7 +26559,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c43
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -26541,7 +26568,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c43
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -26550,7 +26577,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c43
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -26559,7 +26586,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c45
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -26568,7 +26595,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c46
-	.4byte	0xc40e
+	.4byte	0xc41c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -26577,7 +26604,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c47
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -26586,7 +26613,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c48
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -26595,7 +26622,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c49
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -26604,7 +26631,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c4a
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -26613,7 +26640,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c4b
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -26622,7 +26649,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c4c
-	.4byte	0x12537
+	.4byte	0x1255f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x36
@@ -26631,7 +26658,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c4d
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -26640,7 +26667,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c4e
-	.4byte	0x12537
+	.4byte	0x1255f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3e
@@ -26649,7 +26676,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c4f
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -26658,7 +26685,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c50
-	.4byte	0x5529
+	.4byte	0x5537
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -26667,7 +26694,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c51
-	.4byte	0x12543
+	.4byte	0x1256b
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -26676,7 +26703,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c52
-	.4byte	0x12543
+	.4byte	0x1256b
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -26685,7 +26712,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c53
-	.4byte	0x12543
+	.4byte	0x1256b
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -26694,7 +26721,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c54
-	.4byte	0x12543
+	.4byte	0x1256b
 	.byte	0x2
 	.byte	0x23
 	.byte	0x58
@@ -26703,22 +26730,22 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c55
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x12543
-	.4byte	0x857
+	.4byte	0x1256b
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x5
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x5534
+	.4byte	0x5542
 	.byte	0x2
-	.4byte	0x12763
+	.4byte	0x1278b
 	.ascii	"ProcEfxBGCOL\000"
 
 	.byte	0x60
@@ -26729,7 +26756,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c59
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -26738,7 +26765,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c59
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -26747,7 +26774,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c59
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -26756,7 +26783,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c59
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -26765,7 +26792,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c59
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -26774,7 +26801,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c59
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -26783,7 +26810,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c59
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -26792,7 +26819,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c59
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -26801,7 +26828,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c59
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -26810,7 +26837,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c59
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -26819,7 +26846,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c59
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -26828,7 +26855,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c59
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -26837,7 +26864,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c59
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -26846,7 +26873,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c5b
-	.4byte	0xc602
+	.4byte	0xc610
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -26855,7 +26882,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c5c
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -26864,7 +26891,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c5d
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -26873,7 +26900,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c5e
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -26882,7 +26909,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c5f
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -26891,7 +26918,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c60
-	.4byte	0xcfbd
+	.4byte	0xcfcb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -26900,7 +26927,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c61
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -26909,7 +26936,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c62
-	.4byte	0x5529
+	.4byte	0x5537
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -26918,7 +26945,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c63
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -26927,7 +26954,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c64
-	.4byte	0x868
+	.4byte	0x876
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -26936,13 +26963,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1c65
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x127b2
+	.4byte	0x127da
 	.ascii	"BanimScrFrame\000"
 
 	.byte	0xc
@@ -26953,7 +26980,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ce3
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -26962,7 +26989,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ce4
-	.4byte	0x7c6
+	.4byte	0x7d4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -26971,13 +26998,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ce5
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x12809
+	.4byte	0x12831
 	.ascii	"efx_hp_change_type\000"
 
 	.byte	0x4
@@ -26997,7 +27024,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x12882
+	.4byte	0x128aa
 	.ascii	"BattleAnim\000"
 
 	.byte	0x20
@@ -27008,7 +27035,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1cfd
-	.4byte	0x12882
+	.4byte	0x128aa
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -27017,7 +27044,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1cfe
-	.4byte	0x11158
+	.4byte	0x11180
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -27026,7 +27053,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1cff
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -27035,7 +27062,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d00
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -27044,7 +27071,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d01
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -27053,19 +27080,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d02
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x1288e
-	.4byte	0x843
+	.4byte	0x128b6
+	.4byte	0x851
 	.byte	0xe
 	.byte	0xb
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x128ca
+	.4byte	0x128f2
 	.ascii	"BattleAnimCharaPal\000"
 
 	.byte	0x10
@@ -27076,7 +27103,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d08
-	.4byte	0x12882
+	.4byte	0x128aa
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -27085,16 +27112,16 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d09
-	.4byte	0x128ca
+	.4byte	0x128f2
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x843
+	.4byte	0x851
 	.byte	0x1c
-	.4byte	0x12941
+	.4byte	0x12969
 	.ascii	"banim_sprites_size\000"
 
 	.byte	0x4
@@ -27118,7 +27145,7 @@ EfxApocalypseOBJ_Loop2:
 	.2byte	0x1000
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x12aa4
+	.4byte	0x12acc
 	.ascii	"EkrMainMiniBuf\000"
 
 	.byte	0x34
@@ -27129,7 +27156,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d23
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -27138,7 +27165,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d24
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -27147,7 +27174,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d25
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -27156,7 +27183,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d25
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -27165,7 +27192,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d26
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -27174,7 +27201,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d28
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -27183,7 +27210,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d29
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -27192,7 +27219,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d2a
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -27201,7 +27228,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d2b
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -27210,7 +27237,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d2c
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -27219,7 +27246,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d2c
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -27228,7 +27255,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d2d
-	.4byte	0x5534
+	.4byte	0x5542
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -27237,7 +27264,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d2e
-	.4byte	0x5534
+	.4byte	0x5542
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -27246,7 +27273,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d2f
-	.4byte	0x5534
+	.4byte	0x5542
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -27255,7 +27282,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d30
-	.4byte	0x4e17
+	.4byte	0x4e25
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -27264,7 +27291,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d31
-	.4byte	0x5529
+	.4byte	0x5537
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -27273,7 +27300,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d32
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -27282,13 +27309,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d33
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x12c13
+	.4byte	0x12c3b
 	.ascii	"banim_mode_index\000"
 
 	.byte	0x4
@@ -27348,7 +27375,7 @@ EfxApocalypseOBJ_Loop2:
 	.4byte	0xffffffff
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x12c77
+	.4byte	0x12c9f
 	.ascii	"BattleAnimTerrain\000"
 
 	.byte	0x18
@@ -27359,7 +27386,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d47
-	.4byte	0x12882
+	.4byte	0x128aa
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -27368,7 +27395,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d48
-	.4byte	0x128ca
+	.4byte	0x128f2
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -27377,7 +27404,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d49
-	.4byte	0x12c77
+	.4byte	0x12c9f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -27386,16 +27413,16 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d4a
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x7ad
+	.4byte	0x7bb
 	.byte	0x2
-	.4byte	0x12eda
+	.4byte	0x12f02
 	.ascii	"ProcEkrSubAnimeEmulator\000"
 
 	.byte	0x54
@@ -27406,7 +27433,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d52
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -27415,7 +27442,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d52
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -27424,7 +27451,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d52
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -27433,7 +27460,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d52
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -27442,7 +27469,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d52
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -27451,7 +27478,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d52
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -27460,7 +27487,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d52
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -27469,7 +27496,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d52
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -27478,7 +27505,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d52
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -27487,7 +27514,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d52
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -27496,7 +27523,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d52
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -27505,7 +27532,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d52
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -27514,7 +27541,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d52
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -27523,7 +27550,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d54
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -27532,7 +27559,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d55
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -27541,7 +27568,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d56
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -27550,7 +27577,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d57
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -27559,7 +27586,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d59
-	.4byte	0xc40e
+	.4byte	0xc41c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -27568,7 +27595,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d5b
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -27577,7 +27604,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d5c
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -27586,7 +27613,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d5e
-	.4byte	0xc9ba
+	.4byte	0xc9c8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x36
@@ -27595,7 +27622,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d60
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3a
@@ -27604,7 +27631,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d61
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -27613,7 +27640,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d63
-	.4byte	0x12537
+	.4byte	0x1255f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3e
@@ -27622,7 +27649,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d65
-	.4byte	0xab58
+	.4byte	0xab66
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -27631,7 +27658,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d66
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -27640,7 +27667,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d67
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -27649,13 +27676,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d68
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x130ae
+	.4byte	0x130d6
 	.ascii	"ProcEfxFlashing\000"
 
 	.byte	0x60
@@ -27666,7 +27693,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d73
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -27675,7 +27702,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d73
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -27684,7 +27711,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d73
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -27693,7 +27720,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d73
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -27702,7 +27729,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d73
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -27711,7 +27738,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d73
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -27720,7 +27747,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d73
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -27729,7 +27756,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d73
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -27738,7 +27765,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d73
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -27747,7 +27774,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d73
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -27756,7 +27783,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d73
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -27765,7 +27792,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d73
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -27774,7 +27801,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d73
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -27783,7 +27810,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d75
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -27792,7 +27819,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d77
-	.4byte	0xc40e
+	.4byte	0xc41c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -27801,7 +27828,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d79
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -27810,7 +27837,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d7a
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -27819,7 +27846,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d7b
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -27828,7 +27855,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d7d
-	.4byte	0x130ae
+	.4byte	0x130d6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -27837,19 +27864,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1d7f
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x130ba
-	.4byte	0x857
+	.4byte	0x130e2
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x29
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x1330d
+	.4byte	0x13335
 	.ascii	"ProcEfxStatusUnit\000"
 
 	.byte	0x60
@@ -27860,7 +27887,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1da8
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -27869,7 +27896,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1da8
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -27878,7 +27905,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1da8
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -27887,7 +27914,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1da8
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -27896,7 +27923,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1da8
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -27905,7 +27932,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1da8
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -27914,7 +27941,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1da8
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -27923,7 +27950,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1da8
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -27932,7 +27959,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1da8
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -27941,7 +27968,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1da8
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -27950,7 +27977,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1da8
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -27959,7 +27986,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1da8
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -27968,7 +27995,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1da8
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -27977,7 +28004,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1da9
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -27986,7 +28013,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1dab
-	.4byte	0xc40e
+	.4byte	0xc41c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -27995,7 +28022,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1dad
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -28004,7 +28031,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1daf
-	.4byte	0xc9ba
+	.4byte	0xc9c8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -28013,7 +28040,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1db1
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -28022,7 +28049,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1db1
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -28031,7 +28058,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1db1
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x36
@@ -28040,7 +28067,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1db3
-	.4byte	0x868
+	.4byte	0x876
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -28049,7 +28076,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1db5
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -28058,7 +28085,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1db6
-	.4byte	0x5529
+	.4byte	0x5537
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -28067,7 +28094,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1db7
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -28076,7 +28103,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1db7
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -28085,7 +28112,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1db9
-	.4byte	0xc426
+	.4byte	0xc434
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -28094,13 +28121,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1dbb
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x134a6
+	.4byte	0x134ce
 	.ascii	"ProcEfxSpellCast\000"
 
 	.byte	0x30
@@ -28111,7 +28138,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1de6
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -28120,7 +28147,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1de6
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -28129,7 +28156,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1de6
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -28138,7 +28165,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1de6
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -28147,7 +28174,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1de6
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -28156,7 +28183,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1de6
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -28165,7 +28192,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1de6
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -28174,7 +28201,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1de6
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -28183,7 +28210,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1de6
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -28192,7 +28219,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1de6
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -28201,7 +28228,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1de6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -28210,7 +28237,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1de6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -28219,7 +28246,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1de6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -28228,7 +28255,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1de8
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -28237,7 +28264,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1dea
-	.4byte	0xc40e
+	.4byte	0xc41c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -28246,7 +28273,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1dec
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -28255,13 +28282,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ded
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x136b7
+	.4byte	0x136df
 	.ascii	"ProcEfxALPHA\000"
 
 	.byte	0x60
@@ -28272,7 +28299,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1dfc
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -28281,7 +28308,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1dfc
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -28290,7 +28317,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1dfc
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -28299,7 +28326,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1dfc
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -28308,7 +28335,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1dfc
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -28317,7 +28344,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1dfc
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -28326,7 +28353,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1dfc
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -28335,7 +28362,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1dfc
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -28344,7 +28371,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1dfc
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -28353,7 +28380,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1dfc
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -28362,7 +28389,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1dfc
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -28371,7 +28398,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1dfc
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -28380,7 +28407,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1dfc
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -28389,7 +28416,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1dfe
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -28398,7 +28425,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e00
-	.4byte	0xc40e
+	.4byte	0xc41c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -28407,7 +28434,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e02
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -28416,7 +28443,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e03
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -28425,7 +28452,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e04
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -28434,7 +28461,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e06
-	.4byte	0x136b7
+	.4byte	0x136df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -28443,7 +28470,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e08
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -28452,7 +28479,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e08
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -28461,7 +28488,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e08
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -28470,7 +28497,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e0a
-	.4byte	0x868
+	.4byte	0x876
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -28479,19 +28506,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e0c
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x136c3
-	.4byte	0x857
+	.4byte	0x136eb
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x11
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x13703
+	.4byte	0x1372b
 	.ascii	"videoalloc_secret_screen\000"
 
 	.byte	0x4
@@ -28503,7 +28530,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0xa
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x13897
+	.4byte	0x138bf
 	.ascii	"ProcSecretScreen\000"
 
 	.byte	0x48
@@ -28514,7 +28541,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e20
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -28523,7 +28550,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e20
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -28532,7 +28559,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e20
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -28541,7 +28568,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e20
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -28550,7 +28577,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e20
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -28559,7 +28586,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e20
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -28568,7 +28595,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e20
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -28577,7 +28604,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e20
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -28586,7 +28613,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e20
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -28595,7 +28622,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e20
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -28604,7 +28631,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e20
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -28613,7 +28640,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e20
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -28622,7 +28649,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e20
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -28631,7 +28658,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e22
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -28640,7 +28667,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e23
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -28649,7 +28676,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e24
-	.4byte	0x13897
+	.4byte	0x138bf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -28658,19 +28685,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e25
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x138a3
-	.4byte	0x8538
+	.4byte	0x138cb
+	.4byte	0x8546
 	.byte	0xe
 	.byte	0x4
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x138e5
+	.4byte	0x1390d
 	.ascii	"SecretScreenData\000"
 
 	.byte	0x18
@@ -28681,7 +28708,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e29
-	.4byte	0x138e5
+	.4byte	0x1390d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -28690,25 +28717,25 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e2a
-	.4byte	0x138f1
+	.4byte	0x13919
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x138f1
-	.4byte	0x2d36
+	.4byte	0x13919
+	.4byte	0x2d44
 	.byte	0xe
 	.byte	0xa
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x138fd
-	.4byte	0x857
+	.4byte	0x13925
+	.4byte	0x865
 	.byte	0xe
 	.byte	0xc
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x13940
+	.4byte	0x13968
 	.ascii	"UnkStruct_020169C4\000"
 
 	.byte	0x8
@@ -28719,7 +28746,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e30
-	.4byte	0x12537
+	.4byte	0x1255f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -28728,13 +28755,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e32
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x13aba
+	.4byte	0x13ae2
 	.ascii	"videoalloc_playrank\000"
 
 	.byte	0x4
@@ -28810,7 +28837,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x98
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x13c19
+	.4byte	0x13c41
 	.ascii	"ProcOpInfoFadeOut\000"
 
 	.byte	0x2c
@@ -28821,7 +28848,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e8a
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -28830,7 +28857,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e8a
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -28839,7 +28866,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e8a
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -28848,7 +28875,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e8a
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -28857,7 +28884,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e8a
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -28866,7 +28893,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e8a
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -28875,7 +28902,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e8a
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -28884,7 +28911,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e8a
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -28893,7 +28920,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e8a
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -28902,7 +28929,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e8a
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -28911,7 +28938,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e8a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -28920,7 +28947,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e8a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -28929,7 +28956,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e8a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -28938,13 +28965,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1e8c
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x13c99
+	.4byte	0x13cc1
 	.ascii	"videoalloc_opinfo\000"
 
 	.byte	0x4
@@ -28968,7 +28995,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0xf
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x13e09
+	.4byte	0x13e31
 	.ascii	"ProcEndingfx\000"
 
 	.byte	0x50
@@ -28979,7 +29006,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ebe
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -28988,7 +29015,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ebe
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -28997,7 +29024,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ebe
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -29006,7 +29033,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ebe
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -29015,7 +29042,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ebe
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -29024,7 +29051,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ebe
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -29033,7 +29060,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ebe
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -29042,7 +29069,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ebe
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -29051,7 +29078,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ebe
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -29060,7 +29087,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ebe
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -29069,7 +29096,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ebe
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -29078,7 +29105,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ebe
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -29087,7 +29114,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ebe
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -29096,7 +29123,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ec0
-	.4byte	0x13e09
+	.4byte	0x13e31
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -29105,19 +29132,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ec2
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x13e15
-	.4byte	0x857
+	.4byte	0x13e3d
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x22
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x13fa4
+	.4byte	0x13fcc
 	.ascii	"Proc_Prep_08679774\000"
 
 	.byte	0x54
@@ -29128,7 +29155,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ec6
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -29137,7 +29164,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ec6
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -29146,7 +29173,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ec6
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -29155,7 +29182,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ec6
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -29164,7 +29191,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ec6
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -29173,7 +29200,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ec6
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -29182,7 +29209,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ec6
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -29191,7 +29218,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ec6
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -29200,7 +29227,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ec6
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -29209,7 +29236,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ec6
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -29218,7 +29245,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ec6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -29227,7 +29254,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ec6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -29236,7 +29263,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ec6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -29245,7 +29272,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ec8
-	.4byte	0x5534
+	.4byte	0x5542
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -29254,7 +29281,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ec9
-	.4byte	0x4d67
+	.4byte	0x4d75
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -29263,7 +29290,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1eca
-	.4byte	0x4cce
+	.4byte	0x4cdc
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -29272,13 +29299,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1ecb
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x13ffc
+	.4byte	0x14024
 	.ascii	"EkrDragonfxState_idx\000"
 
 	.byte	0x4
@@ -29298,7 +29325,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x14057
+	.4byte	0x1407f
 	.ascii	"EkrDragonState_idx\000"
 
 	.byte	0x4
@@ -29318,7 +29345,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x1410c
+	.4byte	0x14134
 	.ascii	"ekr_dragon_status_type_bitfile\000"
 
 	.byte	0x4
@@ -29350,7 +29377,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x20
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x14171
+	.4byte	0x14199
 	.ascii	"ekr_dragon_intro_fx_flag\000"
 
 	.byte	0x4
@@ -29370,7 +29397,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x143e2
+	.4byte	0x1440a
 	.ascii	"ProcEkrDragonFx\000"
 
 	.byte	0x60
@@ -29381,7 +29408,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f0d
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -29390,7 +29417,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f0d
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -29399,7 +29426,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f0d
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -29408,7 +29435,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f0d
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -29417,7 +29444,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f0d
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -29426,7 +29453,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f0d
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -29435,7 +29462,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f0d
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -29444,7 +29471,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f0d
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -29453,7 +29480,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f0d
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -29462,7 +29489,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f0d
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -29471,7 +29498,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f0d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -29480,7 +29507,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f0d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -29489,7 +29516,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f0d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -29498,7 +29525,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f0f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -29507,7 +29534,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f10
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -29516,7 +29543,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f11
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -29525,7 +29552,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f12
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -29534,7 +29561,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f13
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -29543,7 +29570,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f14
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -29552,7 +29579,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f15
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -29561,7 +29588,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f17
-	.4byte	0xc9ba
+	.4byte	0xc9c8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x36
@@ -29570,7 +29597,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f19
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3a
@@ -29579,7 +29606,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f1a
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -29588,7 +29615,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f1c
-	.4byte	0x12537
+	.4byte	0x1255f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3e
@@ -29597,7 +29624,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f1e
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -29606,7 +29633,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f1f
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -29615,7 +29642,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f20
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -29624,7 +29651,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f21
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -29633,7 +29660,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f23
-	.4byte	0xc426
+	.4byte	0xc434
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -29642,13 +29669,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f25
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x146c9
+	.4byte	0x146f1
 	.ascii	"ProcEkrDragon\000"
 
 	.byte	0x6c
@@ -29659,7 +29686,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f29
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -29668,7 +29695,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f29
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -29677,7 +29704,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f29
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -29686,7 +29713,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f29
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -29695,7 +29722,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f29
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -29704,7 +29731,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f29
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -29713,7 +29740,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f29
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -29722,7 +29749,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f29
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -29731,7 +29758,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f29
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -29740,7 +29767,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f29
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -29749,7 +29776,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f29
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -29758,7 +29785,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f29
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -29767,7 +29794,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f29
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -29776,7 +29803,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f2b
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -29785,7 +29812,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f2d
-	.4byte	0xc40e
+	.4byte	0xc41c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -29794,7 +29821,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f2f
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -29803,7 +29830,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f30
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -29812,7 +29839,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f31
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -29821,7 +29848,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f32
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -29830,7 +29857,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f34
-	.4byte	0x12537
+	.4byte	0x1255f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -29839,7 +29866,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f36
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3a
@@ -29848,7 +29875,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f37
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -29857,7 +29884,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f39
-	.4byte	0x12537
+	.4byte	0x1255f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3e
@@ -29866,7 +29893,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f3b
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -29875,7 +29902,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f3c
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -29884,7 +29911,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f3d
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -29893,7 +29920,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f3e
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -29902,7 +29929,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f3f
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -29911,7 +29938,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f40
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x58
@@ -29920,7 +29947,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f41
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
@@ -29929,7 +29956,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f42
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
@@ -29938,7 +29965,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f43
-	.4byte	0x146c9
+	.4byte	0x146f1
 	.byte	0x2
 	.byte	0x23
 	.byte	0x64
@@ -29947,16 +29974,16 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f44
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x68
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x14171
+	.4byte	0x14199
 	.byte	0x2
-	.4byte	0x1494f
+	.4byte	0x14977
 	.ascii	"ProcEkrDragonDeamon\000"
 
 	.byte	0x60
@@ -29967,7 +29994,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f4a
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -29976,7 +30003,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f4a
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -29985,7 +30012,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f4a
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -29994,7 +30021,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f4a
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -30003,7 +30030,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f4a
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -30012,7 +30039,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f4a
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -30021,7 +30048,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f4a
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -30030,7 +30057,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f4a
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -30039,7 +30066,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f4a
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -30048,7 +30075,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f4a
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -30057,7 +30084,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f4a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -30066,7 +30093,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f4a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -30075,7 +30102,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f4a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -30084,7 +30111,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f4c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -30093,7 +30120,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f4e
-	.4byte	0xc40e
+	.4byte	0xc41c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -30102,7 +30129,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f50
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -30111,7 +30138,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f52
-	.4byte	0xc9ba
+	.4byte	0xc9c8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -30120,7 +30147,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f54
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -30129,7 +30156,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f55
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -30138,7 +30165,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f57
-	.4byte	0xc9ba
+	.4byte	0xc9c8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x36
@@ -30147,7 +30174,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f59
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3a
@@ -30156,7 +30183,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f5a
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -30165,7 +30192,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f5c
-	.4byte	0x12537
+	.4byte	0x1255f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3e
@@ -30174,7 +30201,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f5e
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -30183,7 +30210,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f5f
-	.4byte	0xc9af
+	.4byte	0xc9bd
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -30192,7 +30219,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f60
-	.4byte	0x5529
+	.4byte	0x5537
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -30201,7 +30228,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f62
-	.4byte	0xc9ba
+	.4byte	0xc9c8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -30210,7 +30237,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f64
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -30219,7 +30246,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f66
-	.4byte	0xc9ba
+	.4byte	0xc9c8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x58
@@ -30228,13 +30255,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f68
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x14b90
+	.4byte	0x14bb8
 	.ascii	"ProcEkrIdunnfx\000"
 
 	.byte	0x64
@@ -30245,7 +30272,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f6c
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -30254,7 +30281,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f6c
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -30263,7 +30290,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f6c
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -30272,7 +30299,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f6c
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -30281,7 +30308,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f6c
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -30290,7 +30317,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f6c
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -30299,7 +30326,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f6c
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -30308,7 +30335,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f6c
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -30317,7 +30344,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f6c
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -30326,7 +30353,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f6c
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -30335,7 +30362,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f6c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -30344,7 +30371,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f6c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -30353,7 +30380,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f6c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -30362,7 +30389,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f6e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -30371,7 +30398,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f70
-	.4byte	0xc40e
+	.4byte	0xc41c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -30380,7 +30407,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f72
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -30389,7 +30416,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f73
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -30398,7 +30425,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f75
-	.4byte	0xc41a
+	.4byte	0xc428
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -30407,7 +30434,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f77
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -30416,7 +30443,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f78
-	.4byte	0x5529
+	.4byte	0x5537
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -30425,7 +30452,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f79
-	.4byte	0x14b90
+	.4byte	0x14bb8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -30434,7 +30461,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f7a
-	.4byte	0x14b90
+	.4byte	0x14bb8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -30443,7 +30470,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f7b
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -30452,7 +30479,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f7c
-	.4byte	0x12543
+	.4byte	0x1256b
 	.byte	0x2
 	.byte	0x23
 	.byte	0x58
@@ -30461,7 +30488,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f7d
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
@@ -30470,16 +30497,16 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1f7e
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x5529
+	.4byte	0x5537
 	.byte	0x1c
-	.4byte	0x14c34
+	.4byte	0x14c5c
 	.ascii	"ekrtriangle_types\000"
 
 	.byte	0x4
@@ -30507,7 +30534,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x14e2a
+	.4byte	0x14e52
 	.ascii	"ProcEkrTriClass\000"
 
 	.byte	0x60
@@ -30518,7 +30545,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fa1
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -30527,7 +30554,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fa1
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -30536,7 +30563,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fa1
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -30545,7 +30572,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fa1
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -30554,7 +30581,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fa1
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -30563,7 +30590,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fa1
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -30572,7 +30599,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fa1
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -30581,7 +30608,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fa1
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -30590,7 +30617,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fa1
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -30599,7 +30626,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fa1
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -30608,7 +30635,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fa1
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -30617,7 +30644,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fa1
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -30626,7 +30653,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fa1
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -30635,7 +30662,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fa3
-	.4byte	0xc602
+	.4byte	0xc610
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -30644,7 +30671,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fa4
-	.4byte	0x2e27
+	.4byte	0x2e35
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -30653,7 +30680,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fa5
-	.4byte	0xc9a3
+	.4byte	0xc9b1
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -30662,7 +30689,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fa6
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -30671,7 +30698,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fa7
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -30680,7 +30707,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fa8
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -30689,7 +30716,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fa9
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -30698,7 +30725,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1faa
-	.4byte	0xc426
+	.4byte	0xc434
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -30707,13 +30734,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fab
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x14ea8
+	.4byte	0x14ed0
 	.ascii	"FaceInfo\000"
 
 	.byte	0x10
@@ -30724,7 +30751,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fb0
-	.4byte	0x7d1
+	.4byte	0x7df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -30733,7 +30760,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fb1
-	.4byte	0x7d1
+	.4byte	0x7df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -30742,7 +30769,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fb2
-	.4byte	0x5529
+	.4byte	0x5537
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -30751,7 +30778,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fb3
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -30760,7 +30787,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fb3
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -30769,13 +30796,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fb4
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x14ee2
+	.4byte	0x14f0a
 	.ascii	"FaceVramEnt\000"
 
 	.byte	0x8
@@ -30786,7 +30813,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fb9
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -30795,13 +30822,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fba
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x14f1f
+	.4byte	0x14f47
 	.ascii	"FaceTalkSpriteEnt\000"
 
 	.byte	0x8
@@ -30812,7 +30839,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fbf
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -30821,13 +30848,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fc0
-	.4byte	0x5529
+	.4byte	0x5537
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x15181
+	.4byte	0x151a9
 	.ascii	"FaceProc\000"
 
 	.byte	0x44
@@ -30838,7 +30865,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fc5
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -30847,7 +30874,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fc5
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -30856,7 +30883,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fc5
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -30865,7 +30892,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fc5
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -30874,7 +30901,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fc5
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -30883,7 +30910,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fc5
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -30892,7 +30919,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fc5
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -30901,7 +30928,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fc5
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -30910,7 +30937,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fc5
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -30919,7 +30946,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fc5
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -30928,7 +30955,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fc5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -30937,7 +30964,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fc5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -30946,7 +30973,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fc5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -30955,7 +30982,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fc7
-	.4byte	0x84b
+	.4byte	0x859
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -30964,7 +30991,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fc8
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -30973,7 +31000,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fc9
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -30982,7 +31009,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fca
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2d
@@ -30991,7 +31018,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fcb
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -31000,7 +31027,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fcc
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -31009,7 +31036,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fcd
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -31018,7 +31045,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fce
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -31027,7 +31054,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fcf
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x36
@@ -31036,7 +31063,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fd0
-	.4byte	0x2d90
+	.4byte	0x2d9e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x37
@@ -31045,7 +31072,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fd1
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -31054,7 +31081,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fd2
-	.4byte	0xc40e
+	.4byte	0xc41c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3a
@@ -31063,7 +31090,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fd3
-	.4byte	0x5529
+	.4byte	0x5537
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -31072,13 +31099,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x1fd4
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x151f1
+	.4byte	0x15219
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x1fd8
@@ -31108,7 +31135,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x5
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x15251
+	.4byte	0x15279
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x1fe2
@@ -31134,7 +31161,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x8
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x1526d
+	.4byte	0x15295
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x1ff6
@@ -31144,7 +31171,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x4
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x154cc
+	.4byte	0x154f4
 	.ascii	"ProcPrepDiscardScreen\000"
 
 	.byte	0x5c
@@ -31155,7 +31182,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x203d
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -31164,7 +31191,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x203d
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -31173,7 +31200,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x203d
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -31182,7 +31209,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x203d
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -31191,7 +31218,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x203d
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -31200,7 +31227,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x203d
-	.4byte	0xd5f7
+	.4byte	0xd605
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -31209,7 +31236,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x203d
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -31218,7 +31245,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x203d
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -31227,7 +31254,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x203d
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -31236,7 +31263,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x203d
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -31245,7 +31272,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x203d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -31254,7 +31281,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x203d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -31263,7 +31290,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x203d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -31272,7 +31299,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x203f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -31281,7 +31308,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2041
-	.4byte	0xc40e
+	.4byte	0xc41c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -31290,7 +31317,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2043
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -31299,7 +31326,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2044
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2d
@@ -31308,7 +31335,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2045
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -31317,7 +31344,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2046
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2f
@@ -31326,7 +31353,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2047
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -31335,7 +31362,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2048
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x31
@@ -31344,7 +31371,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x204a
-	.4byte	0x154cc
+	.4byte	0x154f4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -31353,7 +31380,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x204c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x45
@@ -31362,7 +31389,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x204e
-	.4byte	0x1114c
+	.4byte	0x11174
 	.byte	0x2
 	.byte	0x23
 	.byte	0x46
@@ -31371,7 +31398,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2050
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -31380,7 +31407,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2051
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x52
@@ -31389,7 +31416,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2053
-	.4byte	0x8538
+	.4byte	0x8546
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -31398,19 +31425,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2054
-	.4byte	0x8538
+	.4byte	0x8546
 	.byte	0x2
 	.byte	0x23
 	.byte	0x58
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x154d8
-	.4byte	0x857
+	.4byte	0x15500
+	.4byte	0x865
 	.byte	0xe
 	.byte	0x12
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x15747
+	.4byte	0x1576f
 	.ascii	"MenuScrollBarProc\000"
 
 	.byte	0x3c
@@ -31421,7 +31448,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2067
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -31430,7 +31457,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2067
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -31439,7 +31466,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2067
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -31448,7 +31475,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2067
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -31457,7 +31484,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2067
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -31466,7 +31493,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2067
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -31475,7 +31502,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2067
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -31484,7 +31511,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2067
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -31493,7 +31520,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2067
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -31502,7 +31529,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2067
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -31511,7 +31538,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2067
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -31520,7 +31547,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2067
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -31529,7 +31556,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2067
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -31538,7 +31565,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2069
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -31547,7 +31574,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x206a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -31556,7 +31583,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x206b
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2b
@@ -31565,7 +31592,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x206c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -31574,7 +31601,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x206d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2d
@@ -31583,7 +31610,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x206e
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -31592,7 +31619,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x206f
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -31601,7 +31628,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2070
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -31610,7 +31637,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2071
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -31619,7 +31646,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2072
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x36
@@ -31628,7 +31655,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2073
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -31637,7 +31664,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2074
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3a
@@ -31646,13 +31673,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2075
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3b
 	.byte	0x0
 	.byte	0x18
-	.4byte	0x157a6
+	.4byte	0x157ce
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x2081
@@ -31678,7 +31705,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x4
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x15b27
+	.4byte	0x15b4f
 	.ascii	"PrepSubItemProc\000"
 
 	.byte	0x64
@@ -31689,7 +31716,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x208a
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -31698,7 +31725,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x208a
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -31707,7 +31734,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x208a
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -31716,7 +31743,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x208a
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -31725,7 +31752,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x208a
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -31734,7 +31761,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x208a
-	.4byte	0xd5f7
+	.4byte	0xd605
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -31743,7 +31770,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x208a
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -31752,7 +31779,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x208a
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -31761,7 +31788,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x208a
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -31770,7 +31797,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x208a
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -31779,7 +31806,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x208a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -31788,7 +31815,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x208a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -31797,7 +31824,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x208a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -31806,7 +31833,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x208c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -31815,7 +31842,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x208d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -31824,7 +31851,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x208e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2b
@@ -31833,7 +31860,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x208f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -31842,7 +31869,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2090
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2d
@@ -31851,7 +31878,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2091
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -31860,7 +31887,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2092
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2f
@@ -31869,7 +31896,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2093
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -31878,7 +31905,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2094
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x31
@@ -31887,7 +31914,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2095
-	.4byte	0x15b27
+	.4byte	0x15b4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -31896,7 +31923,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2096
-	.4byte	0x15b27
+	.4byte	0x15b4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3b
@@ -31905,7 +31932,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2097
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -31914,7 +31941,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2098
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x45
@@ -31923,7 +31950,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2099
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x46
@@ -31932,7 +31959,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x209a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x47
@@ -31941,7 +31968,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x209b
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -31950,7 +31977,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x209c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x49
@@ -31959,7 +31986,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x209d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4a
@@ -31968,7 +31995,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x209e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4b
@@ -31977,7 +32004,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x209f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -31986,7 +32013,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20a0
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4d
@@ -31995,7 +32022,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20a1
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4e
@@ -32004,7 +32031,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20a2
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -32013,7 +32040,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20a3
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x52
@@ -32022,7 +32049,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20a4
-	.4byte	0x15b33
+	.4byte	0x15b5b
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -32031,7 +32058,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20a5
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
@@ -32040,25 +32067,25 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20a6
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x15b33
-	.4byte	0x2d36
+	.4byte	0x15b5b
+	.4byte	0x2d44
 	.byte	0xe
 	.byte	0x8
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x15b3f
-	.4byte	0x8538
+	.4byte	0x15b67
+	.4byte	0x8546
 	.byte	0xe
 	.byte	0x1
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x15d34
+	.4byte	0x15d5c
 	.ascii	"prepscreen_videoalloc\000"
 
 	.byte	0x4
@@ -32158,7 +32185,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0xd
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x15de3
+	.4byte	0x15e0b
 	.ascii	"proclabel_prep_subitem_screen\000"
 
 	.byte	0x4
@@ -32190,7 +32217,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x7
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x16031
+	.4byte	0x16059
 	.ascii	"Proc08606254\000"
 
 	.byte	0x50
@@ -32201,7 +32228,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20e0
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -32210,7 +32237,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20e0
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -32219,7 +32246,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20e0
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -32228,7 +32255,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20e0
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -32237,7 +32264,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20e0
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -32246,7 +32273,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20e0
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -32255,7 +32282,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20e0
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -32264,7 +32291,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20e0
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -32273,7 +32300,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20e0
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -32282,7 +32309,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20e0
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -32291,7 +32318,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20e0
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -32300,7 +32327,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20e0
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -32309,7 +32336,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20e0
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -32318,7 +32345,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20e2
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -32327,7 +32354,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20e4
-	.4byte	0xc40e
+	.4byte	0xc41c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -32336,7 +32363,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20e6
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -32345,7 +32372,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20e7
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -32354,7 +32381,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20e9
-	.4byte	0xc40e
+	.4byte	0xc41c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -32363,7 +32390,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20eb
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -32372,7 +32399,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20ec
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -32381,7 +32408,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20ee
-	.4byte	0xc9ba
+	.4byte	0xc9c8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x36
@@ -32390,7 +32417,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20f0
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3a
@@ -32399,7 +32426,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20f1
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -32408,7 +32435,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20f3
-	.4byte	0xc9ba
+	.4byte	0xc9c8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3e
@@ -32417,7 +32444,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20f5
-	.4byte	0x16031
+	.4byte	0x16059
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -32426,7 +32453,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20f6
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -32435,18 +32462,18 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x20f7
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x16037
+	.4byte	0x1605f
 	.byte	0xf
-	.4byte	0x2e48
+	.4byte	0x2e56
 	.byte	0x2
-	.4byte	0x16222
+	.4byte	0x1624a
 	.ascii	"ProcEkrDispUP\000"
 
 	.byte	0x54
@@ -32457,7 +32484,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x211b
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -32466,7 +32493,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x211b
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -32475,7 +32502,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x211b
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -32484,7 +32511,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x211b
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -32493,7 +32520,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x211b
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -32502,7 +32529,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x211b
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -32511,7 +32538,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x211b
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -32520,7 +32547,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x211b
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -32529,7 +32556,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x211b
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -32538,7 +32565,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x211b
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -32547,7 +32574,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x211b
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -32556,7 +32583,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x211b
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -32565,7 +32592,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x211b
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -32574,7 +32601,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x211d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -32583,7 +32610,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x211e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -32592,7 +32619,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2120
-	.4byte	0xd9c4
+	.4byte	0xd9d2
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2b
@@ -32601,7 +32628,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2122
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -32610,7 +32637,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2124
-	.4byte	0x12537
+	.4byte	0x1255f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -32619,7 +32646,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2126
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3a
@@ -32628,7 +32655,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2128
-	.4byte	0xcfbd
+	.4byte	0xcfcb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -32637,7 +32664,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x212a
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -32646,13 +32673,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x212b
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x162a4
+	.4byte	0x162cc
 	.ascii	"efx_sound_type\000"
 
 	.byte	0x4
@@ -32688,7 +32715,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x6
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x162f6
+	.4byte	0x1631e
 	.ascii	"efx_staff_type\000"
 
 	.byte	0x4
@@ -32708,7 +32735,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x1631c
+	.4byte	0x16344
 	.ascii	"PrepConvoyData\000"
 
 	.byte	0x4
@@ -32719,13 +32746,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x216b
-	.4byte	0x1631c
+	.4byte	0x16344
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
 	.byte	0x0
 	.byte	0x26
-	.4byte	0x1633f
+	.4byte	0x16367
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x216b
@@ -32734,16 +32761,16 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2168
-	.4byte	0x1633f
+	.4byte	0x16367
 	.byte	0x27
 	.ascii	"raw\000"
 
 	.byte	0x1
 	.2byte	0x216a
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x0
 	.byte	0x28
-	.4byte	0x1637d
+	.4byte	0x163a5
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x2168
@@ -32752,7 +32779,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2165
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -32761,7 +32788,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2166
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -32770,13 +32797,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2167
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x163a4
+	.4byte	0x163cc
 	.ascii	"PrepItemListEnt\000"
 
 	.byte	0x4
@@ -32787,13 +32814,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2212
-	.4byte	0x163a4
+	.4byte	0x163cc
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
 	.byte	0x0
 	.byte	0x26
-	.4byte	0x163c7
+	.4byte	0x163ef
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x2212
@@ -32802,16 +32829,16 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x220f
-	.4byte	0x163c7
+	.4byte	0x163ef
 	.byte	0x27
 	.ascii	"raw\000"
 
 	.byte	0x1
 	.2byte	0x2211
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x0
 	.byte	0x28
-	.4byte	0x16400
+	.4byte	0x16428
 	.byte	0x4
 	.byte	0x1
 	.2byte	0x220f
@@ -32820,7 +32847,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x220c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -32829,7 +32856,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x220d
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -32838,13 +32865,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x220e
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x16577
+	.4byte	0x1659f
 	.ascii	"ProcPrepSubItemSubfx\000"
 
 	.byte	0x4c
@@ -32855,7 +32882,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x221c
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -32864,7 +32891,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x221c
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -32873,7 +32900,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x221c
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -32882,7 +32909,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x221c
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -32891,7 +32918,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x221c
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -32900,7 +32927,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x221c
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -32909,7 +32936,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x221c
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -32918,7 +32945,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x221c
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -32927,7 +32954,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x221c
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -32936,7 +32963,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x221c
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -32945,7 +32972,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x221c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -32954,7 +32981,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x221c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -32963,7 +32990,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x221c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -32972,7 +32999,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x221e
-	.4byte	0x16577
+	.4byte	0x1659f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -32981,25 +33008,25 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2220
-	.4byte	0x16583
+	.4byte	0x165ab
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x16583
-	.4byte	0x857
+	.4byte	0x165ab
+	.4byte	0x865
 	.byte	0xe
 	.byte	0xa
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x1658f
-	.4byte	0x4cce
+	.4byte	0x165b7
+	.4byte	0x4cdc
 	.byte	0xe
 	.byte	0x2
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x16716
+	.4byte	0x1673e
 	.ascii	"ProcPrepSubItemfx\000"
 
 	.byte	0x34
@@ -33010,7 +33037,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2223
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -33019,7 +33046,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2223
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -33028,7 +33055,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2223
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -33037,7 +33064,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2223
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -33046,7 +33073,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2223
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -33055,7 +33082,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2223
-	.4byte	0x16716
+	.4byte	0x1673e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -33064,7 +33091,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2223
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -33073,7 +33100,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2223
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -33082,7 +33109,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2223
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -33091,7 +33118,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2223
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -33100,7 +33127,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2223
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -33109,7 +33136,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2223
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -33118,7 +33145,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2223
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -33127,7 +33154,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2225
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -33136,7 +33163,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2226
-	.4byte	0x1671c
+	.4byte	0x16744
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -33145,19 +33172,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2227
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x157a6
+	.4byte	0x157ce
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x16400
+	.4byte	0x16428
 	.byte	0x2
-	.4byte	0x16898
+	.4byte	0x168c0
 	.ascii	"ProcharacterEnding2\000"
 
 	.byte	0x30
@@ -33168,7 +33195,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x225c
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -33177,7 +33204,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x225c
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -33186,7 +33213,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x225c
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -33195,7 +33222,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x225c
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -33204,7 +33231,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x225c
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -33213,7 +33240,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x225c
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -33222,7 +33249,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x225c
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -33231,7 +33258,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x225c
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -33240,7 +33267,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x225c
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -33249,7 +33276,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x225c
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -33258,7 +33285,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x225c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -33267,7 +33294,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x225c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -33276,7 +33303,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x225c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -33285,7 +33312,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x225e
-	.4byte	0xc602
+	.4byte	0xc610
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -33294,13 +33321,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2260
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x16a55
+	.4byte	0x16a7d
 	.ascii	"ProcClassDemoStatus\000"
 
 	.byte	0x44
@@ -33311,7 +33338,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x228e
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -33320,7 +33347,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x228e
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -33329,7 +33356,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x228e
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -33338,7 +33365,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x228e
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -33347,7 +33374,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x228e
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -33356,7 +33383,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x228e
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -33365,7 +33392,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x228e
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -33374,7 +33401,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x228e
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -33383,7 +33410,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x228e
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -33392,7 +33419,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x228e
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -33401,7 +33428,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x228e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -33410,7 +33437,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x228e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -33419,7 +33446,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x228e
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -33428,7 +33455,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2290
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -33437,7 +33464,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2292
-	.4byte	0xc9ba
+	.4byte	0xc9c8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -33446,7 +33473,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2294
-	.4byte	0x16c56
+	.4byte	0x16c7e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -33455,7 +33482,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2295
-	.4byte	0x16c5c
+	.4byte	0x16c84
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -33464,7 +33491,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2296
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x42
@@ -33473,13 +33500,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2297
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x43
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x16c56
+	.4byte	0x16c7e
 	.ascii	"ProcClassDemoMain\000"
 
 	.byte	0x48
@@ -33490,7 +33517,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x227f
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -33499,7 +33526,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x227f
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -33508,7 +33535,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x227f
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -33517,7 +33544,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x227f
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -33526,7 +33553,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x227f
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -33535,7 +33562,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x227f
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -33544,7 +33571,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x227f
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -33553,7 +33580,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x227f
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -33562,7 +33589,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x227f
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -33571,7 +33598,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x227f
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -33580,7 +33607,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x227f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -33589,7 +33616,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x227f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -33598,7 +33625,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x227f
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -33607,7 +33634,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2281
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -33616,7 +33643,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2282
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -33625,7 +33652,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2283
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -33634,7 +33661,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2284
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -33643,7 +33670,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2285
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x31
@@ -33652,7 +33679,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2286
-	.4byte	0x16eb6
+	.4byte	0x16ede
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -33661,7 +33688,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2287
-	.4byte	0x4bc0
+	.4byte	0x4bce
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -33670,7 +33697,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2288
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3e
@@ -33679,7 +33706,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2289
-	.4byte	0x16ebc
+	.4byte	0x16ee4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
@@ -33688,22 +33715,22 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x228a
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x16a55
+	.4byte	0x16a7d
 	.byte	0xd
-	.4byte	0x16c68
-	.4byte	0x2d36
+	.4byte	0x16c90
+	.4byte	0x2d44
 	.byte	0xe
 	.byte	0xd
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x16eb6
+	.4byte	0x16ede
 	.ascii	"ProcOpInfo\000"
 
 	.byte	0x44
@@ -33714,7 +33741,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x226c
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -33723,7 +33750,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x226c
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -33732,7 +33759,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x226c
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -33741,7 +33768,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x226c
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -33750,7 +33777,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x226c
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -33759,7 +33786,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x226c
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -33768,7 +33795,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x226c
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -33777,7 +33804,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x226c
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -33786,7 +33813,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x226c
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -33795,7 +33822,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x226c
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -33804,7 +33831,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x226c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -33813,7 +33840,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x226c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -33822,7 +33849,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x226c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -33831,7 +33858,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x226e
-	.4byte	0x84b
+	.4byte	0x859
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -33840,7 +33867,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2270
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -33849,7 +33876,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2271
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -33858,7 +33885,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2272
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2d
@@ -33867,7 +33894,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2273
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -33876,7 +33903,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2274
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2f
@@ -33885,7 +33912,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2275
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -33894,7 +33921,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2276
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x31
@@ -33903,7 +33930,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2276
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -33912,7 +33939,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2278
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -33921,7 +33948,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2279
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -33930,7 +33957,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x227a
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -33939,19 +33966,19 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x227b
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x16c68
+	.4byte	0x16c90
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x16898
+	.4byte	0x168c0
 	.byte	0x1c
-	.4byte	0x16f23
+	.4byte	0x16f4b
 	.ascii	"OpInfoModeIndex\000"
 
 	.byte	0x4
@@ -33975,7 +34002,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x3
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x16f70
+	.4byte	0x16f98
 	.ascii	"Unk_086905F8\000"
 
 	.byte	0x4
@@ -33986,7 +34013,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22a1
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -33995,7 +34022,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22a2
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -34004,13 +34031,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22a3
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x170d3
+	.4byte	0x170fb
 	.ascii	"EkrMainMiniDesc\000"
 
 	.byte	0x34
@@ -34021,7 +34048,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22a9
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -34030,7 +34057,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22aa
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -34039,7 +34066,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22ab
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -34048,7 +34075,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22ab
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -34057,7 +34084,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22ac
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -34066,7 +34093,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22b0
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -34075,7 +34102,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22b1
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -34084,7 +34111,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22b2
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -34093,7 +34120,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22b3
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -34102,7 +34129,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22b4
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -34111,7 +34138,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22b4
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -34120,7 +34147,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22b5
-	.4byte	0x5534
+	.4byte	0x5542
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -34129,7 +34156,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22b6
-	.4byte	0x5534
+	.4byte	0x5542
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -34138,7 +34165,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22b7
-	.4byte	0x5534
+	.4byte	0x5542
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -34147,7 +34174,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22b8
-	.4byte	0x4e17
+	.4byte	0x4e25
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -34156,7 +34183,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22b9
-	.4byte	0x5529
+	.4byte	0x5537
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -34165,7 +34192,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22ba
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -34174,13 +34201,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22bb
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x1713f
+	.4byte	0x17167
 	.ascii	"ClassDisplayFont\000"
 
 	.byte	0x8
@@ -34191,7 +34218,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22c4
-	.4byte	0x5534
+	.4byte	0x5542
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -34200,7 +34227,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22c5
-	.4byte	0x843
+	.4byte	0x851
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -34209,7 +34236,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22c6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -34218,7 +34245,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22c6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -34227,13 +34254,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22c6
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x17169
+	.4byte	0x17191
 	.ascii	"Vec1u\000"
 
 	.byte	0x4
@@ -34244,7 +34271,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22cf
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -34253,13 +34280,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22cf
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x172e0
+	.4byte	0x17308
 	.ascii	"ProcEndingPinfoText\000"
 
 	.byte	0x58
@@ -34270,7 +34297,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22d5
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -34279,7 +34306,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22d5
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -34288,7 +34315,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22d5
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -34297,7 +34324,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22d5
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -34306,7 +34333,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22d5
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -34315,7 +34342,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22d5
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -34324,7 +34351,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22d5
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -34333,7 +34360,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22d5
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -34342,7 +34369,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22d5
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -34351,7 +34378,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22d5
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -34360,7 +34387,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22d5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -34369,7 +34396,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22d5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -34378,7 +34405,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22d5
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -34387,7 +34414,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22d7
-	.4byte	0xe7d1
+	.4byte	0xe7df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -34396,13 +34423,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22d9
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x17340
+	.4byte	0x17368
 	.ascii	"PidEndingInfo\000"
 
 	.byte	0x8
@@ -34413,7 +34440,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22e0
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -34422,7 +34449,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22e1
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -34431,7 +34458,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22e2
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -34440,13 +34467,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22e3
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x17529
+	.4byte	0x17551
 	.ascii	"ProcTypeWritter\000"
 
 	.byte	0x64
@@ -34457,7 +34484,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22e9
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -34466,7 +34493,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22e9
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -34475,7 +34502,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22e9
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -34484,7 +34511,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22e9
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -34493,7 +34520,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22e9
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -34502,7 +34529,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22e9
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -34511,7 +34538,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22e9
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -34520,7 +34547,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22e9
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -34529,7 +34556,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22e9
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -34538,7 +34565,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22e9
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -34547,7 +34574,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22e9
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -34556,7 +34583,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22e9
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -34565,7 +34592,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22e9
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -34574,7 +34601,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22eb
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -34583,7 +34610,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22ec
-	.4byte	0x17529
+	.4byte	0x17551
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -34592,7 +34619,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22ed
-	.4byte	0x1752f
+	.4byte	0x17557
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -34601,7 +34628,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22ee
-	.4byte	0xcfbd
+	.4byte	0xcfcb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -34610,7 +34637,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22ef
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
@@ -34619,7 +34646,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22f0
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5e
@@ -34628,7 +34655,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22f1
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
@@ -34637,22 +34664,22 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22f2
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x62
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x4d67
+	.4byte	0x4d75
 	.byte	0xd
-	.4byte	0x1753b
-	.4byte	0x4e39
+	.4byte	0x17563
+	.4byte	0x4e47
 	.byte	0xe
 	.byte	0x5
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x176ae
+	.4byte	0x176d6
 	.ascii	"ProcEndingCredit\000"
 
 	.byte	0x68
@@ -34663,7 +34690,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22fc
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -34672,7 +34699,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22fc
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -34681,7 +34708,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22fc
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -34690,7 +34717,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22fc
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -34699,7 +34726,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22fc
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -34708,7 +34735,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22fc
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -34717,7 +34744,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22fc
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -34726,7 +34753,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22fc
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -34735,7 +34762,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22fc
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -34744,7 +34771,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22fc
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -34753,7 +34780,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22fc
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -34762,7 +34789,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22fc
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -34771,7 +34798,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22fc
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -34780,7 +34807,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x22fe
-	.4byte	0x10dc5
+	.4byte	0x10ded
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -34789,13 +34816,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2300
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x64
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x1770e
+	.4byte	0x17736
 	.ascii	"CreditInfo\000"
 
 	.byte	0xc
@@ -34806,7 +34833,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2303
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -34815,7 +34842,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2304
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -34824,7 +34851,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2305
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -34833,7 +34860,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2305
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -34842,13 +34869,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2306
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x177a2
+	.4byte	0x177ca
 	.ascii	"game_ending_flags\000"
 
 	.byte	0x4
@@ -34880,7 +34907,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x20
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x17913
+	.4byte	0x1793b
 	.ascii	"ProcGameEnding\000"
 
 	.byte	0x68
@@ -34891,7 +34918,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2330
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -34900,7 +34927,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2330
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -34909,7 +34936,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2330
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -34918,7 +34945,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2330
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -34927,7 +34954,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2330
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -34936,7 +34963,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2330
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -34945,7 +34972,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2330
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -34954,7 +34981,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2330
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -34963,7 +34990,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2330
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -34972,7 +34999,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2330
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -34981,7 +35008,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2330
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -34990,7 +35017,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2330
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -34999,7 +35026,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2330
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -35008,7 +35035,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2332
-	.4byte	0x10dc5
+	.4byte	0x10ded
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -35017,13 +35044,13 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2334
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x64
 	.byte	0x0
 	.byte	0x1c
-	.4byte	0x1796e
+	.4byte	0x17996
 	.ascii	"ending_disp_type\000"
 
 	.byte	0x4
@@ -35047,7 +35074,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x3
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x17a90
+	.4byte	0x17ab8
 	.ascii	"EkrTerrainfxDesc\000"
 
 	.byte	0x28
@@ -35058,7 +35085,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x235e
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -35067,7 +35094,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x235f
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -35076,7 +35103,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2360
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -35085,7 +35112,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2361
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -35094,7 +35121,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2362
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -35103,7 +35130,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2363
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -35112,7 +35139,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2364
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -35121,7 +35148,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2365
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -35130,7 +35157,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2367
-	.4byte	0x2d41
+	.4byte	0x2d4f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -35139,7 +35166,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2369
-	.4byte	0x17a90
+	.4byte	0x17ab8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -35148,7 +35175,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x236a
-	.4byte	0x17a90
+	.4byte	0x17ab8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -35157,7 +35184,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x236b
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -35166,7 +35193,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x236c
-	.4byte	0x4e17
+	.4byte	0x4e25
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -35175,16 +35202,16 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x236e
-	.4byte	0x788
+	.4byte	0x79d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
 	.byte	0x0
 	.byte	0x7
 	.byte	0x4
-	.4byte	0x12c7d
+	.4byte	0x12ca5
 	.byte	0x2
-	.4byte	0x17d3e
+	.4byte	0x17d66
 	.ascii	"ProcEfxAureolaOBJ\000"
 
 	.byte	0x68
@@ -35195,7 +35222,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x237c
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -35204,7 +35231,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x237c
-	.4byte	0x819
+	.4byte	0x827
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -35213,7 +35240,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x237c
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -35222,7 +35249,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x237c
-	.4byte	0x4722
+	.4byte	0x4730
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -35231,7 +35258,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x237c
-	.4byte	0x838
+	.4byte	0x846
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -35240,7 +35267,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x237c
-	.4byte	0x7d8
+	.4byte	0x7e6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -35249,7 +35276,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x237c
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -35258,7 +35285,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x237c
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -35267,7 +35294,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x237c
-	.4byte	0x4712
+	.4byte	0x4720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -35276,7 +35303,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x237c
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -35285,7 +35312,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x237c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -35294,7 +35321,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x237c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -35303,7 +35330,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x237c
-	.4byte	0x2d36
+	.4byte	0x2d44
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -35312,7 +35339,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x237e
-	.4byte	0xc602
+	.4byte	0xc610
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -35321,7 +35348,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x237f
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -35330,7 +35357,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2380
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -35339,7 +35366,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2381
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -35348,7 +35375,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2382
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -35357,7 +35384,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2383
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -35366,7 +35393,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2384
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x36
@@ -35375,7 +35402,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2385
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -35384,7 +35411,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2386
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3a
@@ -35393,7 +35420,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2387
-	.4byte	0x2daa
+	.4byte	0x2db8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -35402,7 +35429,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2388
-	.4byte	0x12537
+	.4byte	0x1255f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3e
@@ -35411,7 +35438,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2389
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -35420,7 +35447,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x238a
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -35429,7 +35456,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x238b
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -35438,7 +35465,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x238c
-	.4byte	0x2d63
+	.4byte	0x2d71
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -35447,7 +35474,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x238d
-	.4byte	0x10457
+	.4byte	0x10465
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -35456,7 +35483,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x238e
-	.4byte	0x1045d
+	.4byte	0x1046b
 	.byte	0x2
 	.byte	0x23
 	.byte	0x58
@@ -35465,7 +35492,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x238f
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
@@ -35474,7 +35501,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2390
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
@@ -35483,7 +35510,7 @@ EfxApocalypseOBJ_Loop2:
 
 	.byte	0x1
 	.2byte	0x2391
-	.4byte	0x782
+	.4byte	0x790
 	.byte	0x2
 	.byte	0x23
 	.byte	0x64
@@ -35494,9 +35521,9 @@ EfxApocalypseOBJ_Loop2:
 	.4byte	0x29
 	.2byte	0x2
 	.4byte	.debug_info
-	.4byte	0x17d3f
+	.4byte	0x17d67
 	.4byte	0x1f5
-	.ascii	"EfxApocalypseOBJ_Loop2\000"
+	.ascii	"EfxApocalypseOBJ_Loop4\000"
 
 	.4byte	0x0
 

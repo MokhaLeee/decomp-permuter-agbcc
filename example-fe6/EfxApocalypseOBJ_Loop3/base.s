@@ -3,10 +3,10 @@
 .gcc2_compiled.:
 .text
 	.align	2, 0
-	.globl	EfxApocalypseOBJ_Loop2
-	.type	 EfxApocalypseOBJ_Loop2,function
+	.globl	EfxApocalypseOBJ_Loop3
+	.type	 EfxApocalypseOBJ_Loop3,function
 	.thumb_func
-EfxApocalypseOBJ_Loop2:
+EfxApocalypseOBJ_Loop3:
 .LFB1:
 .LM1:
 
@@ -21,11 +21,11 @@ EfxApocalypseOBJ_Loop2:
 
 	mov	r0, #0x2c
 	ldrsh	r3, [r5, r0]
-	mov	r7, #0x3c
+	mov	r7, #0x50
 	str	r7, [sp]
 	mov	r0, #0x0
-	mov	r1, #0xb4
-	mov	r2, #0x32
+	mov	r1, #0x32
+	mov	r2, #0x0
 	bl	Interpolate
 .LM4:
 
@@ -91,7 +91,7 @@ EfxApocalypseOBJ_Loop2:
 
 	lsl	r0, r0, #0x10
 	asr	r0, r0, #0x10
-	cmp	r0, #0x3c
+	cmp	r0, #0x50
 	ble	.L8	@cond_branch
 .LM18:
 
@@ -106,7 +106,7 @@ EfxApocalypseOBJ_Loop2:
 
 	lsl	r0, r0, #0x10
 	asr	r0, r0, #0x10
-	cmp	r0, #0x78
+	cmp	r0, #0x50
 	ble	.L9	@cond_branch
 .LM21:
 
@@ -132,7 +132,7 @@ EfxApocalypseOBJ_Loop2:
 	.word	gSinLut
 .LFE1:
 .Lfe1:
-	.size	 EfxApocalypseOBJ_Loop2,.Lfe1-EfxApocalypseOBJ_Loop2
+	.size	 EfxApocalypseOBJ_Loop3,.Lfe1-EfxApocalypseOBJ_Loop3
 
 	.section	.text
 .Letext0:
@@ -260,7 +260,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM17
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -275,7 +275,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM20
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -743,7 +743,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x1
 	.ascii	"base.c\000"
 
-	.ascii	"/home/mokha/permuter/example-fe6/EfxApocalypseOBJ_Loop2\000"
+	.ascii	"/home/mokha/permuter/example-fe6/EfxApocalypseOBJ_Loop3\000"
 
 	.ascii	"GNU C 2.9-arm-000512\000"
 
@@ -935,7 +935,7 @@ EfxApocalypseOBJ_Loop2:
 	.byte	0x8
 	.4byte	0x2d1
 	.byte	0x1
-	.ascii	"EfxApocalypseOBJ_Loop2\000"
+	.ascii	"EfxApocalypseOBJ_Loop3\000"
 
 	.byte	0x2
 	.byte	0x4
@@ -35496,7 +35496,7 @@ EfxApocalypseOBJ_Loop2:
 	.4byte	.debug_info
 	.4byte	0x17d3f
 	.4byte	0x1f5
-	.ascii	"EfxApocalypseOBJ_Loop2\000"
+	.ascii	"EfxApocalypseOBJ_Loop3\000"
 
 	.4byte	0x0
 

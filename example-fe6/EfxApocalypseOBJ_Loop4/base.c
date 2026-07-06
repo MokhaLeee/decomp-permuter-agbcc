@@ -1,12 +1,13 @@
 #include "include.h"
 
-void EfxApocalypseOBJ_Loop2(struct ProcEfxOBJ *proc)
+void EfxApocalypseOBJ_Loop4(struct ProcEfxOBJ *proc)
 {
 	struct BaSprite *anim2 = proc->anim2;
-	int zero;
-	i16 interp = Interpolate(0, 0xB4, 0x32, proc->timer, 0x3C);
-	unsigned oldAngle = proc->unk30;
-	register unsigned angle asm("r1") = oldAngle + 0x300;
+	register i16 cap asm("r6");
+	i16 interp;
+	int timer;
+	unsigned oldAngle;
+	register unsigned angle asm("r1");
 	register unsigned index asm("r2");
 	i16 xSin;
 	i16 ySin;
@@ -15,7 +16,12 @@ void EfxApocalypseOBJ_Loop2(struct ProcEfxOBJ *proc)
 	int xPos;
 	int yPos;
 
-	zero = 0;
+	timer = proc->timer;
+	cap = 0x32;
+	interp = Interpolate(1, 0, 0xB4, timer, cap);
+
+	oldAngle = proc->unk30;
+	angle = oldAngle + 0x800;
 	proc->unk30 = angle;
 	index = angle >> 8;
 	xSin = gSinLut[index];
@@ -28,13 +34,15 @@ void EfxApocalypseOBJ_Loop2(struct ProcEfxOBJ *proc)
 	anim2->yPosition = yPos;
 
 	proc->timer++;
-	if (proc->timer > 0x3C)
-		proc->timer = 0x3C;
+
+	if (proc->timer > 0x32)
+		proc->timer = cap;
 
 	proc->terminator++;
-	if (proc->terminator > 0x78) {
-		proc->timer = zero;
-		proc->terminator = zero;
+
+	if (proc->terminator > 0x32) {
+		gEfxBgSemaphore--;
+		BasRemove(proc->anim2);
 		Proc_Break(proc);
 	}
 }

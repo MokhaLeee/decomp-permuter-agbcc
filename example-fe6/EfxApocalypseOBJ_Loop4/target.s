@@ -1,30 +1,29 @@
 	.syntax unified
 
 	.align	2, 0
-	.globl	EfxApocalypseOBJ_Loop2
-	.type	 EfxApocalypseOBJ_Loop2,function
+	.globl	EfxApocalypseOBJ_Loop4
+	.type	 EfxApocalypseOBJ_Loop4,function
 	.thumb_func
-EfxApocalypseOBJ_Loop2: @ 0x08052E9C
-	push {r4, r5, r6, r7, lr}
+EfxApocalypseOBJ_Loop4: @ 0x08052FB4
+	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r5, r0, #0
 	ldr r4, [r5, #0x60]
 	movs r0, #0x2c
 	ldrsh r3, [r5, r0]
-	movs r7, #0x3c
-	str r7, [sp]
-	movs r0, #0
-	movs r1, #0xb4
-	movs r2, #0x32
+	movs r6, #0x32
+	str r6, [sp]
+	movs r0, #1
+	movs r1, #0
+	movs r2, #0xb4
 	bl Interpolate
 	ldrh r2, [r5, #0x30]
-	movs r3, #0xc0
-	lsls r3, r3, #2
+	movs r3, #0x80
+	lsls r3, r3, #4
 	adds r1, r2, r3
-	movs r6, #0
 	strh r1, [r5, #0x30]
 	lsrs r2, r1, #8
-	ldr r3, .L08052F24 @ =gSinLut
+	ldr r3, .L08053044 @ =gSinLut
 	lsls r1, r2, #1
 	adds r1, r1, r3
 	adds r2, #0x40
@@ -53,25 +52,30 @@ EfxApocalypseOBJ_Loop2: @ 0x08052E9C
 	strh r0, [r5, #0x2c]
 	lsls r0, r0, #0x10
 	asrs r0, r0, #0x10
-	cmp r0, #0x3c
-	ble .L08052F04
-	strh r7, [r5, #0x2c]
-.L08052F04:
+	cmp r0, #0x32
+	ble .L0805301A
+	strh r6, [r5, #0x2c]
+.L0805301A:
 	ldrh r0, [r5, #0x2e]
 	adds r0, #1
 	strh r0, [r5, #0x2e]
 	lsls r0, r0, #0x10
 	asrs r0, r0, #0x10
-	cmp r0, #0x78
-	ble .L08052F1C
-	strh r6, [r5, #0x2c]
-	strh r6, [r5, #0x2e]
+	cmp r0, #0x32
+	ble .L0805303C
+	ldr r0, .L08053048 @ =gEfxBgSemaphore
+	ldr r1, [r0]
+	subs r1, #1
+	str r1, [r0]
+	ldr r0, [r5, #0x60]
+	bl BasRemove
 	adds r0, r5, #0
 	bl Proc_Break
-.L08052F1C:
+.L0805303C:
 	add sp, #4
-	pop {r4, r5, r6, r7}
+	pop {r4, r5, r6}
 	pop {r0}
 	bx r0
 	.align 2, 0
-.L08052F24: .4byte gSinLut
+.L08053044: .4byte gSinLut
+.L08053048: .4byte gEfxBgSemaphore
