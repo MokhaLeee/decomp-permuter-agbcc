@@ -1,0 +1,31 @@
+我正在准备做反编译工作，
+即将从 bin 文件中获取的 asm 程序逆向成 c 文件，按照其原本的编译方法，让 c 函数编译成 .o 文件后，
+确保重新链接的文件与原本一致。这需要 c 编译获得的汇编程序与原本的汇编函数完全一致。现在我将指导你来做这样一份工作。
+
+请进入 example-fe6/EfxFenrir_Loop 目录，分析 target.s 的代码逻辑，参考 include.h 将对应的 c 函数保存在 base.c 中
+你需要确保你的函数逻辑与原本的汇编逻辑完全一致
+先不要求做汇编级别的匹配
+
+btw 你可以参考 ~/fe6 目录下 src/banim_efxmagic.c
+btw proc 的结构体应该是 ProcEfxMagicOBJ
+btw 这个结构体是定义在 fe6 的 include/banim.h
+我更新了 include.h，请将 proc 的定义改成  ProcEfxMagicOBJ
+
+代码风格我希望是 linux-kernel，变量名称我希望参考 ~/fe6/src/banim_efxmagic.c, 另外 *((u16 *)((char *)r6 + 0x8)) 类似这种我希望传递给他们结构体意义
+
+很好，接下来我需要你来去修改 decomp 原工程了。decomp 工程在 ~/fe6。我需要你将对应的汇编函数删掉，然后添加 c 函数后确保编译顺利：
+1. EfxFenrir_Loop 这个函数在 asm/banim_efxmagic.s 的头部，去看 fe6.lds,可以看到它和另一个 c 函数相邻：
+        src/banim_efxmagic3.o(.text);
+        asm/banim_efxmagic.o(.text);
+2. 因此，在 asm/banim_efxmagic.s 中将这个函数删除，然后将 c 函数加在 banim_efxmagic3.c 的末尾。随后在 ~/fe6 仓库下做 make，顺利的话，最后能看到 fe6.gba: OK 指示新编译的文件与原文件完全一致，表示反编译完成。
+
+btw 你做的太好了！争取把 asm/banim_efxmagic.s 里的函数全部逆向完成
+一次生成的代码太多了，你一个一个函数地生成，如果某个函数无法匹配的话，按照我教你的在 permuter 里去适配。
+
+好了，继续去做下一个函数吧：
+1. 分析 target.s 的代码逻辑
+2. 参考 include.h 将对应的 c 函数保存在 base.c 中
+3. 逐步修正 c 函数，让 c 编译获得函数与 asm 完全一致。
+你可以去分析 old_agbcc 的代码逻辑，通过分析 gcc 编译的逻辑来帮助你做匹配。gcc 的源代码在 ~/agbcc/
+
+对 ~/agbcc/ 的读行为，对 ~/fe6/ ~/permuter/ 目录下的读写行为我都同意。不需要再找我要许可了
