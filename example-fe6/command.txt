@@ -2,9 +2,11 @@
 即将从 bin 文件中获取的 asm 程序逆向成 c 文件，按照其原本的编译方法，让 c 函数编译成 .o 文件后，
 确保重新链接的文件与原本一致。这需要 c 编译获得的汇编程序与原本的汇编函数完全一致。现在我将指导你来做这样一份工作。
 
-请进入 example-fe6/EfxFenrir_Loop 目录，分析 target.s 的代码逻辑，参考 include.h 将对应的 c 函数保存在 base.c 中
+请进入 example-fe6/NewEfxFenrirBG 目录，分析 target.s 的代码逻辑，参考 include.h 将对应的 c 函数保存在 base.c 中
 你需要确保你的函数逻辑与原本的汇编逻辑完全一致
-先不要求做汇编级别的匹配
+你可以参考 ~/fe6/src/banim_efxmagic.c 的代码，
+另外我们目前正在做的反编译与另一个工程类似，你可以参考 ~/fireemblem8u/src/banim-efxmagic*
+先不要求做汇编级别的匹配.
 
 btw 你可以参考 ~/fe6 目录下 src/banim_efxmagic.c
 btw proc 的结构体应该是 ProcEfxMagicOBJ
