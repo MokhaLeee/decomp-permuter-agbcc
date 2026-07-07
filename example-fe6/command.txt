@@ -61,20 +61,3 @@ permuter example-fe6 已有 Score 0 样例目录(未全部 commit 到 permuter �
 换机恢复:
   git clone/pull ~/fe6 ~/permuter (及 ~/agbcc, ~/fireemblem8u 若需要)
   在新 Cursor 里打开 permuter 或 fe6，说「继续 banim_efxmagic_aureola.s，从 NewEfxApocalypseBG2 开始」
-
-
-# 明天的续作话题：
-我在做 FE6 反编译，用 permuter 把 asm 匹配成 C 后集成到 ~/fe6。
-
-请先读 ~/permuter/example-fe6/command.txt（续做 checkpoint 部分），
-以及 ~/fe6/asm/banim_efxmagic_aureola.s 看剩余函数。
-
-进度：Apocalypse aureola 已完成 OBJ_Loop2/3/4、BGCOL2、Dummy、BgFlash1/2 等。
-下一个：NewEfxApocalypseBG2 @ 0x0805327C，然后同文件剩余 8 个函数。
-
-规则：
-- 每个函数 permuter Score 0 → 写入 banim_efxmagic.c → 删 asm → make → commit 后再做下一个
-- 难匹配的先写逻辑正确的 base.c 暂停
-- 对 ~/fe6 ~/permuter ~/agbcc ~/fireemblem8u 的读写和 commit 都同意，不用反复问
-
-请从 NewEfxApocalypseBG2 开始继续。
